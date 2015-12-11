@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Welcome to Java Beat  for seeing PrimeFaces_Spring_Hibernate_Project</title>
+</h:head>
+<h:body>
+
+	<ui:composition template="template/commonLayout.xhtml">
+
+		<ui:define name="header">
+		
+		Login header
+		
+		</ui:define>
+
+		<ui:define name="content">
+		
+		<h1>Welcome - login</h1>
+		
+		<h:form>
+        
+        	<h:outputText value="Username" />
+        	<h:inputText id="username" value="#{authBean.login}"></h:inputText>
+       	 	<h:message for="username"></h:message>
+        	<br /><br />
+         
+        	<h:outputText value="Password" />
+        	<h:inputSecret id="password" value="#{authBean.password}"></h:inputSecret>
+        	<h:message for="password"></h:message>
+        	<br /><br />
+         
+        	<h:commandButton action="#{authBean.login}" update=":message" value="Login"></h:commandButton>
+    	
+    	</h:form>
+		
+		<br /><br />
+		
+		</ui:define>
+
+    </ui:composition>
+
+</h:body>
+</html> 
