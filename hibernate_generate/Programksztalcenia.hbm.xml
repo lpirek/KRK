@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-01-17 19:44:01 by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="Programksztalcenia" table="programksztalcenia" catalog="easykrkdb">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="programstudiow" class="Programstudiow" fetch="select">
+            <column name="ProgramStudiowid" />
+        </many-to-one>
+        <many-to-one name="kierunekstudiow" class="Kierunekstudiow" fetch="select">
+            <column name="KierunekStudiowid" not-null="true" />
+        </many-to-one>
+        <property name="aktualnyOd" type="timestamp">
+            <column name="aktualnyOd" length="19" />
+        </property>
+        <property name="typStudiow" type="string">
+            <column name="typStudiow" length="13" />
+        </property>
+        <property name="formaStudiow" type="string">
+            <column name="formaStudiow" length="14" />
+        </property>
+        <property name="stopienStuiow" type="string">
+            <column name="stopienStuiow" length="10" />
+        </property>
+        <set name="obszarksztalcenias" table="programksztalceniaobszarksztalcenia" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="ProgramKsztalceniaid" not-null="true" />
+            </key>
+            <many-to-many entity-name="Obszarksztalcenia">
+                <column name="ObszarKsztalceniaid" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="planstudiows" table="planstudiow" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ProgramKsztalceniaid" not-null="true" />
+            </key>
+            <one-to-many class="Planstudiow" />
+        </set>
+    </class>
+</hibernate-mapping>
