@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-01-20 20:45:58 by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="Przedmiot" table="przedmiot" catalog="easykrkdb">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="specjalizacja" class="Specjalizacja" fetch="select">
+            <column name="Specjalizacjaid" />
+        </many-to-one>
+        <many-to-one name="uzytkownik" class="Uzytkownik" fetch="select">
+            <column name="Uzytkownikid" not-null="true" />
+        </many-to-one>
+        <many-to-one name="modulksztalcenia" class="Modulksztalcenia" fetch="select">
+            <column name="ModulKsztalceniaid" not-null="true" />
+        </many-to-one>
+        <property name="rodzaj" type="string">
+            <column name="rodzaj" length="31" not-null="true" />
+        </property>
+        <property name="nazwaPl" type="string">
+            <column name="nazwaPL" not-null="true" />
+        </property>
+        <property name="nazwaEn" type="string">
+            <column name="nazwaEN" not-null="true" />
+        </property>
+        <property name="kod" type="string">
+            <column name="kod" not-null="true" />
+        </property>
+        <property name="column" type="int">
+            <column name="Column" not-null="true" />
+        </property>
+        <set name="przedmiotkeks" table="przedmiotkek" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Przedmiotid" not-null="true" />
+            </key>
+            <one-to-many class="Przedmiotkek" />
+        </set>
+        <set name="grupakursows" table="grupakursow" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Przedmiotid" not-null="true" />
+            </key>
+            <one-to-many class="Grupakursow" />
+        </set>
+        <set name="raportsyntetycznies" table="raportsyntetyczny" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Przedmiotid" not-null="true" />
+            </key>
+            <one-to-many class="Raportsyntetyczny" />
+        </set>
+        <set name="kartaprzedmiotus" table="kartaprzedmiotu" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Przedmiotid" not-null="true" />
+            </key>
+            <one-to-many class="Kartaprzedmiotu" />
+        </set>
+        <set name="kurses" table="kurs" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Przedmiotid" not-null="true" />
+            </key>
+            <one-to-many class="Kurs" />
+        </set>
+    </class>
+</hibernate-mapping>

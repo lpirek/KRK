@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-01-20 20:45:58 by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="Kierunkowyefektksztalcenia" table="kierunkowyefektksztalcenia" catalog="easykrkdb">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="kierunekstudiow" class="Kierunekstudiow" fetch="select">
+            <column name="KierunekStudiowid" not-null="true" />
+        </many-to-one>
+        <many-to-one name="specjalizacja" class="Specjalizacja" fetch="select">
+            <column name="Specjalizacjaid" not-null="true" />
+        </many-to-one>
+        <property name="zakres" type="string">
+            <column name="zakres" length="15" not-null="true" />
+        </property>
+        <property name="numer" type="string">
+            <column name="numer" not-null="true" />
+        </property>
+        <property name="opis" type="string">
+            <column name="opis" not-null="true" />
+        </property>
+        <property name="column" type="int">
+            <column name="Column" not-null="true" />
+        </property>
+        <set name="kekpeks" table="kekpek" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="KierunkowyEfektKsztalceniaid" not-null="true" />
+            </key>
+            <one-to-many class="Kekpek" />
+        </set>
+        <set name="mekkeks" table="mekkek" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="KierunkowyEfektKsztalceniaid" not-null="true" />
+            </key>
+            <one-to-many class="Mekkek" />
+        </set>
+        <set name="przedmiotkeks" table="przedmiotkek" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="KierunkowyEfektKsztalceniaid" not-null="true" />
+            </key>
+            <one-to-many class="Przedmiotkek" />
+        </set>
+    </class>
+</hibernate-mapping>

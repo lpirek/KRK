@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-01-20 20:45:58 by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="Wydzial" table="wydzial" catalog="easykrkdb">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="nazwa" type="string">
+            <column name="nazwa" not-null="true" />
+        </property>
+        <set name="kierunekstudiows" table="kierunekstudiow" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Wydzialid" not-null="true" />
+            </key>
+            <one-to-many class="Kierunekstudiow" />
+        </set>
+    </class>
+</hibernate-mapping>

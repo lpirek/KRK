@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-01-20 20:45:58 by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="Kurs" table="kurs" catalog="easykrkdb">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="grupakursow" class="Grupakursow" fetch="select">
+            <column name="GrupaKursowid" />
+        </many-to-one>
+        <many-to-one name="semestr" class="Semestr" fetch="select">
+            <column name="Semestrid" not-null="true" />
+        </many-to-one>
+        <many-to-one name="przedmiot" class="Przedmiot" fetch="select">
+            <column name="Przedmiotid" not-null="true" />
+        </many-to-one>
+        <property name="formaZajec" type="string">
+            <column name="formaZajec" length="15" not-null="true" />
+        </property>
+        <property name="ects" type="short">
+            <column name="ECTS" not-null="true" />
+        </property>
+        <property name="zzu" type="short">
+            <column name="ZZU" not-null="true" />
+        </property>
+        <property name="cnps" type="short">
+            <column name="CNPS" not-null="true" />
+        </property>
+        <property name="formaZaliczenia" type="string">
+            <column name="formaZaliczenia" length="31" not-null="true" />
+        </property>
+        <property name="punktyP" type="double">
+            <column name="punktyP" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="punktyBk" type="double">
+            <column name="punktyBK" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="kod" type="string">
+            <column name="kod" not-null="true" />
+        </property>
+        <property name="liczbaZajec" type="short">
+            <column name="liczbaZajec" not-null="true" />
+        </property>
+        <set name="narzedziedydaktycznes" table="narzedziedydaktyczne" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Kursid" not-null="true" />
+            </key>
+            <one-to-many class="Narzedziedydaktyczne" />
+        </set>
+    </class>
+</hibernate-mapping>

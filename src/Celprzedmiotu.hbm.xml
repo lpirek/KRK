@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-01-20 20:45:58 by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="Celprzedmiotu" table="celprzedmiotu" catalog="easykrkdb">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="kartaprzedmiotu" class="Kartaprzedmiotu" fetch="select">
+            <column name="KartaPrzedmiotuid" not-null="true" />
+        </many-to-one>
+        <property name="numer" type="string">
+            <column name="numer" not-null="true" />
+        </property>
+        <property name="opis" type="string">
+            <column name="opis" not-null="true" />
+        </property>
+        <set name="pekcelprzedmiotus" table="pekcelprzedmiotu" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CelPrzedmiotuId" not-null="true" />
+            </key>
+            <one-to-many class="Pekcelprzedmiotu" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-01-20 20:45:58 by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="Ocenaosiagieciapek" table="ocenaosiagieciapek" catalog="easykrkdb">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="kartaprzedmiotu" class="Kartaprzedmiotu" fetch="select">
+            <column name="KartaPrzedmiotuid" not-null="true" />
+        </many-to-one>
+        <property name="rodzajOceny" type="string">
+            <column name="rodzajOceny" length="15" not-null="true" />
+        </property>
+        <property name="numer" type="string">
+            <column name="numer" not-null="true" />
+        </property>
+        <property name="opis" type="string">
+            <column name="opis" not-null="true" />
+        </property>
+        <property name="sposobOceny" type="string">
+            <column name="sposobOceny" not-null="true" />
+        </property>
+        <property name="column" type="int">
+            <column name="Column" not-null="true" />
+        </property>
+        <set name="pekocenaosiagnieciapeks" table="pekocenaosiagnieciapek" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="OcenaOsiagieciaPEKId" not-null="true" />
+            </key>
+            <one-to-many class="Pekocenaosiagnieciapek" />
+        </set>
+    </class>
+</hibernate-mapping>

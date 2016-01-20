@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-01-20 20:45:58 by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="Ministerialnyefektksztalcenia" table="ministerialnyefektksztalcenia" catalog="easykrkdb">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="obszarksztalcenia" class="Obszarksztalcenia" fetch="select">
+            <column name="ObszarKsztalceniaid" not-null="true" />
+        </many-to-one>
+        <property name="zakres" type="string">
+            <column name="zakres" length="15" not-null="true" />
+        </property>
+        <property name="numer" type="string">
+            <column name="numer" not-null="true" />
+        </property>
+        <property name="opis" type="string">
+            <column name="opis" not-null="true" />
+        </property>
+        <set name="mekkeks" table="mekkek" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="MinisterialnyEfektKsztalceniaid" not-null="true" />
+            </key>
+            <one-to-many class="Mekkek" />
+        </set>
+    </class>
+</hibernate-mapping>
