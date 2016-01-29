@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+    
+	<!-- Hibernate session factory -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+
+    <property name="dataSource">
+     	<ref bean="dataSource"/>
+    </property>
+
+    <property name="hibernateProperties">
+       <props>
+         <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+         <prop key="hibernate.show_sql">true</prop>
+       </props>
+     </property>
+    	
+     <property name="mappingResources">
+		<list>
+            <value>Raportsyntetyczny.hbm.xml</value>
+        	<value>Przedmiotowyefektksztalcenia.hbm.xml</value>
+        	<value>Modulksztalcenia.hbm.xml</value>
+        	<value>Semestr.hbm.xml</value>
+        	<value>Kierunekstudiow.hbm.xml</value>
+        	<value>Specjalizacja.hbm.xml</value>
+        	<value>Planstudiowsemestr.hbm.xml</value>
+        	<value>Programstudiow.hbm.xml</value>
+        	<value>Przedmiotkek.hbm.xml</value>
+       		<value>Wydzial.hbm.xml</value>
+        	<value>Ministerialnyefektksztalcenia.hbm.xml</value>
+        	<value>Kierunkowyefektksztalcenia.hbm.xml</value>
+        	<value>Pektrescprogramowa.hbm.xml</value>
+        	<value>Przedmiot.hbm.xml</value>
+        	<value>Uzytkownik.hbm.xml</value>
+        	<value>Mekkek.hbm.xml</value>
+	        <value>Planstudiow.hbm.xml</value>
+	        <value>Pekcelprzedmiotu.hbm.xml</value>
+	        <value>Peknarzedziedydaktyczne.hbm.xml</value>
+	        <value>Narzedziedydaktyczne.hbm.xml</value>
+	        <value>Kartaprzedmiotu.hbm.xml</value>
+	        <value>Programksztalcenia.hbm.xml</value>
+	        <value>Wymaganiawstepne.hbm.xml</value>
+	        <value>Programksztalceniaobszarksztalcenia.hbm.xml</value>
+	        <value>Obszarksztalcenia.hbm.xml</value>
+	        <value>Kurs.hbm.xml</value>
+	        <value>Trescprogramowa.hbm.xml</value>
+	        <value>Grupakursow.hbm.xml</value>
+	        <value>Ocenaosiagieciapek.hbm.xml</value>
+	        <value>Pekocenaosiagnieciapek.hbm.xml</value>
+	        <value>Celprzedmiotu.hbm.xml</value>
+	        <value>Kekpek.hbm.xml</value>
+	        <value>Pozycjaliteraturowa.hbm.xml</value>
+		</list>
+      </property>	
+
+    </bean>
+    
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+    	<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+    
+</beans>  
