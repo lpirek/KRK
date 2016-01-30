@@ -4,27 +4,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pl.edu.pwr.krk.models.dao.KekpekHome;
+import pl.edu.pwr.krk.models.dao.KekpekDAO;
 
 @Service("KekpekService")
 @Transactional(readOnly = true)
 public class KekpekService {
 
 	@Autowired
-	KekpekHome kekpekHome;
+	KekpekDAO kekpekDAO;
 
 	/**
-	 * @return the kekpekHome
+	 * @return the kekpekDAO
 	 */
-	public KekpekHome getKekpekHome() {
-		return kekpekHome;
+	public KekpekDAO getKekpekDAO() {
+		return kekpekDAO;
 	}
 
 	/**
-	 * @param kekpekHome
-	 *            the kekpekHome to set
+	 * @param kekpekDAO
+	 *            the kekpekDAO to set
 	 */
-	public void setKekpekHome(KekpekHome kekpekHome) {
-		this.kekpekHome = kekpekHome;
+	public void setKekpekDAO(KekpekDAO kekpekDAO) {
+		this.kekpekDAO = kekpekDAO;
 	}
 }

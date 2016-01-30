@@ -4,27 +4,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pl.edu.pwr.krk.models.dao.PeknarzedziedydaktyczneHome;
+import pl.edu.pwr.krk.models.dao.PeknarzedziedydaktyczneDAO;
 
 @Service("PeknarzedziedydaktyczneService")
 @Transactional(readOnly = true)
 public class PeknarzedziedydaktyczneService {
 
 	@Autowired
-	PeknarzedziedydaktyczneHome peknarzedziedydaktyczneHome;
+	PeknarzedziedydaktyczneDAO peknarzedziedydaktyczneDAO;
 
 	/**
-	 * @return the peknarzedziedydaktyczneHome
+	 * @return the peknarzedziedydaktyczneDAO
 	 */
-	public PeknarzedziedydaktyczneHome getPeknarzedziedydaktyczneHome() {
-		return peknarzedziedydaktyczneHome;
+	public PeknarzedziedydaktyczneDAO getPeknarzedziedydaktyczneDAO() {
+		return peknarzedziedydaktyczneDAO;
 	}
 
 	/**
-	 * @param peknarzedziedydaktyczneHome
-	 *            the peknarzedziedydaktyczneHome to set
+	 * @param peknarzedziedydaktyczneDAO
+	 *            the peknarzedziedydaktyczneDAO to set
 	 */
-	public void setPeknarzedziedydaktyczneHome(PeknarzedziedydaktyczneHome peknarzedziedydaktyczneHome) {
-		this.peknarzedziedydaktyczneHome = peknarzedziedydaktyczneHome;
+	public void setPeknarzedziedydaktyczneDAO(PeknarzedziedydaktyczneDAO peknarzedziedydaktyczneDAO) {
+		this.peknarzedziedydaktyczneDAO = peknarzedziedydaktyczneDAO;
 	}
 }

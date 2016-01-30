@@ -51,15 +51,63 @@
 	        <value>Ocenaosiagieciapek.hbm.xml</value>
 	        <value>Pekocenaosiagnieciapek.hbm.xml</value>
 	        <value>Celprzedmiotu.hbm.xml</value>
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
 	        <value>Kekpek.hbm.xml</value>
 	        <value>Pozycjaliteraturowa.hbm.xml</value>
 		</list>
       </property>	
 
     </bean>
-    
-    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-    	<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
     
 </beans>  

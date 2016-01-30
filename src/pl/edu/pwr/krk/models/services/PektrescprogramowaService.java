@@ -4,26 +4,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pl.edu.pwr.krk.models.dao.PektrescprogramowaHome;
+import pl.edu.pwr.krk.models.dao.PektrescprogramowaDAO;
 
 @Service("PektrescprogramowaService")
 @Transactional(readOnly = true)
 public class PektrescprogramowaService {
 
 	@Autowired
-	PektrescprogramowaHome pektrescprogramowaHome;
+	PektrescprogramowaDAO pektrescprogramowaDAO;
 
 	/**
-	 * @return the pektrescprogramowaHome
+	 * @return the pektrescprogramowaDAO
 	 */
-	public PektrescprogramowaHome getPektrescprogramowaHome() {
-		return pektrescprogramowaHome;
+	public PektrescprogramowaDAO getPektrescprogramowaDAO() {
+		return pektrescprogramowaDAO;
 	}
 
 	/**
-	 * @param pektrescprogramowaHome the pektrescprogramowaHome to set
+	 * @param pektrescprogramowaDAO the pektrescprogramowaDAO to set
 	 */
-	public void setPektrescprogramowaHome(PektrescprogramowaHome pektrescprogramowaHome) {
-		this.pektrescprogramowaHome = pektrescprogramowaHome;
+	public void setPektrescprogramowaDAO(PektrescprogramowaDAO pektrescprogramowaDAO) {
+		this.pektrescprogramowaDAO = pektrescprogramowaDAO;
 	}
 }

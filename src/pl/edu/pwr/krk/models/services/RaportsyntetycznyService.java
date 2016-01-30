@@ -4,27 +4,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pl.edu.pwr.krk.models.dao.RaportsyntetycznyHome;
+import pl.edu.pwr.krk.models.dao.RaportsyntetycznyDAO;
 
 @Service("RaportsyntetycznyService")
 @Transactional(readOnly = true)
 public class RaportsyntetycznyService {
 
 	@Autowired
-	RaportsyntetycznyHome raportsyntetycznyHome;
+	RaportsyntetycznyDAO raportsyntetycznyDAO;
 
 	/**
-	 * @return the raportsyntetycznyHome
+	 * @return the raportsyntetycznyDAO
 	 */
-	public RaportsyntetycznyHome getRaportsyntetycznyHome() {
-		return raportsyntetycznyHome;
+	public RaportsyntetycznyDAO getRaportsyntetycznyDAO() {
+		return raportsyntetycznyDAO;
 	}
 
 	/**
-	 * @param raportsyntetycznyHome
-	 *            the raportsyntetycznyHome to set
+	 * @param raportsyntetycznyDAO
+	 *            the raportsyntetycznyDAO to set
 	 */
-	public void setRaportsyntetycznyHome(RaportsyntetycznyHome raportsyntetycznyHome) {
-		this.raportsyntetycznyHome = raportsyntetycznyHome;
+	public void setRaportsyntetycznyDAO(RaportsyntetycznyDAO raportsyntetycznyDAO) {
+		this.raportsyntetycznyDAO = raportsyntetycznyDAO;
 	}
 }

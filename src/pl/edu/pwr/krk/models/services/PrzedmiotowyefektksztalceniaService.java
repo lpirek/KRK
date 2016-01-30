@@ -4,27 +4,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pl.edu.pwr.krk.models.dao.PrzedmiotowyefektksztalceniaHome;
+import pl.edu.pwr.krk.models.dao.PrzedmiotowyefektksztalceniaDAO;
 
 @Service("PrzedmiotowyefektksztalceniaService")
 @Transactional(readOnly = true)
 public class PrzedmiotowyefektksztalceniaService {
 
 	@Autowired
-	PrzedmiotowyefektksztalceniaHome przedmiotowyefektksztalceniaHome;
+	PrzedmiotowyefektksztalceniaDAO przedmiotowyefektksztalceniaDAO;
 
 	/**
-	 * @return the przedmiotowyefektksztalceniaHome
+	 * @return the przedmiotowyefektksztalceniaDAO
 	 */
-	public PrzedmiotowyefektksztalceniaHome getPrzedmiotowyefektksztalceniaHome() {
-		return przedmiotowyefektksztalceniaHome;
+	public PrzedmiotowyefektksztalceniaDAO getPrzedmiotowyefektksztalceniaDAO() {
+		return przedmiotowyefektksztalceniaDAO;
 	}
 
 	/**
-	 * @param przedmiotowyefektksztalceniaHome
-	 *            the przedmiotowyefektksztalceniaHome to set
+	 * @param przedmiotowyefektksztalceniaDAO
+	 *            the przedmiotowyefektksztalceniaDAO to set
 	 */
-	public void setPrzedmiotowyefektksztalceniaHome(PrzedmiotowyefektksztalceniaHome przedmiotowyefektksztalceniaHome) {
-		this.przedmiotowyefektksztalceniaHome = przedmiotowyefektksztalceniaHome;
+	public void setPrzedmiotowyefektksztalceniaDAO(PrzedmiotowyefektksztalceniaDAO przedmiotowyefektksztalceniaDAO) {
+		this.przedmiotowyefektksztalceniaDAO = przedmiotowyefektksztalceniaDAO;
 	}
 }

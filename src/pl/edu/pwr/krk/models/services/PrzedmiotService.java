@@ -4,27 +4,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pl.edu.pwr.krk.models.dao.PrzedmiotHome;
+import pl.edu.pwr.krk.models.dao.PrzedmiotDAO;
 
 @Service("PrzedmiotService")
 @Transactional(readOnly = true)
 public class PrzedmiotService {
 
 	@Autowired
-	PrzedmiotHome przedmiotHome;
+	PrzedmiotDAO przedmiotDAO;
 
 	/**
-	 * @return the przedmiotHome
+	 * @return the przedmiotDAO
 	 */
-	public PrzedmiotHome getPrzedmiotHome() {
-		return przedmiotHome;
+	public PrzedmiotDAO getPrzedmiotDAO() {
+		return przedmiotDAO;
 	}
 
 	/**
-	 * @param przedmiotHome
-	 *            the przedmiotHome to set
+	 * @param przedmiotDAO
+	 *            the przedmiotDAO to set
 	 */
-	public void setPrzedmiotHome(PrzedmiotHome przedmiotHome) {
-		this.przedmiotHome = przedmiotHome;
+	public void setPrzedmiotDAO(PrzedmiotDAO przedmiotDAO) {
+		this.przedmiotDAO = przedmiotDAO;
 	}
 }

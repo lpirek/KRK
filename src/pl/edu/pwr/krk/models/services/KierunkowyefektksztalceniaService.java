@@ -4,27 +4,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pl.edu.pwr.krk.models.dao.KierunkowyefektksztalceniaHome;
+import pl.edu.pwr.krk.models.dao.KierunkowyefektksztalceniaDAO;
 
 @Service("KierunkowyefektksztalceniaService")
 @Transactional(readOnly = true)
 public class KierunkowyefektksztalceniaService {
 
 	@Autowired
-	KierunkowyefektksztalceniaHome kierunkowyefektksztalceniaHome;
+	KierunkowyefektksztalceniaDAO kierunkowyefektksztalceniaDAO;
 
 	/**
-	 * @return the kierunkowyefektksztalceniaHome
+	 * @return the kierunkowyefektksztalceniaDAO
 	 */
-	public KierunkowyefektksztalceniaHome getKierunkowyefektksztalceniaHome() {
-		return kierunkowyefektksztalceniaHome;
+	public KierunkowyefektksztalceniaDAO getKierunkowyefektksztalceniaDAO() {
+		return kierunkowyefektksztalceniaDAO;
 	}
 
 	/**
-	 * @param kierunkowyefektksztalceniaHome
-	 *            the kierunkowyefektksztalceniaHome to set
+	 * @param kierunkowyefektksztalceniaDAO
+	 *            the kierunkowyefektksztalceniaDAO to set
 	 */
-	public void setKierunkowyefektksztalceniaHome(KierunkowyefektksztalceniaHome kierunkowyefektksztalceniaHome) {
-		this.kierunkowyefektksztalceniaHome = kierunkowyefektksztalceniaHome;
+	public void setKierunkowyefektksztalceniaDAO(KierunkowyefektksztalceniaDAO kierunkowyefektksztalceniaDAO) {
+		this.kierunkowyefektksztalceniaDAO = kierunkowyefektksztalceniaDAO;
 	}
 }

@@ -4,28 +4,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pl.edu.pwr.krk.models.dao.ProgramksztalceniaobszarksztalceniaHome;
+import pl.edu.pwr.krk.models.dao.ProgramksztalceniaobszarksztalceniaDAO;
 
 @Service("ProgramksztalceniaobszarksztalceniaService")
 @Transactional(readOnly = true)
 public class ProgramksztalceniaobszarksztalceniaService {
 
 	@Autowired
-	ProgramksztalceniaobszarksztalceniaHome programksztalceniaobszarksztalceniaHome;
+	ProgramksztalceniaobszarksztalceniaDAO programksztalceniaobszarksztalceniaDAO;
 
 	/**
-	 * @return the programksztalceniaobszarksztalceniaHome
+	 * @return the programksztalceniaobszarksztalceniaDAO
 	 */
-	public ProgramksztalceniaobszarksztalceniaHome getProgramksztalceniaobszarksztalceniaHome() {
-		return programksztalceniaobszarksztalceniaHome;
+	public ProgramksztalceniaobszarksztalceniaDAO getProgramksztalceniaobszarksztalceniaDAO() {
+		return programksztalceniaobszarksztalceniaDAO;
 	}
 
 	/**
-	 * @param programksztalceniaobszarksztalceniaHome
-	 *            the programksztalceniaobszarksztalceniaHome to set
+	 * @param programksztalceniaobszarksztalceniaDAO
+	 *            the programksztalceniaobszarksztalceniaDAO to set
 	 */
-	public void setProgramksztalceniaobszarksztalceniaHome(
-			ProgramksztalceniaobszarksztalceniaHome programksztalceniaobszarksztalceniaHome) {
-		this.programksztalceniaobszarksztalceniaHome = programksztalceniaobszarksztalceniaHome;
+	public void setProgramksztalceniaobszarksztalceniaDAO(
+			ProgramksztalceniaobszarksztalceniaDAO programksztalceniaobszarksztalceniaDAO) {
+		this.programksztalceniaobszarksztalceniaDAO = programksztalceniaobszarksztalceniaDAO;
 	}
 }

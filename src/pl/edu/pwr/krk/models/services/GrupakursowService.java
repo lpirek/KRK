@@ -4,27 +4,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pl.edu.pwr.krk.models.dao.GrupakursowHome;
+import pl.edu.pwr.krk.models.dao.GrupakursowDAO;
 
 @Service("GrupakursowService")
 @Transactional(readOnly = true)
 public class GrupakursowService {
 
 	@Autowired
-	GrupakursowHome grupakursowHome;
+	GrupakursowDAO grupakursowDAO;
 
 	/**
-	 * @return the grupakursowHome
+	 * @return the grupakursowDAO
 	 */
-	public GrupakursowHome getGrupakursowHome() {
-		return grupakursowHome;
+	public GrupakursowDAO getGrupakursowDAO() {
+		return grupakursowDAO;
 	}
 
 	/**
-	 * @param grupakursowHome
-	 *            the grupakursowHome to set
+	 * @param grupakursowDAO
+	 *            the grupakursowDAO to set
 	 */
-	public void setGrupakursowHome(GrupakursowHome grupakursowHome) {
-		this.grupakursowHome = grupakursowHome;
+	public void setGrupakursowDAO(GrupakursowDAO grupakursowDAO) {
+		this.grupakursowDAO = grupakursowDAO;
 	}
 }

@@ -4,26 +4,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pl.edu.pwr.krk.models.dao.PekcelprzedmiotuHome;
+import pl.edu.pwr.krk.models.dao.PekcelprzedmiotuDAO;
 
 @Service("PekcelprzedmiotuService")
 @Transactional(readOnly = true)
 public class PekcelprzedmiotuService {
 
 	@Autowired
-	PekcelprzedmiotuHome pekcelprzedmiotuHome;
+	PekcelprzedmiotuDAO pekcelprzedmiotuDAO;
 
 	/**
-	 * @return the pekcelprzedmiotuHome
+	 * @return the pekcelprzedmiotuDAO
 	 */
-	public PekcelprzedmiotuHome getPekcelprzedmiotuHome() {
-		return pekcelprzedmiotuHome;
+	public PekcelprzedmiotuDAO getPekcelprzedmiotuDAO() {
+		return pekcelprzedmiotuDAO;
 	}
 
 	/**
-	 * @param pekcelprzedmiotuHome the pekcelprzedmiotuHome to set
+	 * @param pekcelprzedmiotuDAO the pekcelprzedmiotuDAO to set
 	 */
-	public void setPekcelprzedmiotuHome(PekcelprzedmiotuHome pekcelprzedmiotuHome) {
-		this.pekcelprzedmiotuHome = pekcelprzedmiotuHome;
+	public void setPekcelprzedmiotuDAO(PekcelprzedmiotuDAO pekcelprzedmiotuDAO) {
+		this.pekcelprzedmiotuDAO = pekcelprzedmiotuDAO;
 	}
 }

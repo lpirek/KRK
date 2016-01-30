@@ -4,27 +4,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pl.edu.pwr.krk.models.dao.KartaprzedmiotuHome;
+import pl.edu.pwr.krk.models.dao.KartaprzedmiotuDAO;
 
 @Service("KartaprzedmiotuService")
 @Transactional(readOnly = true)
 public class KartaprzedmiotuService {
 
 	@Autowired
-	KartaprzedmiotuHome kartaprzedmiotuHome;
+	KartaprzedmiotuDAO kartaprzedmiotuDAO;
 
 	/**
-	 * @return the kartaprzedmiotuHome
+	 * @return the kartaprzedmiotuDAO
 	 */
-	public KartaprzedmiotuHome getKartaprzedmiotuHome() {
-		return kartaprzedmiotuHome;
+	public KartaprzedmiotuDAO getKartaprzedmiotuDAO() {
+		return kartaprzedmiotuDAO;
 	}
 
 	/**
-	 * @param kartaprzedmiotuHome
-	 *            the kartaprzedmiotuHome to set
+	 * @param kartaprzedmiotuDAO
+	 *            the kartaprzedmiotuDAO to set
 	 */
-	public void setKartaprzedmiotuHome(KartaprzedmiotuHome kartaprzedmiotuHome) {
-		this.kartaprzedmiotuHome = kartaprzedmiotuHome;
+	public void setKartaprzedmiotuDAO(KartaprzedmiotuDAO kartaprzedmiotuDAO) {
+		this.kartaprzedmiotuDAO = kartaprzedmiotuDAO;
 	}
 }

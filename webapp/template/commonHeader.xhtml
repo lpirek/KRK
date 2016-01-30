@@ -1,19 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"   
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
       
     <body>
 	    <ui:composition>
-	
-		This is default header
-	
+		
 		<h:form>
-			<p><h:commandLink value="logout" action="#{authBean.logout}" /></p>
+		
+		<table> 
+			<tr>
+				<td width="920">
+					<p:graphicImage value="/resources/images/logo.png"/>
+				</td>
+				<td>
+					<h:commandLink value="#{msg['menu.logout']}" action="#{authBean.logout}" />
+				</td>	
+			</tr>
+		</table>
+		
 		</h:form>
+		
+		<hr />
+		
+		<div id="menu">
+			<p:commandLink action="#{menuBean.goToCareSubjects}">
+        		<h:outputText value="#{msg['menu.careSubjects']}" />
+    		</p:commandLink>
+    		 | 
+    		<p:commandLink action="#{menuBean.goToCurrentSubjectsCard}">
+        		<h:outputText value="#{msg['menu.currentSubjectsCard']}" />
+    		</p:commandLink>
+    		 | 
+    		 <p:commandLink action="#{menuBean.goToMyDetails}">
+        		<h:outputText value="#{msg['menu.myDetails']}" />
+    		</p:commandLink>
+		</div>
+		
+		<hr />
 				
 	    </ui:composition>
     </body>

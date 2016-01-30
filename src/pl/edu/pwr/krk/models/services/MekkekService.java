@@ -4,26 +4,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pl.edu.pwr.krk.models.dao.MekkekHome;
+import pl.edu.pwr.krk.models.dao.MekkekDAO;
 
 @Service("MekkekService")
 @Transactional(readOnly = true)
 public class MekkekService {
 
 	@Autowired
-	MekkekHome mekkekHome;
+	MekkekDAO mekkekDAO;
 
 	/**
-	 * @return the mekkekHome
+	 * @return the mekkekDAO
 	 */
-	public MekkekHome getMekkekHome() {
-		return mekkekHome;
+	public MekkekDAO getMekkekDAO() {
+		return mekkekDAO;
 	}
 
 	/**
-	 * @param mekkekHome the mekkekHome to set
+	 * @param mekkekDAO the mekkekDAO to set
 	 */
-	public void setMekkekHome(MekkekHome mekkekHome) {
-		this.mekkekHome = mekkekHome;
+	public void setMekkekDAO(MekkekDAO mekkekDAO) {
+		this.mekkekDAO = mekkekDAO;
 	}
 }

@@ -4,27 +4,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pl.edu.pwr.krk.models.dao.OcenaosiagieciapekHome;
+import pl.edu.pwr.krk.models.dao.OcenaosiagieciapekDAO;
 
 @Service("OcenaosiagnieciapekService")
 @Transactional(readOnly = true)
 public class OcenaosiagnieciapekService {
 
 	@Autowired
-	OcenaosiagieciapekHome ocenaosiagnieciapekHome;
+	OcenaosiagieciapekDAO ocenaosiagnieciapekDAO;
 
 	/**
-	 * @return the ocenaosiagnieciapekHome
+	 * @return the ocenaosiagnieciapekDAO
 	 */
-	public OcenaosiagieciapekHome getOcenaosiagnieciapekHome() {
-		return ocenaosiagnieciapekHome;
+	public OcenaosiagieciapekDAO getOcenaosiagnieciapekDAO() {
+		return ocenaosiagnieciapekDAO;
 	}
 
 	/**
-	 * @param ocenaosiagnieciapekHome
-	 *            the ocenaosiagnieciapekHome to set
+	 * @param ocenaosiagnieciapekDAO
+	 *            the ocenaosiagnieciapekDAO to set
 	 */
-	public void setOcenaosiagnieciapekHome(OcenaosiagieciapekHome ocenaosiagnieciapekHome) {
-		this.ocenaosiagnieciapekHome = ocenaosiagnieciapekHome;
+	public void setOcenaosiagnieciapekDAO(OcenaosiagieciapekDAO ocenaosiagnieciapekDAO) {
+		this.ocenaosiagnieciapekDAO = ocenaosiagnieciapekDAO;
 	}
 }

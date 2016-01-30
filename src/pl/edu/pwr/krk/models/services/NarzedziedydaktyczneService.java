@@ -4,26 +4,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pl.edu.pwr.krk.models.dao.NarzedziedydaktyczneHome;
+import pl.edu.pwr.krk.models.dao.NarzedziedydaktyczneDAO;
 
 @Service("NarzedziedydaktyczneService")
 @Transactional(readOnly = true)
 public class NarzedziedydaktyczneService {
 
 	@Autowired
-	NarzedziedydaktyczneHome narzedziedydaktyczneHome;
+	NarzedziedydaktyczneDAO narzedziedydaktyczneDAO;
 
 	/**
-	 * @return the narzedziedydaktyczneHome
+	 * @return the narzedziedydaktyczneDAO
 	 */
-	public NarzedziedydaktyczneHome getNarzedziedydaktyczneHome() {
-		return narzedziedydaktyczneHome;
+	public NarzedziedydaktyczneDAO getNarzedziedydaktyczneDAO() {
+		return narzedziedydaktyczneDAO;
 	}
 
 	/**
-	 * @param narzedziedydaktyczneHome the narzedziedydaktyczneHome to set
+	 * @param narzedziedydaktyczneDAO the narzedziedydaktyczneDAO to set
 	 */
-	public void setNarzedziedydaktyczneHome(NarzedziedydaktyczneHome narzedziedydaktyczneHome) {
-		this.narzedziedydaktyczneHome = narzedziedydaktyczneHome;
+	public void setNarzedziedydaktyczneDAO(NarzedziedydaktyczneDAO narzedziedydaktyczneDAO) {
+		this.narzedziedydaktyczneDAO = narzedziedydaktyczneDAO;
 	}
 }

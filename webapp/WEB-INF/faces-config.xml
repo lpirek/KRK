@@ -10,13 +10,24 @@
 	<application>
 		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
 	</application>
+
+	<application>
+     	   <locale-config>
+     	        <default-locale>pl</default-locale>
+     	        <supported-locale>en</supported-locale>
+     	   </locale-config>
+	   	   <resource-bundle>
+				<base-name>messages</base-name>
+				<var>msg</var>
+	   	  </resource-bundle>
+     </application>
 	
 	<navigation-rule>
         <from-view-id>/login.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>login</from-outcome>
-            <to-view-id>/index.xhtml</to-view-id>
-            <redirect />
+            <to-view-id>/pages/index.xhtml</to-view-id>
+            <redirect></redirect>
         </navigation-case>
     </navigation-rule>
 
@@ -24,10 +35,36 @@
         <from-view-id>*</from-view-id>
         <navigation-case>
             <from-outcome>logout</from-outcome>
-            <to-view-id>/login.xhtml</to-view-id>
-            <redirect />
+            <to-view-id>/pages/index.xhtml</to-view-id>
+           <redirect></redirect>
         </navigation-case>
     </navigation-rule>
 
+	<navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>toCareSubjects</from-outcome>
+            <to-view-id>/pages/careSubjects.xhtml</to-view-id>
+           <redirect></redirect>
+        </navigation-case>
+    </navigation-rule>
+	
+	<navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>toCurrentSubjectsCard</from-outcome>
+            <to-view-id>/pages/subjectsCard.xhtml</to-view-id>
+           <redirect></redirect>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>toMyDetails</from-outcome>
+            <to-view-id>/pages/myDetails.xhtml</to-view-id>
+           <redirect></redirect>
+        </navigation-case>
+    </navigation-rule>
 	
 </faces-config>

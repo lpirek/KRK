@@ -4,27 +4,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pl.edu.pwr.krk.models.dao.TrescprogramowaHome;
+import pl.edu.pwr.krk.models.dao.TrescprogramowaDAO;
 
 @Service("TrescprogramowaService")
 @Transactional(readOnly = true)
 public class TrescprogramowaService {
 
 	@Autowired
-	TrescprogramowaHome trescprogramowaHome;
+	TrescprogramowaDAO trescprogramowaDAO;
 
 	/**
-	 * @return the trescprogramowaHome
+	 * @return the trescprogramowaDAO
 	 */
-	public TrescprogramowaHome getTrescprogramowaHome() {
-		return trescprogramowaHome;
+	public TrescprogramowaDAO getTrescprogramowaDAO() {
+		return trescprogramowaDAO;
 	}
 
 	/**
-	 * @param trescprogramowaHome
-	 *            the trescprogramowaHome to set
+	 * @param trescprogramowaDAO
+	 *            the trescprogramowaDAO to set
 	 */
-	public void setTrescprogramowaHome(TrescprogramowaHome trescprogramowaHome) {
-		this.trescprogramowaHome = trescprogramowaHome;
+	public void setTrescprogramowaDAO(TrescprogramowaDAO trescprogramowaDAO) {
+		this.trescprogramowaDAO = trescprogramowaDAO;
 	}
 }

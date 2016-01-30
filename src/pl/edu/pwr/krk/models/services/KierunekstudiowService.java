@@ -4,27 +4,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pl.edu.pwr.krk.models.dao.KierunekstudiowHome;
+import pl.edu.pwr.krk.models.dao.KierunekstudiowDAO;
 
 @Service("KierunekstudiowService")
 @Transactional(readOnly = true)
 public class KierunekstudiowService {
 
 	@Autowired
-	KierunekstudiowHome kierunekstudiowHome;
+	KierunekstudiowDAO kierunekstudiowDAO;
 
 	/**
-	 * @return the kierunekstudiowHome
+	 * @return the kierunekstudiowDAO
 	 */
-	public KierunekstudiowHome getKierunekstudiowHome() {
-		return kierunekstudiowHome;
+	public KierunekstudiowDAO getKierunekstudiowDAO() {
+		return kierunekstudiowDAO;
 	}
 
 	/**
-	 * @param kierunekstudiowHome
-	 *            the kierunekstudiowHome to set
+	 * @param kierunekstudiowDAO
+	 *            the kierunekstudiowDAO to set
 	 */
-	public void setKierunekstudiowHome(KierunekstudiowHome kierunekstudiowHome) {
-		this.kierunekstudiowHome = kierunekstudiowHome;
+	public void setKierunekstudiowDAO(KierunekstudiowDAO kierunekstudiowDAO) {
+		this.kierunekstudiowDAO = kierunekstudiowDAO;
 	}
 }

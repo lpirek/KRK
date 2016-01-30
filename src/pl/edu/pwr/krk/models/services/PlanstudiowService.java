@@ -4,27 +4,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pl.edu.pwr.krk.models.dao.PlanstudiowHome;
+import pl.edu.pwr.krk.models.dao.PlanstudiowDAO;
 
 @Service("PlanstudiowService")
 @Transactional(readOnly = true)
 public class PlanstudiowService {
 
 	@Autowired
-	PlanstudiowHome planstudiowHome;
+	PlanstudiowDAO planstudiowDAO;
 
 	/**
-	 * @return the planstudiowHome
+	 * @return the planstudiowDAO
 	 */
-	public PlanstudiowHome getPlanstudiowHome() {
-		return planstudiowHome;
+	public PlanstudiowDAO getPlanstudiowDAO() {
+		return planstudiowDAO;
 	}
 
 	/**
-	 * @param planstudiowHome
-	 *            the planstudiowHome to set
+	 * @param planstudiowDAO
+	 *            the planstudiowDAO to set
 	 */
-	public void setPlanstudiowHome(PlanstudiowHome planstudiowHome) {
-		this.planstudiowHome = planstudiowHome;
+	public void setPlanstudiowDAO(PlanstudiowDAO planstudiowDAO) {
+		this.planstudiowDAO = planstudiowDAO;
 	}
 }

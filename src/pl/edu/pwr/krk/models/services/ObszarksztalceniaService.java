@@ -4,27 +4,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pl.edu.pwr.krk.models.dao.ObszarksztalceniaHome;
+import pl.edu.pwr.krk.models.dao.ObszarksztalceniaDAO;
 
 @Service("ObszarksztalceniaService")
 @Transactional(readOnly = true)
 public class ObszarksztalceniaService {
 
 	@Autowired
-	ObszarksztalceniaHome obszarksztalceniaHome;
+	ObszarksztalceniaDAO obszarksztalceniaDAO;
 
 	/**
-	 * @return the obszarksztalceniaHome
+	 * @return the obszarksztalceniaDAO
 	 */
-	public ObszarksztalceniaHome getObszarksztalceniaHome() {
-		return obszarksztalceniaHome;
+	public ObszarksztalceniaDAO getObszarksztalceniaDAO() {
+		return obszarksztalceniaDAO;
 	}
 
 	/**
-	 * @param obszarksztalceniaHome
-	 *            the obszarksztalceniaHome to set
+	 * @param obszarksztalceniaDAO
+	 *            the obszarksztalceniaDAO to set
 	 */
-	public void setObszarksztalceniaHome(ObszarksztalceniaHome obszarksztalceniaHome) {
-		this.obszarksztalceniaHome = obszarksztalceniaHome;
+	public void setObszarksztalceniaDAO(ObszarksztalceniaDAO obszarksztalceniaDAO) {
+		this.obszarksztalceniaDAO = obszarksztalceniaDAO;
 	}
 }

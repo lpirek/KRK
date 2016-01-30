@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans
+    xmlns:sec="http://www.springframework.org/schema/security"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+     					http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+    					http://www.springframework.org/schema/security
+    					http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+
+    <!-- Enable method level Spring Security by annotations  -->
+    <sec:global-method-security pre-post-annotations="enabled" />  
+    <sec:http auto-config="true" use-expressions="true">
+    
+        <!-- Page level Spring Security : Permit access to resources in /pages/login.xhtml -->
+        <sec:intercept-url pattern="/pages/login.xhtml" access="permitAll"/>
+        
+        <sec:intercept-url pattern="/template/**" access="permitAll"/>
+        <sec:intercept-url pattern="/resource/**" access="permitAll"/>
+	      
+        <!-- Page level Spring Security : Enable Primefaces -->
+        <sec:intercept-url pattern="/javax.faces.resource/**" access="permitAll"/>        
+        	
+        <!-- Page level Spring Security : Intercept access to resources in /pages/secure/** -->
+        <sec:intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+                
+        <!-- Define login page for Spring Security -->      
+        <!--  <sec:form-login login-page="/pages/login.xhtml" 
+        	default-target-url="/pages/index.xhtml" /> -->
+  
+        <!-- Define logout properties for Spring Security -->
+        <sec:logout invalidate-session="true" delete-cookies="true" logout-success-url="/"></sec:logout>
+        
+        <sec:csrf disabled="true"/>
+    </sec:http>
+   
+    <!-- Set authService class as the authentication Manager for Spring Security-->
+    <sec:authentication-manager alias="authenticationManager">
+        <sec:authentication-provider>
+			<sec:jdbc-user-service data-source-ref="dataSource"
+  				 users-by-username-query=
+     			"SELECT login, haslo, true FROM uzytkownik WHERE login=?"
+   				authorities-by-username-query=
+     			"SELECT login, 'ROLE_USER' FROM uzytkownik WHERE login=?  " />
+		</sec:authentication-provider>
+    </sec:authentication-manager>
+
+    
+</beans:beans>

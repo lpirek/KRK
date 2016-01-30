@@ -4,27 +4,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pl.edu.pwr.krk.models.dao.CelprzedmiotuHome;
+import pl.edu.pwr.krk.models.dao.CelprzedmiotuDAO;
 
 @Service("CelprzedmiouService")
 @Transactional(readOnly = true)
 public class CelprzedmiouService {
 
 	@Autowired
-	CelprzedmiotuHome celprzedmiotuHome;
+	CelprzedmiotuDAO celprzedmiotuDAO;
 
 	/**
-	 * @return the celprzedmiotuHome
+	 * @return the celprzedmiotuDAO
 	 */
-	public CelprzedmiotuHome getCelprzedmiotuHome() {
-		return celprzedmiotuHome;
+	public CelprzedmiotuDAO getCelprzedmiotuDAO() {
+		return celprzedmiotuDAO;
 	}
 
 	/**
-	 * @param celprzedmiotuHome
-	 *            the celprzedmiotuHome to set
+	 * @param celprzedmiotuDAO
+	 *            the celprzedmiotuDAO to set
 	 */
-	public void setCelprzedmiotuHome(CelprzedmiotuHome celprzedmiotuHome) {
-		this.celprzedmiotuHome = celprzedmiotuHome;
+	public void setCelprzedmiotuDAO(CelprzedmiotuDAO celprzedmiotuDAO) {
+		this.celprzedmiotuDAO = celprzedmiotuDAO;
 	}
 }

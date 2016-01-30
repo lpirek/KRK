@@ -4,28 +4,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pl.edu.pwr.krk.models.dao.MinisterialnyefektksztalceniaHome;
+import pl.edu.pwr.krk.models.dao.MinisterialnyefektksztalceniaDAO;
 
 @Service("MinisterialnyefektksztalceniaService")
 @Transactional(readOnly = true)
 public class MinisterialnyefektksztalceniaService {
 
 	@Autowired
-	MinisterialnyefektksztalceniaHome ministerialnyefektksztalceniaHome;
+	MinisterialnyefektksztalceniaDAO ministerialnyefektksztalceniaDAO;
 
 	/**
-	 * @return the ministerialnyefektksztalceniaHome
+	 * @return the ministerialnyefektksztalceniaDAO
 	 */
-	public MinisterialnyefektksztalceniaHome getMinisterialnyefektksztalceniaHome() {
-		return ministerialnyefektksztalceniaHome;
+	public MinisterialnyefektksztalceniaDAO getMinisterialnyefektksztalceniaDAO() {
+		return ministerialnyefektksztalceniaDAO;
 	}
 
 	/**
-	 * @param ministerialnyefektksztalceniaHome
-	 *            the ministerialnyefektksztalceniaHome to set
+	 * @param ministerialnyefektksztalceniaDAO
+	 *            the ministerialnyefektksztalceniaDAO to set
 	 */
-	public void setMinisterialnyefektksztalceniaHome(
-			MinisterialnyefektksztalceniaHome ministerialnyefektksztalceniaHome) {
-		this.ministerialnyefektksztalceniaHome = ministerialnyefektksztalceniaHome;
+	public void setMinisterialnyefektksztalceniaDAO(
+			MinisterialnyefektksztalceniaDAO ministerialnyefektksztalceniaDAO) {
+		this.ministerialnyefektksztalceniaDAO = ministerialnyefektksztalceniaDAO;
 	}
 }

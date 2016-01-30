@@ -4,27 +4,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pl.edu.pwr.krk.models.dao.KursHome;
+import pl.edu.pwr.krk.models.dao.KursDAO;
 
 @Service("KursService")
 @Transactional(readOnly = true)
 public class KursService {
 
 	@Autowired
-	KursHome kursHome;
+	KursDAO kursDAO;
 
 	/**
-	 * @return the kursHome
+	 * @return the kursDAO
 	 */
-	public KursHome getKursHome() {
-		return kursHome;
+	public KursDAO getKursDAO() {
+		return kursDAO;
 	}
 
 	/**
-	 * @param kursHome
-	 *            the kursHome to set
+	 * @param kursDAO
+	 *            the kursDAO to set
 	 */
-	public void setKursHome(KursHome kursHome) {
-		this.kursHome = kursHome;
+	public void setKursDAO(KursDAO kursDAO) {
+		this.kursDAO = kursDAO;
 	}
 }
