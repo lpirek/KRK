@@ -5,6 +5,9 @@ import java.util.Set;
 
 public class Modulksztalcenia implements java.io.Serializable {
 
+	public static final String TYP_WYBIERALNY = "wybieralny";
+	public static final String TYP_OBOWIAZKOWY = "obowiązkowy";
+	
 	private Integer id;
 	private Programstudiow programstudiow;
 	private Modulksztalcenia modulksztalcenia;

@@ -11,7 +11,6 @@ public class Kierunkowyefektksztalcenia implements java.io.Serializable {
 	private String zakres;
 	private String numer;
 	private String opis;
-	private int column;
 	private Set<Kekpek> kekpeks = new HashSet<Kekpek>(0);
 	private Set<Mekkek> mekkeks = new HashSet<Mekkek>(0);
 	private Set<Przedmiotkek> przedmiotkeks = new HashSet<Przedmiotkek>(0);
@@ -20,18 +19,17 @@ public class Kierunkowyefektksztalcenia implements java.io.Serializable {
 	}
 
 	public Kierunkowyefektksztalcenia(int id, Kierunekstudiow kierunekstudiow, Specjalizacja specjalizacja,
-			String zakres, String numer, String opis, int column) {
+			String zakres, String numer, String opis) {
 		this.id = id;
 		this.kierunekstudiow = kierunekstudiow;
 		this.specjalizacja = specjalizacja;
 		this.zakres = zakres;
 		this.numer = numer;
 		this.opis = opis;
-		this.column = column;
 	}
 
 	public Kierunkowyefektksztalcenia(int id, Kierunekstudiow kierunekstudiow, Specjalizacja specjalizacja,
-			String zakres, String numer, String opis, int column, Set<Kekpek> kekpeks, Set<Mekkek> mekkeks,
+			String zakres, String numer, String opis, Set<Kekpek> kekpeks, Set<Mekkek> mekkeks,
 			Set<Przedmiotkek> przedmiotkeks) {
 		this.id = id;
 		this.kierunekstudiow = kierunekstudiow;
@@ -39,7 +37,6 @@ public class Kierunkowyefektksztalcenia implements java.io.Serializable {
 		this.zakres = zakres;
 		this.numer = numer;
 		this.opis = opis;
-		this.column = column;
 		this.kekpeks = kekpeks;
 		this.mekkeks = mekkeks;
 		this.przedmiotkeks = przedmiotkeks;
@@ -91,14 +88,6 @@ public class Kierunkowyefektksztalcenia implements java.io.Serializable {
 
 	public void setOpis(String opis) {
 		this.opis = opis;
-	}
-
-	public int getColumn() {
-		return this.column;
-	}
-
-	public void setColumn(int column) {
-		this.column = column;
 	}
 
 	public Set<Kekpek> getKekpeks() {

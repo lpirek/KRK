@@ -1,11 +1,11 @@
 CREATE SCHEMA easykrkdb;
 USE easykrkdb;
 CREATE TABLE `ProgramKsztalcenia` (
-  `id`                int(11) NOT NULL, 
+  `id`                int(11) NOT NULL AUTO_INCREMENT, 
   `aktualnyOd`        timestamp NOT NULL, 
   `typStudiow`        varchar(15) NOT NULL, 
   `formaStudiow`      varchar(15) NOT NULL, 
-  `stopienStuiow`     varchar(15) NOT NULL, 
+  `stopienStudiow`     varchar(15) NOT NULL, 
   `KierunekStudiowid` int(11) NOT NULL, 
   `ProgramStudiowid`  int(11), 
   PRIMARY KEY (`id`)) ENGINE=InnoDB CHARACTER SET UTF8;
@@ -13,7 +13,7 @@ CREATE TABLE `ObszarKsztalcenia` (
   `id` int(11) NOT NULL AUTO_INCREMENT, 
   PRIMARY KEY (`id`)) ENGINE=InnoDB CHARACTER SET UTF8;
 CREATE TABLE `KierunekStudiow` (
-  `id`        int(11) NOT NULL, 
+  `id`        int(11) NOT NULL AUTO_INCREMENT, 
   `nazwa`     varchar(255) NOT NULL, 
   `Wydzialid` int(11) NOT NULL, 
   PRIMARY KEY (`id`)) ENGINE=InnoDB CHARACTER SET UTF8;
@@ -25,7 +25,7 @@ CREATE TABLE `PlanStudiow` (
   `ProgramKsztalceniaid` int(11) NOT NULL, 
   PRIMARY KEY (`id`)) ENGINE=InnoDB CHARACTER SET UTF8;
 CREATE TABLE `Wydzial` (
-  `id`    int(11) NOT NULL, 
+  `id`    int(11) NOT NULL AUTO_INCREMENT, 
   `nazwa` varchar(255) NOT NULL, 
   PRIMARY KEY (`id`)) ENGINE=InnoDB CHARACTER SET UTF8;
 CREATE TABLE `Specjalizacja` (
@@ -41,11 +41,10 @@ CREATE TABLE `MinisterialnyEfektKsztalcenia` (
   `ObszarKsztalceniaid` int(11) NOT NULL, 
   PRIMARY KEY (`id`)) ENGINE=InnoDB CHARACTER SET UTF8;
 CREATE TABLE `KierunkowyEfektKsztalcenia` (
-  `id`                int(11) NOT NULL, 
+  `id`                int(11) NOT NULL AUTO_INCREMENT, 
   `zakres`            varchar(15) NOT NULL, 
   `numer`             varchar(255) NOT NULL, 
   `opis`              varchar(255) NOT NULL, 
-  `Column`            int(11) NOT NULL, 
   `KierunekStudiowid` int(11) NOT NULL, 
   `Specjalizacjaid`   int(11) NOT NULL, 
   PRIMARY KEY (`id`)) ENGINE=InnoDB CHARACTER SET UTF8;
@@ -75,12 +74,11 @@ CREATE TABLE `RaportSyntetyczny` (
   `Uzytkownikid` int(11) NOT NULL, 
   PRIMARY KEY (`id`)) ENGINE=InnoDB CHARACTER SET UTF8;
 CREATE TABLE `Przedmiot` (
-  `id`                 int(11) NOT NULL, 
+  `id`                 int(11) NOT NULL AUTO_INCREMENT, 
   `rodzaj`             varchar(31) NOT NULL, 
   `nazwaPL`            varchar(255) NOT NULL, 
   `nazwaEN`            varchar(255) NOT NULL, 
   `kod`                varchar(255) NOT NULL, 
-  `Column`             int(11) NOT NULL, 
   `Specjalizacjaid`    int(11), 
   `ModulKsztalceniaid` int(11) NOT NULL, 
   `Uzytkownikid`       int(11) NOT NULL, 
@@ -91,11 +89,10 @@ CREATE TABLE `OcenaOsiagieciaPEK` (
   `numer`             varchar(255) NOT NULL, 
   `opis`              varchar(255) NOT NULL, 
   `sposobOceny`       varchar(255) NOT NULL, 
-  `Column`            int(11) NOT NULL, 
   `KartaPrzedmiotuid` int(11) NOT NULL, 
   PRIMARY KEY (`id`)) ENGINE=InnoDB CHARACTER SET UTF8;
 CREATE TABLE `KartaPrzedmiotu` (
-  `id`              int(11) NOT NULL, 
+  `id`              int(11) NOT NULL AUTO_INCREMENT, 
   `jezyk`           varchar(15) NOT NULL, 
   `nazwa`           varchar(255) NOT NULL, 
   `wersja`          smallint(6) NOT NULL, 
@@ -107,7 +104,7 @@ CREATE TABLE `KartaPrzedmiotu` (
   `Przedmiotid`     int(11) NOT NULL, 
   PRIMARY KEY (`id`)) ENGINE=InnoDB CHARACTER SET UTF8;
 CREATE TABLE `CelPrzedmiotu` (
-  `id`                int(11) NOT NULL, 
+  `id`                int(11) NOT NULL AUTO_INCREMENT, 
   `numer`             varchar(255) NOT NULL, 
   `opis`              varchar(255) NOT NULL, 
   `KartaPrzedmiotuid` int(11) NOT NULL, 

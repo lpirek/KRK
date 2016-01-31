@@ -25,9 +25,21 @@
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <!-- Transaction Manager is defined -->
-    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
     	<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	
+	<!-- Connect DAOs with SessionFactory -->
+	<bean id="uzytkownikDAO" class="pl.edu.pwr.krk.models.dao.UzytkownikDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 
+	<!-- Connect Services with DAOs -->
+	<bean id="uzytkownikService" class="pl.edu.pwr.krk.models.services.UzytkownikService">
+		<property name="uzytkownikDAO" ref="uzytkownikDAO" />
+	</bean>
+	
+	<!-- Connect Provider with AppContext -->
+	<bean id="provider" class="pl.edu.pwr.krk.tools.ApplicationContextProvider"> </bean>
 	
 </beans>

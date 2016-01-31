@@ -6,13 +6,23 @@ import java.util.Set;
 
 public class Programksztalcenia implements java.io.Serializable {
 
+	public final static String STOPIEN_1 = "I stopień";
+	public final static String STOPIEN_2 = "II stopien";
+	
+	public final static String FORMA_STACJONARNA = "stacjonarne";
+	public final static String FORMA_NIESTACJONARNA = "niestacjonarne";
+	
+	public final static String TYP_INZYNIERSKIE = "inżynierskie";
+	public final static String TYP_LICENCJACKIE = "licencjackie";
+	public final static String TYP_MAGISTERSKIE = "magisterskie";
+	
 	private int id;
 	private Programstudiow programstudiow;
 	private Kierunekstudiow kierunekstudiow;
 	private Date aktualnyOd;
 	private String typStudiow;
 	private String formaStudiow;
-	private String stopienStuiow;
+	private String stopienStudiow;
 	private Set<Programksztalceniaobszarksztalcenia> programksztalceniaobszarksztalcenias = new HashSet<Programksztalceniaobszarksztalcenia>(
 			0);
 	private Set<Planstudiow> planstudiows = new HashSet<Planstudiow>(0);
@@ -21,17 +31,17 @@ public class Programksztalcenia implements java.io.Serializable {
 	}
 
 	public Programksztalcenia(int id, Kierunekstudiow kierunekstudiow, Date aktualnyOd, String typStudiow,
-			String formaStudiow, String stopienStuiow) {
+			String formaStudiow, String stopienStudiow) {
 		this.id = id;
 		this.kierunekstudiow = kierunekstudiow;
 		this.aktualnyOd = aktualnyOd;
 		this.typStudiow = typStudiow;
 		this.formaStudiow = formaStudiow;
-		this.stopienStuiow = stopienStuiow;
+		this.stopienStudiow = stopienStudiow;
 	}
 
 	public Programksztalcenia(int id, Programstudiow programstudiow, Kierunekstudiow kierunekstudiow, Date aktualnyOd,
-			String typStudiow, String formaStudiow, String stopienStuiow,
+			String typStudiow, String formaStudiow, String stopienStudiow,
 			Set<Programksztalceniaobszarksztalcenia> programksztalceniaobszarksztalcenias,
 			Set<Planstudiow> planstudiows) {
 		this.id = id;
@@ -40,7 +50,7 @@ public class Programksztalcenia implements java.io.Serializable {
 		this.aktualnyOd = aktualnyOd;
 		this.typStudiow = typStudiow;
 		this.formaStudiow = formaStudiow;
-		this.stopienStuiow = stopienStuiow;
+		this.stopienStudiow = stopienStudiow;
 		this.programksztalceniaobszarksztalcenias = programksztalceniaobszarksztalcenias;
 		this.planstudiows = planstudiows;
 	}
@@ -93,12 +103,12 @@ public class Programksztalcenia implements java.io.Serializable {
 		this.formaStudiow = formaStudiow;
 	}
 
-	public String getStopienStuiow() {
-		return this.stopienStuiow;
+	public String getStopienStudiow() {
+		return this.stopienStudiow;
 	}
 
-	public void setStopienStuiow(String stopienStuiow) {
-		this.stopienStuiow = stopienStuiow;
+	public void setStopienStudiow(String stopienStudiow) {
+		this.stopienStudiow = stopienStudiow;
 	}
 
 	public Set<Programksztalceniaobszarksztalcenia> getProgramksztalceniaobszarksztalcenias() {

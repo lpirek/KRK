@@ -5,6 +5,10 @@ import java.util.Set;
 
 public class Przedmiot implements java.io.Serializable {
 
+	public static final String RODZAJ_OBOWIAZKOWY = "obowiązkowy";
+	public static final String RODZAJ_WYBIERALNY = "wybieralny";
+	public static final String RODZAJ_OGOLNOUCZELNIANY = "ogólnouczelniany";
+	
 	private int id;
 	private Specjalizacja specjalizacja;
 	private Uzytkownik uzytkownik;
@@ -13,7 +17,6 @@ public class Przedmiot implements java.io.Serializable {
 	private String nazwaPl;
 	private String nazwaEn;
 	private String kod;
-	private int column;
 	private Set<Przedmiotkek> przedmiotkeks = new HashSet<Przedmiotkek>(0);
 	private Set<Grupakursow> grupakursows = new HashSet<Grupakursow>(0);
 	private Set<Raportsyntetyczny> raportsyntetycznies = new HashSet<Raportsyntetyczny>(0);
@@ -24,7 +27,7 @@ public class Przedmiot implements java.io.Serializable {
 	}
 
 	public Przedmiot(int id, Uzytkownik uzytkownik, Modulksztalcenia modulksztalcenia, String rodzaj, String nazwaPl,
-			String nazwaEn, String kod, int column) {
+			String nazwaEn, String kod) {
 		this.id = id;
 		this.uzytkownik = uzytkownik;
 		this.modulksztalcenia = modulksztalcenia;
@@ -32,11 +35,10 @@ public class Przedmiot implements java.io.Serializable {
 		this.nazwaPl = nazwaPl;
 		this.nazwaEn = nazwaEn;
 		this.kod = kod;
-		this.column = column;
 	}
 
 	public Przedmiot(int id, Specjalizacja specjalizacja, Uzytkownik uzytkownik, Modulksztalcenia modulksztalcenia,
-			String rodzaj, String nazwaPl, String nazwaEn, String kod, int column, Set<Przedmiotkek> przedmiotkeks,
+			String rodzaj, String nazwaPl, String nazwaEn, String kod, Set<Przedmiotkek> przedmiotkeks,
 			Set<Grupakursow> grupakursows, Set<Raportsyntetyczny> raportsyntetycznies,
 			Set<Kartaprzedmiotu> kartaprzedmiotus, Set<Kurs> kurses) {
 		this.id = id;
@@ -47,7 +49,6 @@ public class Przedmiot implements java.io.Serializable {
 		this.nazwaPl = nazwaPl;
 		this.nazwaEn = nazwaEn;
 		this.kod = kod;
-		this.column = column;
 		this.przedmiotkeks = przedmiotkeks;
 		this.grupakursows = grupakursows;
 		this.raportsyntetycznies = raportsyntetycznies;
@@ -117,14 +118,6 @@ public class Przedmiot implements java.io.Serializable {
 
 	public void setKod(String kod) {
 		this.kod = kod;
-	}
-
-	public int getColumn() {
-		return this.column;
-	}
-
-	public void setColumn(int column) {
-		this.column = column;
 	}
 
 	public Set<Przedmiotkek> getPrzedmiotkeks() {

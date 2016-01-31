@@ -23,9 +23,6 @@
         <property name="sposobOceny" type="string">
             <column name="sposobOceny" not-null="true" />
         </property>
-        <property name="column" type="int">
-            <column name="Column" not-null="true" />
-        </property>
         <set name="pekocenaosiagnieciapeks" table="pekocenaosiagnieciapek" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="OcenaOsiagieciaPEKId" not-null="true" />

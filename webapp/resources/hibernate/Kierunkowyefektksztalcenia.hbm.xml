@@ -23,9 +23,6 @@
         <property name="opis" type="string">
             <column name="opis" not-null="true" />
         </property>
-        <property name="column" type="int">
-            <column name="Column" not-null="true" />
-        </property>
         <set name="kekpeks" table="kekpek" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="KierunkowyEfektKsztalceniaid" not-null="true" />

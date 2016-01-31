@@ -23,8 +23,8 @@
         <property name="formaStudiow" type="string">
             <column name="formaStudiow" length="15" not-null="true" />
         </property>
-        <property name="stopienStuiow" type="string">
-            <column name="stopienStuiow" length="15" not-null="true" />
+        <property name="stopienStudiow" type="string">
+            <column name="stopienStudiow" length="15" not-null="true" />
         </property>
         <set name="programksztalceniaobszarksztalcenias" table="programksztalceniaobszarksztalcenia" inverse="true" lazy="true" fetch="select">
             <key>

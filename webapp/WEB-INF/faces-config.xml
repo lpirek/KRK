@@ -43,6 +43,15 @@
 	<navigation-rule>
         <from-view-id>*</from-view-id>
         <navigation-case>
+            <from-outcome>toIndex</from-outcome>
+            <to-view-id>/pages/index.xhtml</to-view-id>
+           <redirect></redirect>
+        </navigation-case>
+    </navigation-rule>
+
+	<navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
             <from-outcome>toCareSubjects</from-outcome>
             <to-view-id>/pages/careSubjects.xhtml</to-view-id>
            <redirect></redirect>

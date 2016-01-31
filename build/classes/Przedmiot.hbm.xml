@@ -29,9 +29,6 @@
         <property name="kod" type="string">
             <column name="kod" not-null="true" />
         </property>
-        <property name="column" type="int">
-            <column name="Column" not-null="true" />
-        </property>
         <set name="przedmiotkeks" table="przedmiotkek" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="Przedmiotid" not-null="true" />

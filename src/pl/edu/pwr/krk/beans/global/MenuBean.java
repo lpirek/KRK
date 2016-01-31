@@ -17,6 +17,10 @@ public class MenuBean implements Serializable {
 
     private static final Log log = LogFactory.getLog(MenuBean.class);
     
+    public String goToIndex() {
+    	return "toIndex";
+    }
+    
 	public String goToCareSubjects() {
 		return "toCareSubjects";
 	}

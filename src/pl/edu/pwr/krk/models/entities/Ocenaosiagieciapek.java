@@ -11,30 +11,27 @@ public class Ocenaosiagieciapek implements java.io.Serializable {
 	private String numer;
 	private String opis;
 	private String sposobOceny;
-	private int column;
 	private Set<Pekocenaosiagnieciapek> pekocenaosiagnieciapeks = new HashSet<Pekocenaosiagnieciapek>(0);
 
 	public Ocenaosiagieciapek() {
 	}
 
 	public Ocenaosiagieciapek(Kartaprzedmiotu kartaprzedmiotu, String rodzajOceny, String numer, String opis,
-			String sposobOceny, int column) {
+			String sposobOceny) {
 		this.kartaprzedmiotu = kartaprzedmiotu;
 		this.rodzajOceny = rodzajOceny;
 		this.numer = numer;
 		this.opis = opis;
 		this.sposobOceny = sposobOceny;
-		this.column = column;
 	}
 
 	public Ocenaosiagieciapek(Kartaprzedmiotu kartaprzedmiotu, String rodzajOceny, String numer, String opis,
-			String sposobOceny, int column, Set<Pekocenaosiagnieciapek> pekocenaosiagnieciapeks) {
+			String sposobOceny, Set<Pekocenaosiagnieciapek> pekocenaosiagnieciapeks) {
 		this.kartaprzedmiotu = kartaprzedmiotu;
 		this.rodzajOceny = rodzajOceny;
 		this.numer = numer;
 		this.opis = opis;
 		this.sposobOceny = sposobOceny;
-		this.column = column;
 		this.pekocenaosiagnieciapeks = pekocenaosiagnieciapeks;
 	}
 
@@ -84,14 +81,6 @@ public class Ocenaosiagieciapek implements java.io.Serializable {
 
 	public void setSposobOceny(String sposobOceny) {
 		this.sposobOceny = sposobOceny;
-	}
-
-	public int getColumn() {
-		return this.column;
-	}
-
-	public void setColumn(int column) {
-		this.column = column;
 	}
 
 	public Set<Pekocenaosiagnieciapek> getPekocenaosiagnieciapeks() {

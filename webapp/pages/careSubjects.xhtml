@@ -1,0 +1,48 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>EasyKRK</title>
+</h:head>
+<h:body>
+
+	<ui:composition template="../template/commonLayout.xhtml">
+
+		<ui:define name="content">
+		
+		<h2>#{msg['careSubjects.title']}</h2>
+		
+		<h:panelGroup rendered="#{careSubjectsBean.careSubjectsByUser.isEmpty()}">
+			<h:outputText value="#{msg['careSubjects.emptyList']}"/>
+			
+			<br />
+			<br />
+		</h:panelGroup>
+		
+		<h:panelGroup rendered="#{!careSubjectsBean.careSubjectsByUser.isEmpty()}">
+		
+			<ui:repeat value="#{careSubjectsBean.careSubjectsByUser}" var="przedmiot">
+		        <h:panelGrid columns="2" style="width:100%">
+		            
+		            <p:outputPanel>
+		                <h:outputText value="#{careSubjectsBean.getName(przedmiot)}" style="font-weight: bold"/>
+		 				<h:outputText value="#{careSubjectsBean.getDescription(przedmiot)}" />
+		            </p:outputPanel>
+		            
+		            <p:commandButton value="#{msg['careSubjects.button']}" />
+		            
+		        </h:panelGrid>
+		        <hr />
+    		</ui:repeat>
+    
+    	</h:panelGroup>
+		
+		
+		</ui:define>
+
+    </ui:composition>
+
+</h:body>
+</html> 
