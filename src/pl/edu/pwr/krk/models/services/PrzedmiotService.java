@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import pl.edu.pwr.krk.models.dao.PrzedmiotDAO;
+import pl.edu.pwr.krk.models.entities.Przedmiot;
 
 @Service("PrzedmiotService")
 @Transactional(readOnly = true)
@@ -13,18 +14,11 @@ public class PrzedmiotService {
 	@Autowired
 	PrzedmiotDAO przedmiotDAO;
 
-	/**
-	 * @return the przedmiotDAO
-	 */
-	public PrzedmiotDAO getPrzedmiotDAO() {
-		return przedmiotDAO;
-	}
-
-	/**
-	 * @param przedmiotDAO
-	 *            the przedmiotDAO to set
-	 */
 	public void setPrzedmiotDAO(PrzedmiotDAO przedmiotDAO) {
 		this.przedmiotDAO = przedmiotDAO;
+	}
+	
+	public Przedmiot getPrzedmiot(int id) {
+		return przedmiotDAO.findById(id);
 	}
 }

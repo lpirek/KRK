@@ -1,6 +1,8 @@
 package pl.edu.pwr.krk.beans.manage;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +10,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -47,12 +50,34 @@ public class CareSubjectsBean extends Bean implements Serializable{
 		return subjects;
 	}
 	
+	public void goToSubjectCards(Przedmiot przedmiot) throws IOException {
+		FacesContext.getCurrentInstance().getExternalContext().
+			redirect("subjectCards.xhtml?id=" + przedmiot.getId()) ;
+	}
+	
+	public String goToSubjectCards() {
+		return "toSubjectCards";
+	}
+	
 	public String getName(Przedmiot przedmiot) {
-		return "";
+		
+		return isPolnish() ? przedmiot.getNazwaPl() : przedmiot.getNazwaEn();
 	}
 	
 	public String getDescription(Przedmiot przedmiot) {
-		return "";
+		
+		String result = "";
+		
+		if (isPolnish()) {
+			result = MessageFormat.format("kierunek - {0}, {1}, {2}", 
+					"informatyka", "studia stacjonarne", "I stopien");
+		}
+		else {
+			result = MessageFormat.format("faculty - {0}, {1}, {2}", 
+					"informatyka", "studia stacjonarne", "I stopien");
+		}
+		
+		return result;
 	}
 
 }

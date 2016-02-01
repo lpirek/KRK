@@ -33,10 +33,16 @@
 	<bean id="uzytkownikDAO" class="pl.edu.pwr.krk.models.dao.UzytkownikDAO">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	<bean id="przedmiotDAO" class="pl.edu.pwr.krk.models.dao.PrzedmiotDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 
 	<!-- Connect Services with DAOs -->
 	<bean id="uzytkownikService" class="pl.edu.pwr.krk.models.services.UzytkownikService">
 		<property name="uzytkownikDAO" ref="uzytkownikDAO" />
+	</bean>
+	<bean id="przedmiotService" class="pl.edu.pwr.krk.models.services.PrzedmiotService">
+		<property name="przedmiotDAO" ref="przedmiotDAO" />
 	</bean>
 	
 	<!-- Connect Provider with AppContext -->

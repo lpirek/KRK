@@ -26,13 +26,18 @@ public abstract class Bean implements Serializable {
 	
 	private static final Log log = LogFactory.getLog(Bean.class);
 	
+	protected UzytkownikService uzytkownikService = null;
+	
+	public Bean() {
+		uzytkownikService = (UzytkownikService) 
+				ApplicationContextProvider.getApplicationContext().getBean("uzytkownikService");
+	}
 	
 	protected Uzytkownik getCurrentUser() {
 		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
-		UzytkownikService service = (UzytkownikService) 
-				ApplicationContextProvider.getApplicationContext().getBean("uzytkownikService");
-		Uzytkownik uzytkownik = service.getUzytkownik(user.getUsername());
+		
+		Uzytkownik uzytkownik = uzytkownikService.getUzytkownik(user.getUsername());
 		
 		return uzytkownik;
 	}

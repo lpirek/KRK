@@ -4,10 +4,16 @@ import java.util.List;
 import javax.naming.InitialContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.LockMode;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import pl.edu.pwr.krk.models.entities.Przedmiot;
+import pl.edu.pwr.krk.models.entities.Uzytkownik;
 
 import static org.hibernate.criterion.Example.create;
 
@@ -15,88 +21,37 @@ public class PrzedmiotDAO extends DAO{
 
 	private static final Log log = LogFactory.getLog(PrzedmiotDAO.class);
 
-	public void persist(Przedmiot transientInstance) {
-		log.debug("persisting Przedmiot instance");
-		try {
-			sessionFactory.getCurrentSession().persist(transientInstance);
-			log.debug("persist successful");
-		} catch (RuntimeException re) {
-			log.error("persist failed", re);
-			throw re;
-		}
-	}
-
-	public void attachDirty(Przedmiot instance) {
-		log.debug("attaching dirty Przedmiot instance");
-		try {
-			sessionFactory.getCurrentSession().saveOrUpdate(instance);
-			log.debug("attach successful");
-		} catch (RuntimeException re) {
-			log.error("attach failed", re);
-			throw re;
-		}
-	}
-
-	public void attachClean(Przedmiot instance) {
-		log.debug("attaching clean Przedmiot instance");
-		try {
-			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
-			log.debug("attach successful");
-		} catch (RuntimeException re) {
-			log.error("attach failed", re);
-			throw re;
-		}
-	}
-
-	public void delete(Przedmiot persistentInstance) {
-		log.debug("deleting Przedmiot instance");
-		try {
-			sessionFactory.getCurrentSession().delete(persistentInstance);
-			log.debug("delete successful");
-		} catch (RuntimeException re) {
-			log.error("delete failed", re);
-			throw re;
-		}
-	}
-
-	public Przedmiot merge(Przedmiot detachedInstance) {
-		log.debug("merging Przedmiot instance");
-		try {
-			Przedmiot result = (Przedmiot) sessionFactory.getCurrentSession().merge(detachedInstance);
-			log.debug("merge successful");
-			return result;
-		} catch (RuntimeException re) {
-			log.error("merge failed", re);
-			throw re;
-		}
-	}
-
 	public Przedmiot findById(int id) {
 		log.debug("getting Przedmiot instance with id: " + id);
+		
+		Session session = null;
+		
 		try {
-			Przedmiot instance = (Przedmiot) sessionFactory.getCurrentSession().get("Przedmiot", id);
+			session = sessionFactory.openSession();
+			Transaction tx = session.beginTransaction();
+			
+			Criteria criteria = session.createCriteria(Przedmiot.class);
+			criteria.add(Restrictions.eq("id", id));
+			
+			Przedmiot instance = (Przedmiot)criteria.uniqueResult();
+			
+			tx.commit();
+			
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
 				log.debug("get successful, instance found");
 			}
+
 			return instance;
-		} catch (RuntimeException re) {
-			log.error("get failed", re);
-			throw re;
-		}
+			
+		} catch (RuntimeException exception) {
+			log.error("get failed", exception);
+			throw exception;
+		} finally {
+	        session.close(); 
+	    }
 	}
 
-	public List<Przedmiot> findByExample(Przedmiot instance) {
-		log.debug("finding Przedmiot instance by example");
-		try {
-			List<Przedmiot> results = (List<Przedmiot>) sessionFactory.getCurrentSession().createCriteria("Przedmiot")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: " + results.size());
-			return results;
-		} catch (RuntimeException re) {
-			log.error("find by example failed", re);
-			throw re;
-		}
-	}
+	
 }

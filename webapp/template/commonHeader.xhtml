@@ -28,6 +28,10 @@
 		<hr />
 		
 		<div id="menu">
+			<p:commandLink action="#{menuBean.goToIndex}">
+        		<h:outputText value="#{msg['menu.index']}" />
+    		</p:commandLink>
+    		 | 		
 			<p:commandLink action="#{menuBean.goToCareSubjects}">
         		<h:outputText value="#{msg['menu.careSubjects']}" />
     		</p:commandLink>
