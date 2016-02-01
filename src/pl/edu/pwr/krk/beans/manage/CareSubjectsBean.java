@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -15,7 +16,7 @@ import pl.edu.pwr.krk.models.entities.Przedmiot;
 import pl.edu.pwr.krk.models.entities.Uzytkownik;
 
 @ManagedBean
-@SessionScoped()
+@ViewScoped()
 public class CareSubjectsBean extends Bean implements Serializable{
 
 	/**
@@ -39,7 +40,7 @@ public class CareSubjectsBean extends Bean implements Serializable{
 	public void initialiaze() {
 		Uzytkownik uzytkownik = getCurrentUser();
 		
-		subjects = new ArrayList<Przedmiot>();
+		subjects = new ArrayList<Przedmiot>(uzytkownik.getPrzedmiots());
 	}
 	
 	public List<Przedmiot> getCareSubjectsByUser() {

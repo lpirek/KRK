@@ -5,6 +5,7 @@ import javax.naming.InitialContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.LockMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -33,14 +34,15 @@ public class UzytkownikDAO extends DAO {
 			
 			Uzytkownik instance = (Uzytkownik)criteria.uniqueResult();
 			
+			tx.commit();
+			
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
+				Hibernate.initialize(instance.getPrzedmiots());
 				log.debug("get successful, instance found");
 			}
-			
-			tx.commit();
-			
+
 			return instance;
 			
 		} catch (RuntimeException exception) {
