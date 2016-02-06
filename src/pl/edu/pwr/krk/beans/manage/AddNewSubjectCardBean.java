@@ -25,6 +25,15 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 	private static final Log log = LogFactory.getLog(AddNewSubjectCardBean.class);
 
 	private int tabIndex = 0;
+	private String subjectCardLanguage;
+
+	public String getSubjectCardLanguage() {
+		return subjectCardLanguage;
+	}
+
+	public void setSubjectCardLanguage(String subjectCardLanguage) {
+		this.subjectCardLanguage = subjectCardLanguage;
+	}
 
 	public int getTabIndex() {
 		return tabIndex;

@@ -16,20 +16,177 @@
 
 		<ui:define name="content">
 
-			<h1>Dodawanie nowej karty przedmiotu - nazwa przedmiotu</h1>
+			<h1>#{msg['newSubjectCard.title']} - nazwa przedmiotu</h1>
 
 			<h:form id="form">
 
-				<p:growl id="msgs" showDetail="true" />
-
 				<p:tabView activeIndex="#{addNewSubjectCardBean.tabIndex}">
+
 					<p:tab title="#{msg['newSubjectCard.basicDataTitle']}">
+						<h2>#{msg['newSubjectCard.basicDataTitle.subjectCardLanguage.title']}</h2>
+						<h:panelGrid columns="2" style="margin-bottom:10px"
+							cellpadding="5">
+							<p:selectOneRadio id="language"
+								value="#{addNewSubjectCardBean.subjectCardLanguage}">
+								<f:selectItem
+									itemLabel="#{msg['newSubjectCard.basicDataTitle.subjectCardLanguage.polish']}"
+									itemValue="polish" />
+								<f:selectItem
+									itemLabel="#{msg['newSubjectCard.basicDataTitle.subjectCardLanguage.english']}"
+									itemValue="english" />
+							</p:selectOneRadio>
+						</h:panelGrid>
+
+						<h2>#{msg['newSubjectCard.basicDataTitle.subjectInfo.title']}</h2>
+
+
+						<h:panelGrid columns="1" style="margin-bottom:10px"
+							cellpadding="5">
+							<ui:fragment>
+								<p:outputLabel for="department2"
+									value="#{msg['newSubjectCard.basicDataTitle.subjectInfo.department']}: "
+									style="font-weight:bold" />
+								<h:outputText id="department2" value="dsdsada" />
+							</ui:fragment>
+							<ui:fragment>
+								<p:outputLabel for="namePL"
+									value="#{msg['newSubjectCard.basicDataTitle.subjectInfo.namePL']}: "
+									style="font-weight:bold" />
+								<h:outputText id="namePL" value="dsdsada" />
+							</ui:fragment>
+							<ui:fragment>
+								<p:outputLabel for="nameEN"
+									value="#{msg['newSubjectCard.basicDataTitle.subjectInfo.nameEN']}: "
+									style="font-weight:bold" />
+								<h:outputText id="nameEN" value="dsdsada" />
+							</ui:fragment>
+							<ui:fragment>
+								<p:outputLabel for="fieldOfStudy"
+									value="#{msg['newSubjectCard.basicDataTitle.subjectInfo.fieldOfStudy']}: "
+									style="font-weight:bold" />
+								<h:outputText id="fieldOfStudy" value="dsdsada" />
+							</ui:fragment>
+							<ui:fragment>
+								<p:outputLabel for="specialization"
+									value="#{msg['newSubjectCard.basicDataTitle.subjectInfo.specialization']}: "
+									style="font-weight:bold" />
+								<h:outputText id="specialization" value="dsdsada" />
+							</ui:fragment>
+							<ui:fragment>
+								<p:outputLabel for="level"
+									value="#{msg['newSubjectCard.basicDataTitle.subjectInfo.level']}: "
+									style="font-weight:bold" />
+								<h:outputText id="level" value="dsdsada" />
+							</ui:fragment>
+							<ui:fragment>
+								<p:outputLabel for="form"
+									value="#{msg['newSubjectCard.basicDataTitle.subjectInfo.form']}: "
+									style="font-weight:bold" />
+								<h:outputText id="form" value="dsdsada" />
+							</ui:fragment>
+							<ui:fragment>
+								<p:outputLabel for="kind"
+									value="#{msg['newSubjectCard.basicDataTitle.subjectInfo.kind']}: "
+									style="font-weight:bold" />
+								<h:outputText id="kind" value="dsdsada" />
+							</ui:fragment>
+							<ui:fragment>
+								<p:outputLabel for="code"
+									value="#{msg['newSubjectCard.basicDataTitle.subjectInfo.code']}: "
+									style="font-weight:bold" />
+								<h:outputText id="code" value="dsdsada" />
+							</ui:fragment>
+							<ui:fragment>
+								<p:outputLabel for="isGroup"
+									value="#{msg['newSubjectCard.basicDataTitle.subjectInfo.isGroup']}: "
+									style="font-weight:bold" />
+								<h:outputText id="isGroup" value="dsdsada" />
+							</ui:fragment>
+						</h:panelGrid>
+
+						<h2>#{msg['newSubjectCard.basicDataTitle.classes.title']}</h2>
+						<p:panelGrid columns="6">
+
+							<h:outputText value="" />
+							<h:outputText
+								value="#{msg['newSubjectCard.basicDataTitle.classes.lecture']}"
+								style="font-weight:bold" />
+							<h:outputText
+								value="#{msg['newSubjectCard.basicDataTitle.classes.classes']}"
+								style="font-weight:bold" />
+							<h:outputText
+								value="#{msg['newSubjectCard.basicDataTitle.classes.laboratory']}"
+								style="font-weight:bold" />
+							<h:outputText
+								value="#{msg['newSubjectCard.basicDataTitle.classes.project']}"
+								style="font-weight:bold" />
+							<h:outputText
+								value="#{msg['newSubjectCard.basicDataTitle.classes.seminar']}"
+								style="font-weight:bold" />
+
+							<h:outputText
+								value="#{msg['newSubjectCard.basicDataTitle.classes.zzu']}"
+								style="font-weight:bold" />
+							<h:outputText value="" />
+							<h:outputText value="" />
+							<h:outputText value="" />
+							<h:outputText value="" />
+							<h:outputText value="" />
+
+							<h:outputText
+								value="#{msg['newSubjectCard.basicDataTitle.classes.cnps']}"
+								style="font-weight:bold" />
+							<h:outputText value="" />
+							<h:outputText value="" />
+							<h:outputText value="" />
+							<h:outputText value="" />
+							<h:outputText value="" />
+
+							<h:outputText
+								value="#{msg['newSubjectCard.basicDataTitle.classes.crediting']}"
+								style="font-weight:bold" />
+							<h:outputText value="" />
+							<h:outputText value="" />
+							<h:outputText value="" />
+							<h:outputText value="" />
+							<h:outputText value="" />
+
+							<h:outputText
+								value="#{msg['newSubjectCard.basicDataTitle.classes.ects']}"
+								style="font-weight:bold" />
+							<h:outputText value="" />
+							<h:outputText value="" />
+							<h:outputText value="" />
+							<h:outputText value="" />
+							<h:outputText value="" />
+
+							<h:outputText
+								value="#{msg['newSubjectCard.basicDataTitle.classes.pEcts']}"
+								style="font-weight:bold" />
+							<h:outputText value="" />
+							<h:outputText value="" />
+							<h:outputText value="" />
+							<h:outputText value="" />
+							<h:outputText value="" />
+
+							<h:outputText
+								value="#{msg['newSubjectCard.basicDataTitle.classes.bkEcts']}"
+								style="font-weight:bold" />
+							<h:outputText value="" />
+							<h:outputText value="" />
+							<h:outputText value="" />
+							<h:outputText value="" />
+							<h:outputText value="" />
+
+						</p:panelGrid>
 					</p:tab>
+
 					<p:tab title="#{msg['newSubjectCard.prerequisitesTitle']}">
 					</p:tab>
 					<p:tab title="#{msg['newSubjectCard.subjectObjectivesTitle']}">
 					</p:tab>
-					<p:tab title="#{msg['newSubjectCard.subjectEducationalEffectsTitle']}">
+					<p:tab
+						title="#{msg['newSubjectCard.subjectEducationalEffectsTitle']}">
 					</p:tab>
 					<p:tab title="#{msg['newSubjectCard.programmeContentTitle']}">
 					</p:tab>
