@@ -12,8 +12,10 @@ import javax.faces.context.FacesContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import pl.edu.pwr.krk.models.entities.Kartaprzedmiotu;
 import pl.edu.pwr.krk.models.entities.Przedmiot;
 import pl.edu.pwr.krk.models.entities.Uzytkownik;
+import pl.edu.pwr.krk.models.services.KartaprzedmiotuService;
 import pl.edu.pwr.krk.models.services.PrzedmiotService;
 import pl.edu.pwr.krk.models.services.UzytkownikService;
 import pl.edu.pwr.krk.tools.ApplicationContextProvider;
@@ -32,8 +34,11 @@ public class SubjectCardsBean extends Bean implements Serializable{
 	private int id;
 	
 	private Przedmiot subject;
+	private List<Kartaprzedmiotu> subjectCards = null;
+	
 	
 	private PrzedmiotService przedmiotService = null;
+	private KartaprzedmiotuService kartaPrzedmiotuService = null;
 	
 	public SubjectCardsBean() {
 		log.debug("Initialiaze SubjectCardsBean");
@@ -46,11 +51,18 @@ public class SubjectCardsBean extends Bean implements Serializable{
 	    	
 	    	przedmiotService = (PrzedmiotService) 
 					ApplicationContextProvider.getApplicationContext().getBean("przedmiotService");
+	    	kartaPrzedmiotuService  = (KartaprzedmiotuService) 
+					ApplicationContextProvider.getApplicationContext().getBean("kartaprzedmiotuService");
 	    }
 	}
 	
 	public void initialiaze() {
 		subject = przedmiotService.getPrzedmiot(id);
+		subjectCards = kartaPrzedmiotuService.getKartyPrzedmiotu(id);
+	}
+	
+	public void addNewCard() {
+		
 	}
 
 	public int getId() {
@@ -64,7 +76,23 @@ public class SubjectCardsBean extends Bean implements Serializable{
 	}
 	
 	public String getSubjectName() {
-		return "test";
+		return isPolnish() ? subject.getNazwaPl() : subject.getNazwaEn();
+	}
+
+	public Przedmiot getSubject() {
+		return subject;
+	}
+
+	public void setSubject(Przedmiot subject) {
+		this.subject = subject;
+	}
+
+	public List<Kartaprzedmiotu> getSubjectCards() {
+		return subjectCards;
+	}
+
+	public void setSubjectCards(List<Kartaprzedmiotu> subjectCards) {
+		this.subjectCards = subjectCards;
 	}
 
 }

@@ -22,7 +22,6 @@ public class PrzedmiotDAO extends DAO{
 	private static final Log log = LogFactory.getLog(PrzedmiotDAO.class);
 
 	public Przedmiot findById(int id) {
-		log.debug("getting Przedmiot instance with id: " + id);
 		
 		Session session = null;
 		
@@ -37,12 +36,6 @@ public class PrzedmiotDAO extends DAO{
 			
 			tx.commit();
 			
-			if (instance == null) {
-				log.debug("get successful, no instance found");
-			} else {
-				log.debug("get successful, instance found");
-			}
-
 			return instance;
 			
 		} catch (RuntimeException exception) {

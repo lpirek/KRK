@@ -61,7 +61,6 @@ public class CareSubjectsBean extends Bean implements Serializable{
 	}
 	
 	public String getName(Przedmiot przedmiot) {
-		
 		return isPolnish() ? przedmiot.getNazwaPl() : przedmiot.getNazwaEn();
 	}
 	
