@@ -18,3 +18,10 @@ VALUES ('obowiązkowy', 'Przedmioty obowiązkowe kierunkowe', 1, null);
 
 INSERT INTO easykrkdb.przedmiot(rodzaj, nazwaPL, nazwaEN, kod, Specjalizacjaid, ModulKsztalceniaid, Uzytkownikid)
 VALUES ('obowiązkowy','Projektowanie Oprogramowania', 'Software design', 'INZ003838W', null, 1, 1);
+
+
+INSERT INTO easykrkdb.kartaprzedmiotu(jezyk, nazwa, wersja, dataUtworzenia, status, kierunekStudiow, stopienStudiow, formaStudiow, Przedmiotid)
+VALUES ('PL', 'Projekt_Syst_Inform_ST_1', 1, '2015-10-01', 'wersja zatwierdzona', 'informatyka', 'I stopień', 'stacjonarne', 1);
+
+INSERT INTO easykrkdb.kartaprzedmiotu(jezyk, nazwa, wersja, dataUtworzenia, status, kierunekStudiow, stopienStudiow, formaStudiow, Przedmiotid)
+VALUES ('PL', 'Projekt_Syst_Inform_ST_2', 2, '2015-12-01', 'wersja robocza', 'informatyka', 'I stopień', 'stacjonarne', 1);

@@ -23,33 +23,47 @@
 		<p:dataTable var="card" value="#{subjectCardsBean.subjectCards}"
 			emptyMessage="#{msg['subjectCards.table.empty']}">
 			
-		    <p:column headerText="#{msg['subjectCards.table.name']}">
+		    <p:column headerText="#{msg['subjectCards.table.name']}"
+		    	sortBy="#{card.nazwa}">
 		        <h:outputText value="#{card.nazwa}" />
 		    </p:column>
 		 
-		    <p:column headerText="#{msg['subjectCards.table.state']}">
+		    <p:column headerText="#{msg['subjectCards.table.state']}" 
+		    	sortBy="#{card.status}" style="width: 140px" 
+		    	styleClass="#{card.accepted ? 'normalText' : 'redText'}">
 		        <h:outputText value="#{card.status}" />
 		    </p:column>
 		 
-		    <p:column headerText="#{msg['subjectCards.table.lang']}">
+		    <p:column headerText="#{msg['subjectCards.table.lang']}"  
+		    	sortBy="#{card.jezyk}" style="width: 60px">
 		        <h:outputText value="#{card.jezyk}" />
 		    </p:column>
 		 
-		    <p:column headerText="#{msg['subjectCards.table.createDate']}">
-		        <h:outputText value="#{card.dataUtworzenia}" />
+		    <p:column headerText="#{msg['subjectCards.table.createDate']}"  
+		     	sortBy="#{card.dataUtworzenia}" style="width: 160px">
+		        <h:outputText value="#{card.dataUtworzenia}" >
+		        	<f:convertDateTime pattern="yyyy-MM-dd" />
+		       	</h:outputText>
 		    </p:column>
 		    
-		    <p:column>
-		    
+		    <p:column style="width: 328px" >
+		    	<p:commandButton id="modify" style="width: 80px"
+		    		value="#{msg['subjectCards.button.modify']}" disabled="true" />
+		       	<p:commandButton id="remove" style="width: 80px"
+		    		value="#{msg['subjectCards.button.remove']}" disabled="true" />
+		       	<p:commandButton id="verify" style="width: 80px"
+		    		value="#{msg['subjectCards.button.verify']}" />
+		       	<p:commandButton id="download" style="width: 80px"
+		    		value="#{msg['subjectCards.button.download']}" />
 		    </p:column>
 		    
 		</p:dataTable>
 		
 		<br />
 		
-		<p:commandButton id="add" 
+		<p:commandButton id="add" style="width: 200px"
 		    	value="#{msg['subjectCards.button.add']}" 
-		        action="#{subjectCardsBean.addNewCard}" />
+		        action="#{subjectCardsBean.goToAddNewCard}" />
 		
 		<br />
 		<br />

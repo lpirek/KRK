@@ -53,7 +53,7 @@ public class CareSubjectsBean extends Bean implements Serializable{
 	
 	public void goToSubjectCards(Przedmiot przedmiot) throws IOException {
 		FacesContext.getCurrentInstance().getExternalContext().
-			redirect("subjectCards.xhtml?id=" + przedmiot.getId()) ;
+			redirect("subjectCards.xhtml?id=" + przedmiot.getId());
 	}
 	
 	public String goToSubjectCards() {

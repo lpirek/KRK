@@ -1,5 +1,6 @@
 package pl.edu.pwr.krk.beans.manage;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,8 +62,9 @@ public class SubjectCardsBean extends Bean implements Serializable{
 		subjectCards = kartaPrzedmiotuService.getKartyPrzedmiotu(id);
 	}
 	
-	public void addNewCard() {
-		
+	public void goToAddNewCard() throws IOException {
+		FacesContext.getCurrentInstance().getExternalContext().
+			redirect("addNewSubjectCard.xhtml?id=" + id);
 	}
 
 	public int getId() {

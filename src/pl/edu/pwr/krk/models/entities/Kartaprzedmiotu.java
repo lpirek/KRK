@@ -207,5 +207,9 @@ public class Kartaprzedmiotu implements java.io.Serializable {
 	public void setTrescprogramowas(Set<Trescprogramowa> trescprogramowas) {
 		this.trescprogramowas = trescprogramowas;
 	}
+	
+	public boolean isAccepted() {
+		return this.status.equals(STATUS_ZATWIERDZONY);
+	}
 
 }
