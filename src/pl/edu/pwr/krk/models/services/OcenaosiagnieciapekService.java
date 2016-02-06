@@ -13,17 +13,6 @@ public class OcenaosiagnieciapekService {
 	@Autowired
 	OcenaosiagieciapekDAO ocenaosiagnieciapekDAO;
 
-	/**
-	 * @return the ocenaosiagnieciapekDAO
-	 */
-	public OcenaosiagieciapekDAO getOcenaosiagnieciapekDAO() {
-		return ocenaosiagnieciapekDAO;
-	}
-
-	/**
-	 * @param ocenaosiagnieciapekDAO
-	 *            the ocenaosiagnieciapekDAO to set
-	 */
 	public void setOcenaosiagnieciapekDAO(OcenaosiagieciapekDAO ocenaosiagnieciapekDAO) {
 		this.ocenaosiagnieciapekDAO = ocenaosiagnieciapekDAO;
 	}

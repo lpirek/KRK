@@ -13,16 +13,6 @@ public class NarzedziedydaktyczneService {
 	@Autowired
 	NarzedziedydaktyczneDAO narzedziedydaktyczneDAO;
 
-	/**
-	 * @return the narzedziedydaktyczneDAO
-	 */
-	public NarzedziedydaktyczneDAO getNarzedziedydaktyczneDAO() {
-		return narzedziedydaktyczneDAO;
-	}
-
-	/**
-	 * @param narzedziedydaktyczneDAO the narzedziedydaktyczneDAO to set
-	 */
 	public void setNarzedziedydaktyczneDAO(NarzedziedydaktyczneDAO narzedziedydaktyczneDAO) {
 		this.narzedziedydaktyczneDAO = narzedziedydaktyczneDAO;
 	}

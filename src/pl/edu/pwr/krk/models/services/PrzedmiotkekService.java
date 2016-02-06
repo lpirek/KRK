@@ -13,17 +13,6 @@ public class PrzedmiotkekService {
 	@Autowired
 	PrzedmiotkekDAO przedmiotkekDAO;
 
-	/**
-	 * @return the przedmiotkekDAO
-	 */
-	public PrzedmiotkekDAO getPrzedmiotkekDAO() {
-		return przedmiotkekDAO;
-	}
-
-	/**
-	 * @param przedmiotkekDAO
-	 *            the przedmiotkekDAO to set
-	 */
 	public void setPrzedmiotkekDAO(PrzedmiotkekDAO przedmiotkekDAO) {
 		this.przedmiotkekDAO = przedmiotkekDAO;
 	}

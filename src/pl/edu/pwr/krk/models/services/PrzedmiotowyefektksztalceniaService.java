@@ -13,17 +13,6 @@ public class PrzedmiotowyefektksztalceniaService {
 	@Autowired
 	PrzedmiotowyefektksztalceniaDAO przedmiotowyefektksztalceniaDAO;
 
-	/**
-	 * @return the przedmiotowyefektksztalceniaDAO
-	 */
-	public PrzedmiotowyefektksztalceniaDAO getPrzedmiotowyefektksztalceniaDAO() {
-		return przedmiotowyefektksztalceniaDAO;
-	}
-
-	/**
-	 * @param przedmiotowyefektksztalceniaDAO
-	 *            the przedmiotowyefektksztalceniaDAO to set
-	 */
 	public void setPrzedmiotowyefektksztalceniaDAO(PrzedmiotowyefektksztalceniaDAO przedmiotowyefektksztalceniaDAO) {
 		this.przedmiotowyefektksztalceniaDAO = przedmiotowyefektksztalceniaDAO;
 	}

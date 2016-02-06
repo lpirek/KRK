@@ -13,17 +13,6 @@ public class ProgramksztalceniaService {
 	@Autowired
 	ProgramksztalceniaDAO programksztalceniaDAO;
 
-	/**
-	 * @return the programksztalceniaDAO
-	 */
-	public ProgramksztalceniaDAO getProgramksztalceniaDAO() {
-		return programksztalceniaDAO;
-	}
-
-	/**
-	 * @param programksztalceniaDAO
-	 *            the programksztalceniaDAO to set
-	 */
 	public void setProgramksztalceniaDAO(ProgramksztalceniaDAO programksztalceniaDAO) {
 		this.programksztalceniaDAO = programksztalceniaDAO;
 	}

@@ -13,16 +13,6 @@ public class PekcelprzedmiotuService {
 	@Autowired
 	PekcelprzedmiotuDAO pekcelprzedmiotuDAO;
 
-	/**
-	 * @return the pekcelprzedmiotuDAO
-	 */
-	public PekcelprzedmiotuDAO getPekcelprzedmiotuDAO() {
-		return pekcelprzedmiotuDAO;
-	}
-
-	/**
-	 * @param pekcelprzedmiotuDAO the pekcelprzedmiotuDAO to set
-	 */
 	public void setPekcelprzedmiotuDAO(PekcelprzedmiotuDAO pekcelprzedmiotuDAO) {
 		this.pekcelprzedmiotuDAO = pekcelprzedmiotuDAO;
 	}

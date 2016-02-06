@@ -13,17 +13,6 @@ public class ProgramstudiowService {
 	@Autowired
 	ProgramstudiowDAO programstudiowDAO;
 
-	/**
-	 * @return the programstudiowDAO
-	 */
-	public ProgramstudiowDAO getProgramstudiowDAO() {
-		return programstudiowDAO;
-	}
-
-	/**
-	 * @param programstudiowDAO
-	 *            the programstudiowDAO to set
-	 */
 	public void setProgramstudiowDAO(ProgramstudiowDAO programstudiowDAO) {
 		this.programstudiowDAO = programstudiowDAO;
 	}

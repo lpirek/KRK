@@ -14,28 +14,7 @@ public class WymaganiewstepneService {
 
 	@Autowired
 	WymaganiawstepneDAO wymaganiawstepneDAO;
-
-	@Transactional(readOnly = false)
-	public void persistWymaganiawstepne(Wymaganiawstepne wymaganiawstepne) {
-		wymaganiawstepneDAO.persist(wymaganiawstepne);
-	}
-
-	@Transactional(readOnly = false)
-	public void deleteWymaganiawstepne(Wymaganiawstepne wymaganiawstepne) {
-		wymaganiawstepneDAO.delete(wymaganiawstepne);
-	}
-
-	/**
-	 * @return the wymaganiawstepneDAO
-	 */
-	public WymaganiawstepneDAO getWymaganiawstepneDAO() {
-		return wymaganiawstepneDAO;
-	}
-
-	/**
-	 * @param wymaganiawstepneDAO
-	 *            the wymaganiawstepneDAO to set
-	 */
+	
 	public void setWymaganiawstepneDAO(WymaganiawstepneDAO wymaganiawstepneDAO) {
 		this.wymaganiawstepneDAO = wymaganiawstepneDAO;
 	}

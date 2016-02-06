@@ -13,17 +13,6 @@ public class PlanstudiowsemestrService {
 	@Autowired
 	PlanstudiowsemestrDAO planstudiowsemestrDAO;
 
-	/**
-	 * @return the planstudiowsemestrDAO
-	 */
-	public PlanstudiowsemestrDAO getPlanstudiowsemestrDAO() {
-		return planstudiowsemestrDAO;
-	}
-
-	/**
-	 * @param planstudiowsemestrDAO
-	 *            the planstudiowsemestrDAO to set
-	 */
 	public void setPlanstudiowsemestrDAO(PlanstudiowsemestrDAO planstudiowsemestrDAO) {
 		this.planstudiowsemestrDAO = planstudiowsemestrDAO;
 	}

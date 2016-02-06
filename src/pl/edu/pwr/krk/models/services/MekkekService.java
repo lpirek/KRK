@@ -13,16 +13,6 @@ public class MekkekService {
 	@Autowired
 	MekkekDAO mekkekDAO;
 
-	/**
-	 * @return the mekkekDAO
-	 */
-	public MekkekDAO getMekkekDAO() {
-		return mekkekDAO;
-	}
-
-	/**
-	 * @param mekkekDAO the mekkekDAO to set
-	 */
 	public void setMekkekDAO(MekkekDAO mekkekDAO) {
 		this.mekkekDAO = mekkekDAO;
 	}

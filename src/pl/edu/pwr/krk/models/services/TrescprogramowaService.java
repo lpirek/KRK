@@ -13,17 +13,6 @@ public class TrescprogramowaService {
 	@Autowired
 	TrescprogramowaDAO trescprogramowaDAO;
 
-	/**
-	 * @return the trescprogramowaDAO
-	 */
-	public TrescprogramowaDAO getTrescprogramowaDAO() {
-		return trescprogramowaDAO;
-	}
-
-	/**
-	 * @param trescprogramowaDAO
-	 *            the trescprogramowaDAO to set
-	 */
 	public void setTrescprogramowaDAO(TrescprogramowaDAO trescprogramowaDAO) {
 		this.trescprogramowaDAO = trescprogramowaDAO;
 	}

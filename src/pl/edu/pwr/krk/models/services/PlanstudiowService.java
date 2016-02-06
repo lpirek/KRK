@@ -13,17 +13,6 @@ public class PlanstudiowService {
 	@Autowired
 	PlanstudiowDAO planstudiowDAO;
 
-	/**
-	 * @return the planstudiowDAO
-	 */
-	public PlanstudiowDAO getPlanstudiowDAO() {
-		return planstudiowDAO;
-	}
-
-	/**
-	 * @param planstudiowDAO
-	 *            the planstudiowDAO to set
-	 */
 	public void setPlanstudiowDAO(PlanstudiowDAO planstudiowDAO) {
 		this.planstudiowDAO = planstudiowDAO;
 	}
