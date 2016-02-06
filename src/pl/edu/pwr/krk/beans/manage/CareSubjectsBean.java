@@ -62,7 +62,7 @@ public class CareSubjectsBean extends Bean implements Serializable{
 	
 	public String getName(Przedmiot przedmiot) {
 		
-		return isPolnish() ? przedmiot.getNazwaPl() : przedmiot.getNazwaEn();
+		return isPolish() ? przedmiot.getNazwaPl() : przedmiot.getNazwaEn();
 	}
 	
 	public String getDescription(Przedmiot przedmiot) {
@@ -70,7 +70,7 @@ public class CareSubjectsBean extends Bean implements Serializable{
 		String result = "";
 		Programksztalcenia programksztalcenia = przedmiot.getModulksztalcenia().getProgramstudiow().getProgramksztalcenia();
 		
-		if (isPolnish()) {
+		if (isPolish()) {
 			result = MessageFormat.format("kierunek - {0}, {1}, {2}", 
 					 programksztalcenia.getKierunekstudiow().getNazwa(), 
 					 programksztalcenia.getFormaStudiow(),

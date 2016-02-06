@@ -1,0 +1,52 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>EasyKRK</title>
+</h:head>
+<h:body>
+
+	<!-- <f:metadata>
+		<f:viewParam name="id" value="#{subjectCardsBean.id}" />
+	</f:metadata> -->
+
+	<ui:composition template="../template/commonLayout.xhtml">
+
+		<ui:define name="content">
+
+			<h1>Dodawanie nowej karty przedmiotu - nazwa przedmiotu</h1>
+
+			<h:form id="form">
+
+				<p:growl id="msgs" showDetail="true" />
+
+				<p:tabView activeIndex="#{addNewSubjectCardBean.tabIndex}">
+					<p:tab title="#{msg['newSubjectCard.basicDataTitle']}">
+					</p:tab>
+					<p:tab title="#{msg['newSubjectCard.prerequisitesTitle']}">
+					</p:tab>
+					<p:tab title="#{msg['newSubjectCard.subjectObjectivesTitle']}">
+					</p:tab>
+					<p:tab title="#{msg['newSubjectCard.subjectEducationalEffectsTitle']}">
+					</p:tab>
+					<p:tab title="#{msg['newSubjectCard.programmeContentTitle']}">
+					</p:tab>
+					<p:tab title="#{msg['newSubjectCard.teachingToolsTitle']}">
+					</p:tab>
+					<p:tab title="#{msg['newSubjectCard.literatureTitle']}">
+					</p:tab>
+					<p:tab title="#{msg['newSubjectCard.evaluationOfSEETitle']}">
+					</p:tab>
+					<p:tab title="#{msg['newSubjectCard.correlationMatrixTitle']}">
+					</p:tab>
+				</p:tabView>
+			</h:form>
+
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+</html>

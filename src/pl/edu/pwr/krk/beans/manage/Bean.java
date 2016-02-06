@@ -40,7 +40,7 @@ public abstract class Bean implements Serializable {
 		return uzytkownik;
 	}
 	
-	protected boolean isPolnish() {
+	protected boolean isPolish() {
 		return FacesContext.getCurrentInstance().getViewRoot().getLocale() != Locale.ENGLISH;
 	}
 	
