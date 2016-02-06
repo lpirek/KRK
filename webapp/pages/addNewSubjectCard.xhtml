@@ -16,8 +16,8 @@
 
 		<ui:define name="content">
 
-			<h1>#{msg['newSubjectCard.title']} -
-				#{addNewSubjectCardBean.subjectName}</h1>
+			<h2>#{msg['newSubjectCard.title']} -
+				#{addNewSubjectCardBean.subjectName}</h2>
 
 			<h:form id="form">
 
@@ -47,61 +47,55 @@
 								<p:outputLabel for="department2"
 									value="#{msg['newSubjectCard.basicDataTitle.subjectInfo.department']}: "
 									style="font-weight:bold" />
-								<h:outputText id="department2" value="dsdsada" />
+								<h:outputText id="department2" value="#{addNewSubjectCardBean.subject.modulksztalcenia.programstudiow.programksztalcenia.kierunekstudiow.wydzial.nazwa}" />
 							</ui:fragment>
 							<ui:fragment>
 								<p:outputLabel for="namePL"
 									value="#{msg['newSubjectCard.basicDataTitle.subjectInfo.namePL']}: "
 									style="font-weight:bold" />
-								<h:outputText id="namePL" value="dsdsada" />
+								<h:outputText id="namePL" value="#{addNewSubjectCardBean.subject.nazwaPl}" />
 							</ui:fragment>
 							<ui:fragment>
 								<p:outputLabel for="nameEN"
 									value="#{msg['newSubjectCard.basicDataTitle.subjectInfo.nameEN']}: "
 									style="font-weight:bold" />
-								<h:outputText id="nameEN" value="dsdsada" />
+								<h:outputText id="nameEN" value="#{addNewSubjectCardBean.subject.nazwaEn}" />
 							</ui:fragment>
 							<ui:fragment>
 								<p:outputLabel for="fieldOfStudy"
 									value="#{msg['newSubjectCard.basicDataTitle.subjectInfo.fieldOfStudy']}: "
 									style="font-weight:bold" />
-								<h:outputText id="fieldOfStudy" value="dsdsada" />
-							</ui:fragment>
-							<ui:fragment>
-								<p:outputLabel for="specialization"
-									value="#{msg['newSubjectCard.basicDataTitle.subjectInfo.specialization']}: "
-									style="font-weight:bold" />
-								<h:outputText id="specialization" value="dsdsada" />
+								<h:outputText id="fieldOfStudy" value="#{addNewSubjectCardBean.subject.modulksztalcenia.programstudiow.programksztalcenia.kierunekstudiow.nazwa}" />
 							</ui:fragment>
 							<ui:fragment>
 								<p:outputLabel for="level"
 									value="#{msg['newSubjectCard.basicDataTitle.subjectInfo.level']}: "
 									style="font-weight:bold" />
-								<h:outputText id="level" value="dsdsada" />
+								<h:outputText id="level" value="#{addNewSubjectCardBean.subject.modulksztalcenia.programstudiow.programksztalcenia.stopienStudiow}" />
 							</ui:fragment>
 							<ui:fragment>
 								<p:outputLabel for="form"
 									value="#{msg['newSubjectCard.basicDataTitle.subjectInfo.form']}: "
 									style="font-weight:bold" />
-								<h:outputText id="form" value="dsdsada" />
+								<h:outputText id="form" value="#{addNewSubjectCardBean.subject.modulksztalcenia.programstudiow.programksztalcenia.formaStudiow}" />
 							</ui:fragment>
 							<ui:fragment>
 								<p:outputLabel for="kind"
 									value="#{msg['newSubjectCard.basicDataTitle.subjectInfo.kind']}: "
 									style="font-weight:bold" />
-								<h:outputText id="kind" value="dsdsada" />
+								<h:outputText id="kind" value="#{addNewSubjectCardBean.subject.rodzaj}" />
 							</ui:fragment>
 							<ui:fragment>
 								<p:outputLabel for="code"
 									value="#{msg['newSubjectCard.basicDataTitle.subjectInfo.code']}: "
 									style="font-weight:bold" />
-								<h:outputText id="code" value="dsdsada" />
+								<h:outputText id="code" value="#{addNewSubjectCardBean.subject.kod}" />
 							</ui:fragment>
 							<ui:fragment>
 								<p:outputLabel for="isGroup"
 									value="#{msg['newSubjectCard.basicDataTitle.subjectInfo.isGroup']}: "
 									style="font-weight:bold" />
-								<h:outputText id="isGroup" value="dsdsada" />
+								<h:outputText id="isGroup" value="#{addNewSubjectCardBean.subject.group ? 'TAK' : 'NIE'}" />
 							</ui:fragment>
 						</h:panelGrid>
 
@@ -183,7 +177,7 @@
 					</p:tab>
 
 					<p:tab title="#{msg['newSubjectCard.prerequisitesTitle']}">
-						<h:button
+						<p:commandButton
 							value="#{msg['newSubjectCard.prerequisitesTitle.button.add']}" />
 
 						<br />
@@ -193,9 +187,9 @@
 							value="#{addNewSubjectCardBean.prerequisites}"
 							emptyMessage="#{msg['newSubjectCard.prerequisitesTitle.table.empty']}">
 
-							<p:column
+							<p:column 
 								headerText="#{msg['newSubjectCard.prerequisitesTitle.table.lp']}"
-								style="width: 100px" sortBy="#{card.pozycja}">
+								style="width: 40px" sortBy="#{card.pozycja}">
 								<h:outputText value="#{card.pozycja}" />
 							</p:column>
 
@@ -208,7 +202,7 @@
 
 							<p:column
 								headerText="#{msg['newSubjectCard.prerequisitesTitle.table.prerequisite']}"
-								sortBy="#{card.wymaganie}" style="width: 60px">
+								sortBy="#{card.wymaganie}">
 								<h:outputText value="#{card.wymaganie}" />
 							</p:column>
 
@@ -225,7 +219,7 @@
 						<br />
 						<br />
 
-						<h:button
+						<p:commandButton
 							value="#{msg['newSubjectCard.prerequisitesTitle.button.import']}" />
 					</p:tab>
 

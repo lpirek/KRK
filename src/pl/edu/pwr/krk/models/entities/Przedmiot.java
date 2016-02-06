@@ -159,5 +159,10 @@ public class Przedmiot implements java.io.Serializable {
 	public void setKurses(Set<Kurs> kurses) {
 		this.kurses = kurses;
 	}
+	
+	public boolean isGroup() {
+		return grupakursows != null && !grupakursows.isEmpty();
+		
+	}
 
 }

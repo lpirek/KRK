@@ -36,6 +36,15 @@ public class PrzedmiotDAO extends DAO{
 			
 			tx.commit();
 			
+			Hibernate.initialize(instance.getKurses());
+			Hibernate.initialize(instance.getGrupakursows());
+			
+			Hibernate.initialize(instance.getModulksztalcenia());
+			Hibernate.initialize(instance.getModulksztalcenia().getProgramstudiow());
+			Hibernate.initialize(instance.getModulksztalcenia().getProgramstudiow().getProgramksztalcenia());
+			Hibernate.initialize(instance.getModulksztalcenia().getProgramstudiow().getProgramksztalcenia().getKierunekstudiow());
+			Hibernate.initialize(instance.getModulksztalcenia().getProgramstudiow().getProgramksztalcenia().getKierunekstudiow().getWydzial());
+			
 			return instance;
 			
 		} catch (RuntimeException exception) {

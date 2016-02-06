@@ -52,6 +52,10 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 
 	public void initialiaze() {
 		subject = subjectService.getPrzedmiot(id);
+		
+
+		String nazwa = subject.getModulksztalcenia().getProgramstudiow().getProgramksztalcenia().getKierunekstudiow().getWydzial().getNazwa();
+		
 		prerequisites = new ArrayList<>();
 	}
 

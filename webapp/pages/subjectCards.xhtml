@@ -16,9 +16,7 @@
 
 		<ui:define name="content">
 		
-		<h2>#{msg['subjectCards.title']}</h2>
-		
-		<p:panel id="subjectCardsPanel" header="#{subjectCardsBean.subjectName}">
+		<h2>#{msg['subjectCards.title']} - #{subjectCardsBean.subjectName}</h2>
 		
 		<p:dataTable var="card" value="#{subjectCardsBean.subjectCards}"
 			emptyMessage="#{msg['subjectCards.table.empty']}">
@@ -29,9 +27,8 @@
 		    </p:column>
 		 
 		    <p:column headerText="#{msg['subjectCards.table.state']}" 
-		    	sortBy="#{card.status}" style="width: 140px" 
-		    	styleClass="#{card.accepted ? 'normalText' : 'redText'}">
-		        <h:outputText value="#{card.status}" />
+		    	sortBy="#{card.status}" style="width: 140px" >
+		        <h:outputText value="#{card.status}" styleClass="#{card.accepted ? 'normalText' : 'redText'}"/>
 		    </p:column>
 		 
 		    <p:column headerText="#{msg['subjectCards.table.lang']}"  
@@ -67,9 +64,6 @@
 		
 		<br />
 		<br />
-		
-		</p:panel>
-		
 		
 		</ui:define>
 		
