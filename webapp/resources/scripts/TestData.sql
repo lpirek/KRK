@@ -1,5 +1,5 @@
 INSERT INTO easykrkdb.uzytkownik(nazwisko, imie, login, haslo, email)
-VALUES ('Pirek','Łukasz', 'lpirek', 'pass', 'lukasz_pirek@wp.pl');
+VALUES ('Pirek','Łukasz', 'a', 'a', 'lukasz_pirek@wp.pl');
 
 INSERT INTO easykrkdb.wydzial(nazwa)
 VALUES ('Wydział Informatyki i Zarządzania');

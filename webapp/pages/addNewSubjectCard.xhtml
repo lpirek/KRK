@@ -8,15 +8,16 @@
 </h:head>
 <h:body>
 
-	<!-- <f:metadata>
-		<f:viewParam name="id" value="#{subjectCardsBean.id}" />
-	</f:metadata> -->
+	<f:metadata>
+		<f:viewParam name="id" value="#{addNewSubjectCardBean.id}" />
+	</f:metadata>
 
 	<ui:composition template="../template/commonLayout.xhtml">
 
 		<ui:define name="content">
 
-			<h1>#{msg['newSubjectCard.title']} - nazwa przedmiotu</h1>
+			<h1>#{msg['newSubjectCard.title']} -
+				#{addNewSubjectCardBean.subjectName}</h1>
 
 			<h:form id="form">
 
@@ -182,7 +183,52 @@
 					</p:tab>
 
 					<p:tab title="#{msg['newSubjectCard.prerequisitesTitle']}">
+						<h:button
+							value="#{msg['newSubjectCard.prerequisitesTitle.button.add']}" />
+
+						<br />
+						<br />
+
+						<p:dataTable var="card"
+							value="#{addNewSubjectCardBean.prerequisites}"
+							emptyMessage="#{msg['newSubjectCard.prerequisitesTitle.table.empty']}">
+
+							<p:column
+								headerText="#{msg['newSubjectCard.prerequisitesTitle.table.lp']}"
+								style="width: 100px" sortBy="#{card.pozycja}">
+								<h:outputText value="#{card.pozycja}" />
+							</p:column>
+
+							<p:column style="width: 100px">
+								<p:commandButton id="up" style="width: 80px" value="/\"
+									disabled="true" />
+								<p:commandButton id="down" style="width: 80px" value="\/"
+									disabled="true" />
+							</p:column>
+
+							<p:column
+								headerText="#{msg['newSubjectCard.prerequisitesTitle.table.prerequisite']}"
+								sortBy="#{card.wymaganie}" style="width: 60px">
+								<h:outputText value="#{card.wymaganie}" />
+							</p:column>
+
+							<p:column style="width: 200px">
+								<p:commandButton id="modify" style="width: 80px"
+									value="#{msg['newSubjectCard.prerequisitesTitle.table.button.edit']}"
+									disabled="true" />
+								<p:commandButton id="remove" style="width: 80px"
+									value="#{msg['newSubjectCard.prerequisitesTitle.table.button.remove']}"
+									disabled="true" />
+							</p:column>
+
+						</p:dataTable>
+						<br />
+						<br />
+
+						<h:button
+							value="#{msg['newSubjectCard.prerequisitesTitle.button.import']}" />
 					</p:tab>
+
 					<p:tab title="#{msg['newSubjectCard.subjectObjectivesTitle']}">
 					</p:tab>
 					<p:tab
