@@ -12,43 +12,40 @@
 
 		<ui:define name="header">
 		
-		<p:graphicImage value="/resources/images/logo.png"/>
+		<h:graphicImage library="images" name="logo.png" />
 	
 		<hr />
 	
 		</ui:define>
 
 		<ui:define name="content">
-		
-		<h:form>
-        
-        	<h:outputText value="#{msg['login.username']}" />
-        	<h:inputText 
-        		id="j_username" 
-        		value="#{authBean.userName}" 
-        		required="true"
-        		requiredMessage="#{msg['login.usernameRequired']}" />
-        	<br /><br />
-         
-        	<h:outputText value="#{msg['login.password']}" />
-        	<h:inputSecret 
-        		id="j_password" 
-        		value="#{authBean.password}"
-        		required="true"
-        		requiredMessage="#{msg['login.passwordRequired']}"  />
-        	<br /><br />
-        	
-        	<h:outputText value="#{msg['login.rememberMe']}" />
-			<h:selectBooleanCheckbox 
-				id="_spring_security_remember_me" />
-			<br />
-         
-        	<p:button 
-        		action="#{authBean.login}" 
-        		update="message"
-        		value="#{msg['login.button']}" />
     	
-    	</h:form>
+    	<h:form id="loginForm">
+		    
+		    <br />
+		    
+		    <h:panelGrid columns="2">
+			    <h:outputLabel for="username" value="#{msg['login.username']}" />  
+			    <h:inputText id="username" 
+			    	value="#{authBean.username}"
+			    	required="true" 
+			    	requiredMessage="#{msg['login.usernameRequired']}"  />  
+			                    
+			    <h:outputLabel for="password" value="#{msg['login.password']}" />  
+			    <h:inputSecret id="password" 
+			    	value="#{authBean.password}"
+			    	required="true"
+					requiredMessage="#{msg['login.passwordRequired']}" />  
+			                         
+		    </h:panelGrid>
+		           
+		    <br />        
+		            
+		    <p:commandButton id="login" 
+		     	update="message"
+		    	value="#{msg['login.button']}" 
+		        action="#{authBean.doLogin}" />
+		</h:form>
 		
 		<br /><br />
 		

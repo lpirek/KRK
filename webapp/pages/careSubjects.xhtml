@@ -24,20 +24,28 @@
 		<h:panelGroup rendered="#{!careSubjectsBean.careSubjectsByUser.isEmpty()}">
 		
 			<ui:repeat value="#{careSubjectsBean.careSubjectsByUser}" var="przedmiot">
+				
+				<p:panel>
+			
 		        <h:panelGrid columns="2" style="width: 980px; line-height: 25px">
 		            
-		            <p:outputPanel style="width: 780px;">
+		            <p:outputPanel style="width: 680px;">
 		                <h:outputText value="#{careSubjectsBean.getName(przedmiot)}" style="font-weight: bold"/><br />
 		 				<h:outputText value="#{careSubjectsBean.getDescription(przedmiot)}" />
 		            </p:outputPanel>
 		            
-		            <p:commandButton value="#{msg['careSubjects.button']}" 
+		            <p:commandButton value="#{msg['careSubjects.button']}" style="width: 200px"
 		            				action="#{careSubjectsBean.goToSubjectCards(przedmiot)}">
    					</p:commandButton>
 		            
 		        </h:panelGrid>
 		        
+		        </p:panel>
+		        
     		</ui:repeat>
+    		
+    		<br />
+			<br />
     
     	</h:panelGroup>
 		

@@ -7,7 +7,6 @@ CREATE TABLE `ProgramKsztalcenia` (
   `formaStudiow`      varchar(15) NOT NULL, 
   `stopienStudiow`     varchar(15) NOT NULL, 
   `KierunekStudiowid` int(11) NOT NULL, 
-  `ProgramStudiowid`  int(11), 
   PRIMARY KEY (`id`)) ENGINE=InnoDB CHARACTER SET UTF8;
 CREATE TABLE `ObszarKsztalcenia` (
   `id` int(11) NOT NULL AUTO_INCREMENT, 
@@ -19,6 +18,7 @@ CREATE TABLE `KierunekStudiow` (
   PRIMARY KEY (`id`)) ENGINE=InnoDB CHARACTER SET UTF8;
 CREATE TABLE `ProgramStudiow` (
   `id` int(11) NOT NULL AUTO_INCREMENT, 
+  `ProgramKsztalceniaid`  int(11), 
   PRIMARY KEY (`id`)) ENGINE=InnoDB CHARACTER SET UTF8;
 CREATE TABLE `PlanStudiow` (
   `id`                   int(11) NOT NULL AUTO_INCREMENT, 
@@ -210,7 +210,7 @@ CREATE TABLE `ProgramKsztalceniaObszarKsztalcenia` (
   `ObszarKsztalceniaid`  int(11) NOT NULL, 
   PRIMARY KEY (`id`)) ENGINE=InnoDB CHARACTER SET UTF8;
 ALTER TABLE `PlanStudiow` ADD INDEX `FKPlanStudio339978` (`ProgramKsztalceniaid`), ADD CONSTRAINT `FKPlanStudio339978` FOREIGN KEY (`ProgramKsztalceniaid`) REFERENCES `ProgramKsztalcenia` (`id`);
-ALTER TABLE `ProgramKsztalcenia` ADD INDEX `FKProgramKsz706035` (`ProgramStudiowid`), ADD CONSTRAINT `FKProgramKsz706035` FOREIGN KEY (`ProgramStudiowid`) REFERENCES `ProgramStudiow` (`id`);
+ALTER TABLE `ProgramStudiow` ADD INDEX `FKProgramStudio706035` (`ProgramKsztalceniaid`), ADD CONSTRAINT `FKProgramStudio706035` FOREIGN KEY (`ProgramKsztalceniaid`) REFERENCES `ProgramKsztalcenia` (`id`);
 ALTER TABLE `PlanStudiowSemestr` ADD INDEX `FKPlanStudio821472` (`PlanStudiowid`), ADD CONSTRAINT `FKPlanStudio821472` FOREIGN KEY (`PlanStudiowid`) REFERENCES `PlanStudiow` (`id`);
 ALTER TABLE `PlanStudiowSemestr` ADD INDEX `FKPlanStudio226958` (`Semestrid`), ADD CONSTRAINT `FKPlanStudio226958` FOREIGN KEY (`Semestrid`) REFERENCES `Semestr` (`id`);
 ALTER TABLE `Kurs` ADD INDEX `FKKurs370540` (`Semestrid`), ADD CONSTRAINT `FKKurs370540` FOREIGN KEY (`Semestrid`) REFERENCES `Semestr` (`id`);

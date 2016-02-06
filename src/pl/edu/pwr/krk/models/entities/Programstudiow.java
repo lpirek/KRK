@@ -6,14 +6,14 @@ import java.util.Set;
 public class Programstudiow implements java.io.Serializable {
 
 	private Integer id;
-	private Set<Programksztalcenia> programksztalcenias = new HashSet<Programksztalcenia>(0);
+	private Programksztalcenia programksztalcenia;
 	private Set<Modulksztalcenia> modulksztalcenias = new HashSet<Modulksztalcenia>(0);
 
 	public Programstudiow() {
 	}
 
-	public Programstudiow(Set<Programksztalcenia> programksztalcenias, Set<Modulksztalcenia> modulksztalcenias) {
-		this.programksztalcenias = programksztalcenias;
+	public Programstudiow(Programksztalcenia programksztalcenia, Set<Modulksztalcenia> modulksztalcenias) {
+		this.programksztalcenia = programksztalcenia;
 		this.modulksztalcenias = modulksztalcenias;
 	}
 
@@ -25,20 +25,20 @@ public class Programstudiow implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Set<Programksztalcenia> getProgramksztalcenias() {
-		return this.programksztalcenias;
-	}
-
-	public void setProgramksztalcenias(Set<Programksztalcenia> programksztalcenias) {
-		this.programksztalcenias = programksztalcenias;
-	}
-
 	public Set<Modulksztalcenia> getModulksztalcenias() {
 		return this.modulksztalcenias;
 	}
 
 	public void setModulksztalcenias(Set<Modulksztalcenia> modulksztalcenias) {
 		this.modulksztalcenias = modulksztalcenias;
+	}
+
+	public Programksztalcenia getProgramksztalcenia() {
+		return programksztalcenia;
+	}
+
+	public void setProgramksztalcenia(Programksztalcenia programksztalcenia) {
+		this.programksztalcenia = programksztalcenia;
 	}
 
 }

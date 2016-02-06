@@ -15,6 +15,7 @@ import javax.faces.context.FacesContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import pl.edu.pwr.krk.models.entities.Programksztalcenia;
 import pl.edu.pwr.krk.models.entities.Przedmiot;
 import pl.edu.pwr.krk.models.entities.Uzytkownik;
 
@@ -67,14 +68,19 @@ public class CareSubjectsBean extends Bean implements Serializable{
 	public String getDescription(Przedmiot przedmiot) {
 		
 		String result = "";
+		Programksztalcenia programksztalcenia = przedmiot.getModulksztalcenia().getProgramstudiow().getProgramksztalcenia();
 		
 		if (isPolnish()) {
 			result = MessageFormat.format("kierunek - {0}, {1}, {2}", 
-					"informatyka", "studia stacjonarne", "I stopien");
+					 programksztalcenia.getKierunekstudiow().getNazwa(), 
+					 programksztalcenia.getFormaStudiow(),
+					 programksztalcenia.getStopienStudiow());
 		}
 		else {
 			result = MessageFormat.format("faculty - {0}, {1}, {2}", 
-					"informatyka", "studia stacjonarne", "I stopien");
+					 programksztalcenia.getKierunekstudiow().getNazwa(), 
+					 programksztalcenia.getFormaStudiow(),
+					 programksztalcenia.getStopienStudiow());
 		}
 		
 		return result;

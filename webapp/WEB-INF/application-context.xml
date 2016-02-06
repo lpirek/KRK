@@ -29,6 +29,11 @@
     	<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
+	<!-- Connect AuthBean with AuthManager -->
+	<bean id="authBean" class="pl.edu.pwr.krk.beans.global.AuthBean">
+		<property name="authenticationManager" ref="authenticationManager" />
+	</bean>
+	
 	<!-- Connect DAOs with SessionFactory -->
 	<bean id="uzytkownikDAO" class="pl.edu.pwr.krk.models.dao.UzytkownikDAO">
 		<property name="sessionFactory" ref="sessionFactory" />

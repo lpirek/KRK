@@ -8,12 +8,9 @@
             <column name="id" />
             <generator class="identity" />
         </id>
-        <set name="programksztalcenias" table="programksztalcenia" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="ProgramStudiowid" />
-            </key>
-            <one-to-many class="pl.edu.pwr.krk.models.entities.Programksztalcenia" />
-        </set>
+        <many-to-one name="programksztalcenia" class="pl.edu.pwr.krk.models.entities.Programksztalcenia" fetch="select">
+            <column name="ProgramKsztalceniaid" />
+        </many-to-one>
         <set name="modulksztalcenias" table="modulksztalcenia" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="ProgramStudiowid" not-null="true" />

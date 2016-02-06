@@ -23,7 +23,7 @@
      </application>
 	
 	<navigation-rule>
-        <from-view-id>/login.xhtml</from-view-id>
+        <from-view-id>/pages/login.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>login</from-outcome>
             <to-view-id>/pages/index.xhtml</to-view-id>

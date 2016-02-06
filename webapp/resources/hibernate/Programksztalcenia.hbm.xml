@@ -8,9 +8,6 @@
             <column name="id" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="programstudiow" class="pl.edu.pwr.krk.models.entities.Programstudiow" fetch="select">
-            <column name="ProgramStudiowid" />
-        </many-to-one>
         <many-to-one name="kierunekstudiow" class="pl.edu.pwr.krk.models.entities.Kierunekstudiow" fetch="select">
             <column name="KierunekStudiowid" not-null="true" />
         </many-to-one>

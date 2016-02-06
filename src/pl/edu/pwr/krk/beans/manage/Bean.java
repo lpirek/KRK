@@ -35,8 +35,6 @@ public abstract class Bean implements Serializable {
 	
 	protected Uzytkownik getCurrentUser() {
 		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		
-		
 		Uzytkownik uzytkownik = uzytkownikService.getUzytkownik(user.getUsername());
 		
 		return uzytkownik;
@@ -51,7 +49,9 @@ public abstract class Bean implements Serializable {
 	}
 	
 	protected String getMessage(String key) {
-		ResourceBundle bundle = ResourceBundle.getBundle("msg", FacesContext.getCurrentInstance().getViewRoot().getLocale());
+		FacesContext context = FacesContext.getCurrentInstance();
+		ResourceBundle bundle = context.getApplication().getResourceBundle(context, "msg");
+		
 		return bundle.getString(key);
 	}
 }

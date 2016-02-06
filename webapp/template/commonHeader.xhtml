@@ -14,11 +14,13 @@
 		
 		<table> 
 			<tr>
-				<td width="920">
-					<p:graphicImage value="/resources/images/logo.png"/>
+				<td width="500">
+					<h:graphicImage library="images" name="logo.png" />
 				</td>
-				<td>
-					<h:commandLink value="#{msg['menu.logout']}" action="#{authBean.logout}" />
+				<td width="500" style="text-align: right">
+					<h:outputText value="#{authBean.currentUsername}" />
+					<h:outputText value=", " />
+					<h:commandLink value="#{msg['menu.logout']}" action="#{authBean.doLogout}" />
 				</td>	
 			</tr>
 		</table>

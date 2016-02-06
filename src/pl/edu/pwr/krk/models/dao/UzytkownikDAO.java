@@ -12,6 +12,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
+import pl.edu.pwr.krk.models.entities.Przedmiot;
 import pl.edu.pwr.krk.models.entities.Uzytkownik;
 
 import static org.hibernate.criterion.Example.create;
@@ -40,6 +41,14 @@ public class UzytkownikDAO extends DAO {
 				log.debug("get successful, no instance found");
 			} else {
 				Hibernate.initialize(instance.getPrzedmiots());
+				
+				for (Przedmiot przedmiot : instance.getPrzedmiots()) {
+					Hibernate.initialize(przedmiot.getModulksztalcenia());
+					Hibernate.initialize(przedmiot.getModulksztalcenia().getProgramstudiow());
+					Hibernate.initialize(przedmiot.getModulksztalcenia().getProgramstudiow().getProgramksztalcenia());
+					Hibernate.initialize(przedmiot.getModulksztalcenia().getProgramstudiow().getProgramksztalcenia().getKierunekstudiow());
+				}
+				
 				log.debug("get successful, instance found");
 			}
 

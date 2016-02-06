@@ -17,7 +17,6 @@ public class Programksztalcenia implements java.io.Serializable {
 	public final static String TYP_MAGISTERSKIE = "magisterskie";
 	
 	private int id;
-	private Programstudiow programstudiow;
 	private Kierunekstudiow kierunekstudiow;
 	private Date aktualnyOd;
 	private String typStudiow;
@@ -45,7 +44,6 @@ public class Programksztalcenia implements java.io.Serializable {
 			Set<Programksztalceniaobszarksztalcenia> programksztalceniaobszarksztalcenias,
 			Set<Planstudiow> planstudiows) {
 		this.id = id;
-		this.programstudiow = programstudiow;
 		this.kierunekstudiow = kierunekstudiow;
 		this.aktualnyOd = aktualnyOd;
 		this.typStudiow = typStudiow;
@@ -61,14 +59,6 @@ public class Programksztalcenia implements java.io.Serializable {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public Programstudiow getProgramstudiow() {
-		return this.programstudiow;
-	}
-
-	public void setProgramstudiow(Programstudiow programstudiow) {
-		this.programstudiow = programstudiow;
 	}
 
 	public Kierunekstudiow getKierunekstudiow() {
