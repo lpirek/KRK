@@ -16,6 +16,8 @@
 
 		<ui:define name="content">
 		
+		<h:form id="form">
+		
 		<h2>#{msg['subjectCards.title']} - #{subjectCardsBean.subjectName}</h2>
 		
 		<p:dataTable var="card" value="#{subjectCardsBean.subjectCards}"
@@ -49,9 +51,13 @@
 		       	<p:commandButton id="remove" style="width: 80px"
 		    		value="#{msg['subjectCards.button.remove']}" disabled="true" />
 		       	<p:commandButton id="verify" style="width: 80px"
-		    		value="#{msg['subjectCards.button.verify']}" />
+		    		value="#{msg['subjectCards.button.verify']}"
+		    		action="#{subjectCardsBean.verifyCard(card)}" />
 		       	<p:commandButton id="download" style="width: 80px"
-		    		value="#{msg['subjectCards.button.download']}" />
+		    		value="#{msg['subjectCards.button.download']}"
+		    		ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" >
+		    		<p:fileDownload value="#{subjectCardsBean.downloadCard(card)}" />
+		    	</p:commandButton>
 		    </p:column>
 		    
 		</p:dataTable>
@@ -60,14 +66,26 @@
 		
 		<p:commandButton id="add" style="width: 200px"
 		    	value="#{msg['subjectCards.button.add']}" 
-		        action="#{subjectCardsBean.goToAddNewCard}" />
+		        action="#{subjectCardsBean.addNewCard}" />
 		
 		<br />
 		<br />
+		
+		</h:form>
 		
 		</ui:define>
 		
     </ui:composition>
+    
+    <script type="text/javascript">
+		function start() {
+		    PF('statusDialog').show();
+		}
+		 
+		function stop() {
+		    PF('statusDialog').hide();
+		}
+	</script>
 
 </h:body>
 </html> 

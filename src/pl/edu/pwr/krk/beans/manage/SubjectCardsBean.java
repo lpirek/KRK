@@ -12,6 +12,7 @@ import javax.faces.context.FacesContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.primefaces.model.StreamedContent;
 
 import pl.edu.pwr.krk.models.entities.Kartaprzedmiotu;
 import pl.edu.pwr.krk.models.entities.Przedmiot;
@@ -62,9 +63,19 @@ public class SubjectCardsBean extends Bean implements Serializable{
 		subjectCards = kartaPrzedmiotuService.getKartyPrzedmiotu(id);
 	}
 	
-	public void goToAddNewCard() throws IOException {
+	public void addNewCard() throws IOException {
 		FacesContext.getCurrentInstance().getExternalContext().
 			redirect("addNewSubjectCard.xhtml?id=" + id);
+	}
+	
+	public void verifyCard(Kartaprzedmiotu card) throws IOException {
+		FacesContext.getCurrentInstance().getExternalContext().
+			redirect("verifySubjectCard.xhtml?id=" + card.getId());
+	}
+	
+	public StreamedContent downloadCard(Kartaprzedmiotu card) {
+		
+		return null;
 	}
 
 	public int getId() {
