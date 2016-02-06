@@ -6,6 +6,12 @@ import java.util.Set;
 
 public class Kartaprzedmiotu implements java.io.Serializable {
 
+	public static final String JEZYK_PL = "PL";
+	public static final String JEZYK_EN = "EN";
+	
+	public static final String STATUS_ZATWIERDZONY = "wersja zatwierdzona";
+	public static final String STATUS_ROBOCZY = "wersja robocza";
+	
 	private int id;
 	private Przedmiot przedmiot;
 	private String jezyk;
@@ -21,8 +27,7 @@ public class Kartaprzedmiotu implements java.io.Serializable {
 	private Set<Ocenaosiagieciapek> ocenaosiagieciapeks = new HashSet<Ocenaosiagieciapek>(0);
 	private Set<Pozycjaliteraturowa> pozycjaliteraturowas = new HashSet<Pozycjaliteraturowa>(0);
 	private Set<Narzedziedydaktyczne> narzedziedydaktycznes = new HashSet<Narzedziedydaktyczne>(0);
-	private Set<Przedmiotowyefektksztalcenia> przedmiotowyefektksztalcenias = new HashSet<Przedmiotowyefektksztalcenia>(
-			0);
+	private Set<Przedmiotowyefektksztalcenia> przedmiotowyefektksztalcenias = new HashSet<Przedmiotowyefektksztalcenia>(0);
 	private Set<Trescprogramowa> trescprogramowas = new HashSet<Trescprogramowa>(0);
 
 	public Kartaprzedmiotu() {

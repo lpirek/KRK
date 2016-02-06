@@ -41,6 +41,9 @@
 	<bean id="przedmiotDAO" class="pl.edu.pwr.krk.models.dao.PrzedmiotDAO">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	<bean id="kartaprzedmiotuDAO" class="pl.edu.pwr.krk.models.dao.KartaprzedmiotuDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 
 	<!-- Connect Services with DAOs -->
 	<bean id="uzytkownikService" class="pl.edu.pwr.krk.models.services.UzytkownikService">
@@ -49,6 +52,10 @@
 	<bean id="przedmiotService" class="pl.edu.pwr.krk.models.services.PrzedmiotService">
 		<property name="przedmiotDAO" ref="przedmiotDAO" />
 	</bean>
+	<bean id="kartaprzedmiotuService" class="pl.edu.pwr.krk.models.services.KartaprzedmiotuService">
+		<property name="kartaprzedmiotuDAO" ref="kartaprzedmiotuDAO" />
+	</bean>
+	
 	
 	<!-- Connect Provider with AppContext -->
 	<bean id="provider" class="pl.edu.pwr.krk.tools.ApplicationContextProvider"> </bean>

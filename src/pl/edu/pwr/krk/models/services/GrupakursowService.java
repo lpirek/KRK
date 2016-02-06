@@ -13,17 +13,6 @@ public class GrupakursowService {
 	@Autowired
 	GrupakursowDAO grupakursowDAO;
 
-	/**
-	 * @return the grupakursowDAO
-	 */
-	public GrupakursowDAO getGrupakursowDAO() {
-		return grupakursowDAO;
-	}
-
-	/**
-	 * @param grupakursowDAO
-	 *            the grupakursowDAO to set
-	 */
 	public void setGrupakursowDAO(GrupakursowDAO grupakursowDAO) {
 		this.grupakursowDAO = grupakursowDAO;
 	}

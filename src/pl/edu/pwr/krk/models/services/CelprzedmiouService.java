@@ -13,17 +13,6 @@ public class CelprzedmiouService {
 	@Autowired
 	CelprzedmiotuDAO celprzedmiotuDAO;
 
-	/**
-	 * @return the celprzedmiotuDAO
-	 */
-	public CelprzedmiotuDAO getCelprzedmiotuDAO() {
-		return celprzedmiotuDAO;
-	}
-
-	/**
-	 * @param celprzedmiotuDAO
-	 *            the celprzedmiotuDAO to set
-	 */
 	public void setCelprzedmiotuDAO(CelprzedmiotuDAO celprzedmiotuDAO) {
 		this.celprzedmiotuDAO = celprzedmiotuDAO;
 	}

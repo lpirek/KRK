@@ -13,17 +13,6 @@ public class KekpekService {
 	@Autowired
 	KekpekDAO kekpekDAO;
 
-	/**
-	 * @return the kekpekDAO
-	 */
-	public KekpekDAO getKekpekDAO() {
-		return kekpekDAO;
-	}
-
-	/**
-	 * @param kekpekDAO
-	 *            the kekpekDAO to set
-	 */
 	public void setKekpekDAO(KekpekDAO kekpekDAO) {
 		this.kekpekDAO = kekpekDAO;
 	}

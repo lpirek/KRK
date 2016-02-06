@@ -13,16 +13,6 @@ public class WydzialService {
 	@Autowired
 	WydzialDAO wydzialDAO;
 
-	/**
-	 * @return the wydzialDAO
-	 */
-	public WydzialDAO getWydzialDAO() {
-		return wydzialDAO;
-	}
-
-	/**
-	 * @param wydzialDAO the wydzialDAO to set
-	 */
 	public void setWydzialDAO(WydzialDAO wydzialDAO) {
 		this.wydzialDAO = wydzialDAO;
 	}

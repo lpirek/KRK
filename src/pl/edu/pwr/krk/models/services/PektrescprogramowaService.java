@@ -13,16 +13,6 @@ public class PektrescprogramowaService {
 	@Autowired
 	PektrescprogramowaDAO pektrescprogramowaDAO;
 
-	/**
-	 * @return the pektrescprogramowaDAO
-	 */
-	public PektrescprogramowaDAO getPektrescprogramowaDAO() {
-		return pektrescprogramowaDAO;
-	}
-
-	/**
-	 * @param pektrescprogramowaDAO the pektrescprogramowaDAO to set
-	 */
 	public void setPektrescprogramowaDAO(PektrescprogramowaDAO pektrescprogramowaDAO) {
 		this.pektrescprogramowaDAO = pektrescprogramowaDAO;
 	}

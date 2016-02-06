@@ -13,17 +13,6 @@ public class PeknarzedziedydaktyczneService {
 	@Autowired
 	PeknarzedziedydaktyczneDAO peknarzedziedydaktyczneDAO;
 
-	/**
-	 * @return the peknarzedziedydaktyczneDAO
-	 */
-	public PeknarzedziedydaktyczneDAO getPeknarzedziedydaktyczneDAO() {
-		return peknarzedziedydaktyczneDAO;
-	}
-
-	/**
-	 * @param peknarzedziedydaktyczneDAO
-	 *            the peknarzedziedydaktyczneDAO to set
-	 */
 	public void setPeknarzedziedydaktyczneDAO(PeknarzedziedydaktyczneDAO peknarzedziedydaktyczneDAO) {
 		this.peknarzedziedydaktyczneDAO = peknarzedziedydaktyczneDAO;
 	}

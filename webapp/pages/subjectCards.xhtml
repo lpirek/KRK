@@ -16,7 +16,45 @@
 
 		<ui:define name="content">
 		
-		<h2>#{msg['subjectCards.title']}</h2> - #{subjectCardsBean.id}
+		<h2>#{msg['subjectCards.title']}</h2>
+		
+		<p:panel id="subjectCardsPanel" header="#{subjectCardsBean.subjectName}">
+		
+		<p:dataTable var="card" value="#{subjectCardsBean.subjectCards}"
+			emptyMessage="#{msg['subjectCards.table.empty']}">
+			
+		    <p:column headerText="#{msg['subjectCards.table.name']}">
+		        <h:outputText value="#{card.nazwa}" />
+		    </p:column>
+		 
+		    <p:column headerText="#{msg['subjectCards.table.state']}">
+		        <h:outputText value="#{card.status}" />
+		    </p:column>
+		 
+		    <p:column headerText="#{msg['subjectCards.table.lang']}">
+		        <h:outputText value="#{card.jezyk}" />
+		    </p:column>
+		 
+		    <p:column headerText="#{msg['subjectCards.table.createDate']}">
+		        <h:outputText value="#{card.dataUtworzenia}" />
+		    </p:column>
+		    
+		    <p:column>
+		    
+		    </p:column>
+		    
+		</p:dataTable>
+		
+		<br />
+		
+		<p:commandButton id="add" 
+		    	value="#{msg['subjectCards.button.add']}" 
+		        action="#{subjectCardsBean.addNewCard}" />
+		
+		<br />
+		<br />
+		
+		</p:panel>
 		
 		
 		</ui:define>

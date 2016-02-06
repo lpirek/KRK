@@ -13,17 +13,6 @@ public class ObszarksztalceniaService {
 	@Autowired
 	ObszarksztalceniaDAO obszarksztalceniaDAO;
 
-	/**
-	 * @return the obszarksztalceniaDAO
-	 */
-	public ObszarksztalceniaDAO getObszarksztalceniaDAO() {
-		return obszarksztalceniaDAO;
-	}
-
-	/**
-	 * @param obszarksztalceniaDAO
-	 *            the obszarksztalceniaDAO to set
-	 */
 	public void setObszarksztalceniaDAO(ObszarksztalceniaDAO obszarksztalceniaDAO) {
 		this.obszarksztalceniaDAO = obszarksztalceniaDAO;
 	}

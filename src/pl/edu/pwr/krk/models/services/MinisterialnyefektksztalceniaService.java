@@ -13,17 +13,6 @@ public class MinisterialnyefektksztalceniaService {
 	@Autowired
 	MinisterialnyefektksztalceniaDAO ministerialnyefektksztalceniaDAO;
 
-	/**
-	 * @return the ministerialnyefektksztalceniaDAO
-	 */
-	public MinisterialnyefektksztalceniaDAO getMinisterialnyefektksztalceniaDAO() {
-		return ministerialnyefektksztalceniaDAO;
-	}
-
-	/**
-	 * @param ministerialnyefektksztalceniaDAO
-	 *            the ministerialnyefektksztalceniaDAO to set
-	 */
 	public void setMinisterialnyefektksztalceniaDAO(
 			MinisterialnyefektksztalceniaDAO ministerialnyefektksztalceniaDAO) {
 		this.ministerialnyefektksztalceniaDAO = ministerialnyefektksztalceniaDAO;

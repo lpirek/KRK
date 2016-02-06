@@ -13,17 +13,6 @@ public class PozycjaliteraturowaService {
 	@Autowired
 	PozycjaliteraturowaDAO pozycjaliteraturowaDAO;
 
-	/**
-	 * @return the pozycjaliteraturowaDAO
-	 */
-	public PozycjaliteraturowaDAO getPozycjaliteraturowaDAO() {
-		return pozycjaliteraturowaDAO;
-	}
-
-	/**
-	 * @param pozycjaliteraturowaDAO
-	 *            the pozycjaliteraturowaDAO to set
-	 */
 	public void setPozycjaliteraturowaDAO(PozycjaliteraturowaDAO pozycjaliteraturowaDAO) {
 		this.pozycjaliteraturowaDAO = pozycjaliteraturowaDAO;
 	}

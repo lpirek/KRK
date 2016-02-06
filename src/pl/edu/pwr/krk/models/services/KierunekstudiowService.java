@@ -12,18 +12,7 @@ public class KierunekstudiowService {
 
 	@Autowired
 	KierunekstudiowDAO kierunekstudiowDAO;
-
-	/**
-	 * @return the kierunekstudiowDAO
-	 */
-	public KierunekstudiowDAO getKierunekstudiowDAO() {
-		return kierunekstudiowDAO;
-	}
-
-	/**
-	 * @param kierunekstudiowDAO
-	 *            the kierunekstudiowDAO to set
-	 */
+	
 	public void setKierunekstudiowDAO(KierunekstudiowDAO kierunekstudiowDAO) {
 		this.kierunekstudiowDAO = kierunekstudiowDAO;
 	}

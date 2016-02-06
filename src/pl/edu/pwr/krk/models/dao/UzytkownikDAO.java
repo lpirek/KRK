@@ -22,7 +22,6 @@ public class UzytkownikDAO extends DAO {
 	private static final Log log = LogFactory.getLog(UzytkownikDAO.class);
 
 	public Uzytkownik findByLogin(String login) {
-		log.debug("getting Uzytkownik instance with login: " + login);
 		
 		Session session = null;
 		
@@ -37,9 +36,7 @@ public class UzytkownikDAO extends DAO {
 			
 			tx.commit();
 			
-			if (instance == null) {
-				log.debug("get successful, no instance found");
-			} else {
+			if (instance != null) {
 				Hibernate.initialize(instance.getPrzedmiots());
 				
 				for (Przedmiot przedmiot : instance.getPrzedmiots()) {
@@ -48,8 +45,6 @@ public class UzytkownikDAO extends DAO {
 					Hibernate.initialize(przedmiot.getModulksztalcenia().getProgramstudiow().getProgramksztalcenia());
 					Hibernate.initialize(przedmiot.getModulksztalcenia().getProgramstudiow().getProgramksztalcenia().getKierunekstudiow());
 				}
-				
-				log.debug("get successful, instance found");
 			}
 
 			return instance;

@@ -13,17 +13,6 @@ public class SpecjalizacjaService {
 	@Autowired
 	SpecjalizacjaDAO specjalizacjaDAO;
 
-	/**
-	 * @return the specjalizacjaDAO
-	 */
-	public SpecjalizacjaDAO getSpecjalizacjaDAO() {
-		return specjalizacjaDAO;
-	}
-
-	/**
-	 * @param specjalizacjaDAO
-	 *            the specjalizacjaDAO to set
-	 */
 	public void setSpecjalizacjaDAO(SpecjalizacjaDAO specjalizacjaDAO) {
 		this.specjalizacjaDAO = specjalizacjaDAO;
 	}

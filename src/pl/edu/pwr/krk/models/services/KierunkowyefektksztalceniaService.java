@@ -13,17 +13,6 @@ public class KierunkowyefektksztalceniaService {
 	@Autowired
 	KierunkowyefektksztalceniaDAO kierunkowyefektksztalceniaDAO;
 
-	/**
-	 * @return the kierunkowyefektksztalceniaDAO
-	 */
-	public KierunkowyefektksztalceniaDAO getKierunkowyefektksztalceniaDAO() {
-		return kierunkowyefektksztalceniaDAO;
-	}
-
-	/**
-	 * @param kierunkowyefektksztalceniaDAO
-	 *            the kierunkowyefektksztalceniaDAO to set
-	 */
 	public void setKierunkowyefektksztalceniaDAO(KierunkowyefektksztalceniaDAO kierunkowyefektksztalceniaDAO) {
 		this.kierunkowyefektksztalceniaDAO = kierunkowyefektksztalceniaDAO;
 	}

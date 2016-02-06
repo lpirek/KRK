@@ -13,17 +13,6 @@ public class SemestrService {
 	@Autowired
 	SemestrDAO semestrDAO;
 
-	/**
-	 * @return the semestrDAO
-	 */
-	public SemestrDAO getSemestrDAO() {
-		return semestrDAO;
-	}
-
-	/**
-	 * @param semestrDAO
-	 *            the semestrDAO to set
-	 */
 	public void setSemestrDAO(SemestrDAO semestrDAO) {
 		this.semestrDAO = semestrDAO;
 	}

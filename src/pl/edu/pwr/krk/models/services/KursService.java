@@ -13,17 +13,6 @@ public class KursService {
 	@Autowired
 	KursDAO kursDAO;
 
-	/**
-	 * @return the kursDAO
-	 */
-	public KursDAO getKursDAO() {
-		return kursDAO;
-	}
-
-	/**
-	 * @param kursDAO
-	 *            the kursDAO to set
-	 */
 	public void setKursDAO(KursDAO kursDAO) {
 		this.kursDAO = kursDAO;
 	}

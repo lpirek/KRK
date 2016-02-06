@@ -13,17 +13,6 @@ public class PekocenaosiagnieciapekService {
 	@Autowired
 	PekocenaosiagnieciapekDAO pekocenaosiagnieciapekDAO;
 
-	/**
-	 * @return the pekocenaosiagnieciapekDAO
-	 */
-	public PekocenaosiagnieciapekDAO getPekocenaosiagnieciapekDAO() {
-		return pekocenaosiagnieciapekDAO;
-	}
-
-	/**
-	 * @param pekocenaosiagnieciapekDAO
-	 *            the pekocenaosiagnieciapekDAO to set
-	 */
 	public void setPekocenaosiagnieciapekDAO(PekocenaosiagnieciapekDAO pekocenaosiagnieciapekDAO) {
 		this.pekocenaosiagnieciapekDAO = pekocenaosiagnieciapekDAO;
 	}
