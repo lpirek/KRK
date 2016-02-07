@@ -187,8 +187,12 @@
 
 					<p:tab title="#{msg['newSubjectCard.prerequisitesTitle']}">
 						<p:commandButton
-							value="#{msg['newSubjectCard.prerequisitesTitle.button.add']}" />
-
+							value="#{msg['newSubjectCard.prerequisitesTitle.button.add']}"
+							actionListener="#{addNewSubjectCardBean.addPrerequisite}">
+							<p:ajax event="dialogReturn"
+								listener="#{addNewSubjectCardBean.onPrerequisiteAdd}"
+								update="message" />
+						</p:commandButton>
 						<br />
 						<br />
 
@@ -615,7 +619,7 @@
 					</p:tab>
 
 					<p:tab title="#{msg['newSubjectCard.evaluationOfSEETitle']}">
-					<h:outputText
+						<h:outputText
 							value="#{msg['newSubjectCard.evaluationOfSEETitle.forming']}" />
 						<p:separator />
 
@@ -640,13 +644,13 @@
 								sortBy="#{cardEvaluationForming.opis}">
 								<h:outputText value="#{cardEvaluationForming.opis}" />
 							</p:column>
-							
+
 							<p:column
 								headerText="#{msg['newSubjectCard.evaluationOfSEETitle.table.numberEE']}"
 								sortBy="#{cardEvaluationForming.numer}">
 								<h:outputText value="TODO: Pobrać i wypisać" />
 							</p:column>
-							
+
 							<p:column
 								headerText="#{msg['newSubjectCard.evaluationOfSEETitle.table.theWay']}"
 								sortBy="#{cardEvaluationForming.sposobOceny}">
@@ -697,13 +701,13 @@
 								sortBy="#{cardEvaluationConcluding.opis}">
 								<h:outputText value="#{cardEvaluationConcluding.opis}" />
 							</p:column>
-							
+
 							<p:column
 								headerText="#{msg['newSubjectCard.evaluationOfSEETitle.table.numberEE']}"
 								sortBy="#{cardEvaluationConcluding.numer}">
 								<h:outputText value="TODO: Pobrać i wypisać" />
 							</p:column>
-							
+
 							<p:column
 								headerText="#{msg['newSubjectCard.evaluationOfSEETitle.table.theWay']}"
 								sortBy="#{cardEvaluationConcluding.sposobOceny}">
@@ -725,23 +729,20 @@
 
 						<p:commandButton
 							value="#{msg['newSubjectCard.prerequisitesTitle.button.import']}" />
-					
+
 					</p:tab>
 
 					<p:tab title="#{msg['newSubjectCard.correlationMatrixTitle']}">
 					</p:tab>
 				</p:tabView>
-				
-				<br/>
-				<br/>
-				
-				<p:commandButton
-							value="#{msg['newSubjectCard.button.cancel']}" />
-				<p:commandButton
-							value="#{msg['newSubjectCard.button.storeDraft']}" />
-				<p:commandButton
-							value="#{msg['newSubjectCard.button.store']}" />
-				
+
+				<br />
+				<br />
+
+				<p:commandButton value="#{msg['newSubjectCard.button.cancel']}" />
+				<p:commandButton value="#{msg['newSubjectCard.button.storeDraft']}" />
+				<p:commandButton value="#{msg['newSubjectCard.button.store']}" />
+
 			</h:form>
 
 		</ui:define>
