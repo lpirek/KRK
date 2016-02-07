@@ -47,55 +47,64 @@
 								<p:outputLabel for="department2"
 									value="#{msg['newSubjectCard.basicDataTitle.subjectInfo.department']}: "
 									style="font-weight:bold" />
-								<h:outputText id="department2" value="#{addNewSubjectCardBean.subject.modulksztalcenia.programstudiow.programksztalcenia.kierunekstudiow.wydzial.nazwa}" />
+								<h:outputText id="department2"
+									value="#{addNewSubjectCardBean.subject.modulksztalcenia.programstudiow.programksztalcenia.kierunekstudiow.wydzial.nazwa}" />
 							</ui:fragment>
 							<ui:fragment>
 								<p:outputLabel for="namePL"
 									value="#{msg['newSubjectCard.basicDataTitle.subjectInfo.namePL']}: "
 									style="font-weight:bold" />
-								<h:outputText id="namePL" value="#{addNewSubjectCardBean.subject.nazwaPl}" />
+								<h:outputText id="namePL"
+									value="#{addNewSubjectCardBean.subject.nazwaPl}" />
 							</ui:fragment>
 							<ui:fragment>
 								<p:outputLabel for="nameEN"
 									value="#{msg['newSubjectCard.basicDataTitle.subjectInfo.nameEN']}: "
 									style="font-weight:bold" />
-								<h:outputText id="nameEN" value="#{addNewSubjectCardBean.subject.nazwaEn}" />
+								<h:outputText id="nameEN"
+									value="#{addNewSubjectCardBean.subject.nazwaEn}" />
 							</ui:fragment>
 							<ui:fragment>
 								<p:outputLabel for="fieldOfStudy"
 									value="#{msg['newSubjectCard.basicDataTitle.subjectInfo.fieldOfStudy']}: "
 									style="font-weight:bold" />
-								<h:outputText id="fieldOfStudy" value="#{addNewSubjectCardBean.subject.modulksztalcenia.programstudiow.programksztalcenia.kierunekstudiow.nazwa}" />
+								<h:outputText id="fieldOfStudy"
+									value="#{addNewSubjectCardBean.subject.modulksztalcenia.programstudiow.programksztalcenia.kierunekstudiow.nazwa}" />
 							</ui:fragment>
 							<ui:fragment>
 								<p:outputLabel for="level"
 									value="#{msg['newSubjectCard.basicDataTitle.subjectInfo.level']}: "
 									style="font-weight:bold" />
-								<h:outputText id="level" value="#{addNewSubjectCardBean.subject.modulksztalcenia.programstudiow.programksztalcenia.stopienStudiow}" />
+								<h:outputText id="level"
+									value="#{addNewSubjectCardBean.subject.modulksztalcenia.programstudiow.programksztalcenia.stopienStudiow}" />
 							</ui:fragment>
 							<ui:fragment>
 								<p:outputLabel for="form"
 									value="#{msg['newSubjectCard.basicDataTitle.subjectInfo.form']}: "
 									style="font-weight:bold" />
-								<h:outputText id="form" value="#{addNewSubjectCardBean.subject.modulksztalcenia.programstudiow.programksztalcenia.formaStudiow}" />
+								<h:outputText id="form"
+									value="#{addNewSubjectCardBean.subject.modulksztalcenia.programstudiow.programksztalcenia.formaStudiow}" />
 							</ui:fragment>
 							<ui:fragment>
 								<p:outputLabel for="kind"
 									value="#{msg['newSubjectCard.basicDataTitle.subjectInfo.kind']}: "
 									style="font-weight:bold" />
-								<h:outputText id="kind" value="#{addNewSubjectCardBean.subject.rodzaj}" />
+								<h:outputText id="kind"
+									value="#{addNewSubjectCardBean.subject.rodzaj}" />
 							</ui:fragment>
 							<ui:fragment>
 								<p:outputLabel for="code"
 									value="#{msg['newSubjectCard.basicDataTitle.subjectInfo.code']}: "
 									style="font-weight:bold" />
-								<h:outputText id="code" value="#{addNewSubjectCardBean.subject.kod}" />
+								<h:outputText id="code"
+									value="#{addNewSubjectCardBean.subject.kod}" />
 							</ui:fragment>
 							<ui:fragment>
 								<p:outputLabel for="isGroup"
 									value="#{msg['newSubjectCard.basicDataTitle.subjectInfo.isGroup']}: "
 									style="font-weight:bold" />
-								<h:outputText id="isGroup" value="#{addNewSubjectCardBean.subject.group ? 'TAK' : 'NIE'}" />
+								<h:outputText id="isGroup"
+									value="#{addNewSubjectCardBean.subject.group ? 'TAK' : 'NIE'}" />
 							</ui:fragment>
 						</h:panelGrid>
 
@@ -187,17 +196,17 @@
 							value="#{addNewSubjectCardBean.prerequisites}"
 							emptyMessage="#{msg['newSubjectCard.prerequisitesTitle.table.empty']}">
 
-							<p:column 
-								headerText="#{msg['newSubjectCard.prerequisitesTitle.table.lp']}"
+							<p:column
+								headerText="#{msg['newSubjectCard.prerequisitesTitle.table.number']}"
 								style="width: 40px" sortBy="#{card.pozycja}">
 								<h:outputText value="#{card.pozycja}" />
 							</p:column>
 
-							<p:column style="width: 100px">
+							<p:column style="width:200px">
 								<p:commandButton id="up" style="width: 80px" value="/\"
-									disabled="true" />
+									disabled="false" />
 								<p:commandButton id="down" style="width: 80px" value="\/"
-									disabled="true" />
+									disabled="false" />
 							</p:column>
 
 							<p:column
@@ -209,10 +218,10 @@
 							<p:column style="width: 200px">
 								<p:commandButton id="modify" style="width: 80px"
 									value="#{msg['newSubjectCard.prerequisitesTitle.table.button.edit']}"
-									disabled="true" />
+									disabled="false" />
 								<p:commandButton id="remove" style="width: 80px"
 									value="#{msg['newSubjectCard.prerequisitesTitle.table.button.remove']}"
-									disabled="true" />
+									disabled="false" />
 							</p:column>
 
 						</p:dataTable>
@@ -224,21 +233,515 @@
 					</p:tab>
 
 					<p:tab title="#{msg['newSubjectCard.subjectObjectivesTitle']}">
+						<p:commandButton
+							value="#{msg['newSubjectCard.prerequisitesTitle.button.add']}" />
+
+						<br />
+						<br />
+
+						<p:dataTable var="cardObjectives"
+							value="#{addNewSubjectCardBean.objectives}"
+							emptyMessage="#{msg['newSubjectCard.subjectObjectivesTitle.table.empty']}">
+
+							<p:column
+								headerText="#{msg['newSubjectCard.subjectObjectivesTitle.table.number']}"
+								style="width: 40px" sortBy="#{cardObjectives.numer}">
+								<h:outputText value="#{cardObjectives.numer}" />
+							</p:column>
+
+							<p:column
+								headerText="#{msg['newSubjectCard.subjectObjectivesTitle.table.objective']}"
+								sortBy="#{cardObjectives.opis}">
+								<h:outputText value="#{cardObjectives.opis}" />
+							</p:column>
+
+							<p:column style="width: 200px">
+								<p:commandButton id="modify" style="width: 80px"
+									value="#{msg['newSubjectCard.prerequisitesTitle.table.button.edit']}"
+									disabled="false" />
+								<p:commandButton id="remove" style="width: 80px"
+									value="#{msg['newSubjectCard.prerequisitesTitle.table.button.remove']}"
+									disabled="false" />
+							</p:column>
+
+						</p:dataTable>
+						<br />
+						<br />
+
+						<p:commandButton
+							value="#{msg['newSubjectCard.prerequisitesTitle.button.import']}" />
 					</p:tab>
+
 					<p:tab
 						title="#{msg['newSubjectCard.subjectEducationalEffectsTitle']}">
+
+						<p:commandButton
+							value="#{msg['newSubjectCard.subjectEducationalEffectsTitle.getVerbs']}" />
+
+						<br />
+						<br />
+
+						<h:outputText
+							value="#{msg['newSubjectCard.subjectEducationalEffectsTitle.knowledge']}" />
+						<p:separator />
+
+						<p:commandButton
+							value="#{msg['newSubjectCard.prerequisitesTitle.button.add']}" />
+
+						<br />
+						<br />
+
+						<p:dataTable var="cardSEEKnowledge"
+							value="#{addNewSubjectCardBean.subjectEducationalEffectsKnowledge}"
+							emptyMessage="#{msg['newSubjectCard.subjectEducationalEffectsTitle.table.empty']}">
+
+							<p:column
+								headerText="#{msg['newSubjectCard.subjectEducationalEffectsTitle.table.number']}"
+								style="width: 40px" sortBy="#{cardSEEKnowledge.numer}">
+								<h:outputText value="#{cardSEEKnowledge.numer}" />
+							</p:column>
+
+							<p:column
+								headerText="#{msg['newSubjectCard.subjectEducationalEffectsTitle.table.description']}"
+								sortBy="#{cardSEEKnowledge.opis}">
+								<h:outputText value="#{cardSEEKnowledge.opis}" />
+							</p:column>
+
+							<p:column style="width: 200px">
+								<p:commandButton id="modify" style="width: 80px"
+									value="#{msg['newSubjectCard.prerequisitesTitle.table.button.edit']}"
+									disabled="false" />
+								<p:commandButton id="remove" style="width: 80px"
+									value="#{msg['newSubjectCard.prerequisitesTitle.table.button.remove']}"
+									disabled="false" />
+							</p:column>
+
+						</p:dataTable>
+						<br />
+						<br />
+
+						<p:commandButton
+							value="#{msg['newSubjectCard.prerequisitesTitle.button.import']}" />
+
+						<br />
+						<br />
+
+						<h:outputText
+							value="#{msg['newSubjectCard.subjectEducationalEffectsTitle.skills']}" />
+						<p:separator />
+
+						<p:commandButton
+							value="#{msg['newSubjectCard.prerequisitesTitle.button.add']}" />
+
+						<br />
+						<br />
+
+						<p:dataTable var="cardSEESkills"
+							value="#{addNewSubjectCardBean.subjectEducationalEffectsSkills}"
+							emptyMessage="#{msg['newSubjectCard.subjectEducationalEffectsTitle.table.empty']}">
+
+							<p:column
+								headerText="#{msg['newSubjectCard.subjectEducationalEffectsTitle.table.number']}"
+								style="width: 40px" sortBy="#{cardSEESkills.numer}">
+								<h:outputText value="#{cardSEESkills.numer}" />
+							</p:column>
+
+							<p:column
+								headerText="#{msg['newSubjectCard.subjectEducationalEffectsTitle.table.description']}"
+								sortBy="#{cardSEESkills.opis}">
+								<h:outputText value="#{cardSEESkills.opis}" />
+							</p:column>
+
+							<p:column style="width: 200px">
+								<p:commandButton id="modify" style="width: 80px"
+									value="#{msg['newSubjectCard.prerequisitesTitle.table.button.edit']}"
+									disabled="false" />
+								<p:commandButton id="remove" style="width: 80px"
+									value="#{msg['newSubjectCard.prerequisitesTitle.table.button.remove']}"
+									disabled="false" />
+							</p:column>
+
+						</p:dataTable>
+						<br />
+						<br />
+
+						<p:commandButton
+							value="#{msg['newSubjectCard.prerequisitesTitle.button.import']}" />
+						<br />
+						<br />
+
+						<h:outputText
+							value="#{msg['newSubjectCard.subjectEducationalEffectsTitle.references']}" />
+						<p:separator />
+
+						<p:commandButton
+							value="#{msg['newSubjectCard.prerequisitesTitle.button.add']}" />
+
+						<br />
+						<br />
+
+						<p:dataTable var="cardSEEReferences"
+							value="#{addNewSubjectCardBean.subjectEducationalEffectsReferences}"
+							emptyMessage="#{msg['newSubjectCard.subjectEducationalEffectsTitle.table.empty']}">
+
+							<p:column
+								headerText="#{msg['newSubjectCard.subjectEducationalEffectsTitle.table.number']}"
+								style="width: 40px" sortBy="#{cardSEEReferences.numer}">
+								<h:outputText value="#{cardSEEReferences.numer}" />
+							</p:column>
+
+							<p:column
+								headerText="#{msg['newSubjectCard.subjectEducationalEffectsTitle.table.description']}"
+								sortBy="#{cardSEEReferences.opis}">
+								<h:outputText value="#{cardSEEReferences.opis}" />
+							</p:column>
+
+							<p:column style="width: 200px">
+								<p:commandButton id="modify" style="width: 80px"
+									value="#{msg['newSubjectCard.prerequisitesTitle.table.button.edit']}"
+									disabled="false" />
+								<p:commandButton id="remove" style="width: 80px"
+									value="#{msg['newSubjectCard.prerequisitesTitle.table.button.remove']}"
+									disabled="false" />
+							</p:column>
+
+						</p:dataTable>
+						<br />
+						<br />
+
+						<p:commandButton
+							value="#{msg['newSubjectCard.prerequisitesTitle.button.import']}" />
+
 					</p:tab>
-					<p:tab title="#{msg['newSubjectCard.programmeContentTitle']}">
-					</p:tab>
+
 					<p:tab title="#{msg['newSubjectCard.teachingToolsTitle']}">
+						<p:commandButton
+							value="#{msg['newSubjectCard.prerequisitesTitle.button.add']}" />
+
+						<br />
+						<br />
+
+						<p:dataTable var="cardTeachingTools"
+							value="#{addNewSubjectCardBean.teachingTools}"
+							emptyMessage="#{msg['newSubjectCard.teachingToolsTitle.table.empty']}">
+
+							<p:column
+								headerText="#{msg['newSubjectCard.teachingToolsTitle.table.number']}"
+								style="width: 40px" sortBy="#{cardTeachingTools.numer}">
+								<h:outputText value="#{cardTeachingTools.numer}" />
+							</p:column>
+
+							<p:column
+								headerText="#{msg['newSubjectCard.teachingToolsTitle.table.tool']}"
+								sortBy="#{cardTeachingTools.opis}">
+								<h:outputText value="#{cardTeachingTools.opis}" />
+							</p:column>
+
+							<p:column style="width: 200px">
+								<p:commandButton id="modify" style="width: 80px"
+									value="#{msg['newSubjectCard.prerequisitesTitle.table.button.edit']}"
+									disabled="false" />
+								<p:commandButton id="remove" style="width: 80px"
+									value="#{msg['newSubjectCard.prerequisitesTitle.table.button.remove']}"
+									disabled="false" />
+							</p:column>
+
+						</p:dataTable>
+						<br />
+						<br />
+
+						<p:commandButton
+							value="#{msg['newSubjectCard.prerequisitesTitle.button.import']}" />
 					</p:tab>
+
+					<p:tab title="#{msg['newSubjectCard.programmeContentTitle']}">
+
+						<h:outputText
+							value="#{msg['newSubjectCard.programmeContentTitle.formOfClasses']}" />
+						<p:separator />
+
+						<p:commandButton
+							value="#{msg['newSubjectCard.prerequisitesTitle.button.add']}" />
+
+						<br />
+						<br />
+
+						<p:dataTable var="cardProgrammeContent"
+							value="#{addNewSubjectCardBean.programmeContents}"
+							emptyMessage="#{msg['newSubjectCard.programmeContentTitle.table.empty']}">
+
+							<p:column
+								headerText="#{msg['newSubjectCard.programmeContentTitle.table.from']}"
+								style="width: 40px" sortBy="#{cardProgrammeContent.trescOd}">
+								<h:outputText value="#{cardProgrammeContent.trescOd}" />
+							</p:column>
+
+							<p:column
+								headerText="#{msg['newSubjectCard.programmeContentTitle.table.to']}"
+								style="width: 40px" sortBy="#{cardProgrammeContent.trescDo}">
+								<h:outputText value="#{cardProgrammeContent.trescDo}" />
+							</p:column>
+
+							<p:column
+								headerText="#{msg['newSubjectCard.programmeContentTitle.table.topic']}"
+								style="width: 40px" sortBy="#{cardProgrammeContent.opis}">
+								<h:outputText value="#{cardProgrammeContent.opis}" />
+							</p:column>
+
+							<p:column
+								headerText="#{msg['newSubjectCard.programmeContentTitle.table.hours']}"
+								sortBy="#{cardProgrammeContent.liczbaGodzin}">
+								<h:outputText value="#{cardProgrammeContent.liczbaGodzin}" />
+							</p:column>
+
+							<p:column style="width: 200px">
+								<p:commandButton id="modify" style="width: 80px"
+									value="#{msg['newSubjectCard.prerequisitesTitle.table.button.edit']}"
+									disabled="false" />
+								<p:commandButton id="remove" style="width: 80px"
+									value="#{msg['newSubjectCard.prerequisitesTitle.table.button.remove']}"
+									disabled="false" />
+							</p:column>
+
+						</p:dataTable>
+						<br />
+						<br />
+
+						<p:commandButton
+							value="#{msg['newSubjectCard.prerequisitesTitle.button.import']}" />
+					</p:tab>
+
 					<p:tab title="#{msg['newSubjectCard.literatureTitle']}">
+						<h:outputText
+							value="#{msg['newSubjectCard.literatureTitle.basic']}" />
+						<p:separator />
+
+						<p:commandButton
+							value="#{msg['newSubjectCard.prerequisitesTitle.button.add']}" />
+
+						<br />
+						<br />
+
+						<p:dataTable var="cardLiterature"
+							value="#{addNewSubjectCardBean.basicLiterature}"
+							emptyMessage="#{msg['newSubjectCard.literatureTitle.table.empty']}">
+
+							<p:column
+								headerText="#{msg['newSubjectCard.literatureTitle.table.number']}"
+								style="width: 40px" sortBy="#{cardLiterature.pozycja}">
+								<h:outputText value="#{cardLiterature.pozycja}" />
+							</p:column>
+
+							<p:column style="width: 200px">
+								<p:commandButton id="up" style="width: 80px" value="/\"
+									disabled="false" />
+								<p:commandButton id="down" style="width: 80px" value="\/"
+									disabled="false" />
+							</p:column>
+
+							<p:column
+								headerText="#{msg['newSubjectCard.literatureTitle.table.descripton']}"
+								sortBy="#{cardLiterature.opis}">
+								<h:outputText value="#{cardLiterature.opis}" />
+							</p:column>
+
+							<p:column style="width: 200px">
+								<p:commandButton id="modify" style="width: 80px"
+									value="#{msg['newSubjectCard.prerequisitesTitle.table.button.edit']}"
+									disabled="false" />
+								<p:commandButton id="remove" style="width: 80px"
+									value="#{msg['newSubjectCard.prerequisitesTitle.table.button.remove']}"
+									disabled="false" />
+							</p:column>
+						</p:dataTable>
+
+						<br />
+						<br />
+
+						<p:commandButton
+							value="#{msg['newSubjectCard.prerequisitesTitle.button.import']}" />
+
+						<br />
+						<br />
+
+						<h:outputText
+							value="#{msg['newSubjectCard.literatureTitle.extended']}" />
+						<p:separator />
+
+						<p:commandButton
+							value="#{msg['newSubjectCard.prerequisitesTitle.button.add']}" />
+
+						<br />
+						<br />
+
+						<p:dataTable var="cardLiteratureExtended"
+							value="#{addNewSubjectCardBean.extendedLiterature}"
+							emptyMessage="#{msg['newSubjectCard.literatureTitle.table.empty']}">
+
+							<p:column
+								headerText="#{msg['newSubjectCard.literatureTitle.table.number']}"
+								style="width: 40px" sortBy="#{cardLiteratureExtended.pozycja}">
+								<h:outputText value="#{cardLiteratureExtended.pozycja}" />
+							</p:column>
+
+							<p:column style="width: 100px">
+								<p:commandButton id="up" style="width: 80px" value="/\"
+									disabled="false" />
+								<p:commandButton id="down" style="width: 80px" value="\/"
+									disabled="false" />
+							</p:column>
+
+							<p:column
+								headerText="#{msg['newSubjectCard.literatureTitle.table.descripton']}"
+								sortBy="#{cardLiteratureExtended.opis}">
+								<h:outputText value="#{cardLiteratureExtended.opis}" />
+							</p:column>
+
+							<p:column style="width: 200px">
+								<p:commandButton id="modify" style="width: 80px"
+									value="#{msg['newSubjectCard.prerequisitesTitle.table.button.edit']}"
+									disabled="false" />
+								<p:commandButton id="remove" style="width: 80px"
+									value="#{msg['newSubjectCard.prerequisitesTitle.table.button.remove']}"
+									disabled="false" />
+							</p:column>
+
+						</p:dataTable>
+						<br />
+						<br />
+
+						<p:commandButton
+							value="#{msg['newSubjectCard.prerequisitesTitle.button.import']}" />
 					</p:tab>
+
 					<p:tab title="#{msg['newSubjectCard.evaluationOfSEETitle']}">
+					<h:outputText
+							value="#{msg['newSubjectCard.evaluationOfSEETitle.forming']}" />
+						<p:separator />
+
+						<p:commandButton
+							value="#{msg['newSubjectCard.prerequisitesTitle.button.add']}" />
+
+						<br />
+						<br />
+
+						<p:dataTable var="cardEvaluationForming"
+							value="#{addNewSubjectCardBean.formingEvaluations}"
+							emptyMessage="#{msg['newSubjectCard.evaluationOfSEETitle.table.empty']}">
+
+							<p:column
+								headerText="#{msg['newSubjectCard.evaluationOfSEETitle.table.number']}"
+								style="width: 40px" sortBy="#{cardEvaluationForming.numer}">
+								<h:outputText value="#{cardEvaluationForming.numer}" />
+							</p:column>
+
+							<p:column
+								headerText="#{msg['newSubjectCard.evaluationOfSEETitle.table.name']}"
+								sortBy="#{cardEvaluationForming.opis}">
+								<h:outputText value="#{cardEvaluationForming.opis}" />
+							</p:column>
+							
+							<p:column
+								headerText="#{msg['newSubjectCard.evaluationOfSEETitle.table.numberEE']}"
+								sortBy="#{cardEvaluationForming.numer}">
+								<h:outputText value="TODO: Pobrać i wypisać" />
+							</p:column>
+							
+							<p:column
+								headerText="#{msg['newSubjectCard.evaluationOfSEETitle.table.theWay']}"
+								sortBy="#{cardEvaluationForming.sposobOceny}">
+								<h:outputText value="#{cardEvaluationForming.sposobOceny}" />
+							</p:column>
+
+							<p:column style="width: 200px">
+								<p:commandButton id="modify" style="width: 80px"
+									value="#{msg['newSubjectCard.prerequisitesTitle.table.button.edit']}"
+									disabled="false" />
+								<p:commandButton id="remove" style="width: 80px"
+									value="#{msg['newSubjectCard.prerequisitesTitle.table.button.remove']}"
+									disabled="false" />
+							</p:column>
+						</p:dataTable>
+
+						<br />
+						<br />
+
+						<p:commandButton
+							value="#{msg['newSubjectCard.prerequisitesTitle.button.import']}" />
+
+						<br />
+						<br />
+
+						<h:outputText
+							value="#{msg['newSubjectCard.evaluationOfSEETitle.concluding']}" />
+						<p:separator />
+
+						<p:commandButton
+							value="#{msg['newSubjectCard.prerequisitesTitle.button.add']}" />
+
+						<br />
+						<br />
+
+						<p:dataTable var="cardEvaluationConcluding"
+							value="#{addNewSubjectCardBean.concludingEvaluations}"
+							emptyMessage="#{msg['newSubjectCard.evaluationOfSEETitle.table.empty']}">
+
+							<p:column
+								headerText="#{msg['newSubjectCard.evaluationOfSEETitle.table.number']}"
+								style="width: 40px" sortBy="#{cardEvaluationConcluding.numer}">
+								<h:outputText value="#{cardEvaluationConcluding.numer}" />
+							</p:column>
+
+							<p:column
+								headerText="#{msg['newSubjectCard.evaluationOfSEETitle.table.name']}"
+								sortBy="#{cardEvaluationConcluding.opis}">
+								<h:outputText value="#{cardEvaluationConcluding.opis}" />
+							</p:column>
+							
+							<p:column
+								headerText="#{msg['newSubjectCard.evaluationOfSEETitle.table.numberEE']}"
+								sortBy="#{cardEvaluationConcluding.numer}">
+								<h:outputText value="TODO: Pobrać i wypisać" />
+							</p:column>
+							
+							<p:column
+								headerText="#{msg['newSubjectCard.evaluationOfSEETitle.table.theWay']}"
+								sortBy="#{cardEvaluationConcluding.sposobOceny}">
+								<h:outputText value="#{cardEvaluationConcluding.sposobOceny}" />
+							</p:column>
+
+							<p:column style="width: 200px">
+								<p:commandButton id="modify" style="width: 80px"
+									value="#{msg['newSubjectCard.prerequisitesTitle.table.button.edit']}"
+									disabled="false" />
+								<p:commandButton id="remove" style="width: 80px"
+									value="#{msg['newSubjectCard.prerequisitesTitle.table.button.remove']}"
+									disabled="false" />
+							</p:column>
+
+						</p:dataTable>
+						<br />
+						<br />
+
+						<p:commandButton
+							value="#{msg['newSubjectCard.prerequisitesTitle.button.import']}" />
+					
 					</p:tab>
+
 					<p:tab title="#{msg['newSubjectCard.correlationMatrixTitle']}">
 					</p:tab>
 				</p:tabView>
+				
+				<br/>
+				<br/>
+				
+				<p:commandButton
+							value="#{msg['newSubjectCard.button.cancel']}" />
+				<p:commandButton
+							value="#{msg['newSubjectCard.button.storeDraft']}" />
+				<p:commandButton
+							value="#{msg['newSubjectCard.button.store']}" />
+				
 			</h:form>
 
 		</ui:define>
