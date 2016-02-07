@@ -1,0 +1,30 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">	
+	
+		<p:dialog
+			resizable="false" draggable="false" closable="true" 
+			widgetVar="removePrerequisiteDlg" modal="true">
+			
+			<h:form id="removePrerquisiteDlgForm">
+				<h:panelGrid columns="1">
+					<h:outputText value="#{msg['prerequisite.remove']}" />
+					
+					<h:panelGrid columns="2">
+						<p:commandButton value="#{msg['view.button.cancel']}"
+							onclick="PF('removePrerequisiteDlg').hide();" />
+						<p:commandButton value="#{msg['view.button.accept']}"
+							action="#{addNewSubjectCardBean.removePrerequisteClick()}"
+							update=":tabView:prerequisitiesForm, :message"
+							oncomplete="PF('removePrerequisiteDlg').hide();" />
+					</h:panelGrid>
+					
+				</h:panelGrid>
+			</h:form>
+			
+		</p:dialog>
+		
+</ui:composition>

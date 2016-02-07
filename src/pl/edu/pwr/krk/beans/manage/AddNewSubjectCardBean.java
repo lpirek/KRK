@@ -20,6 +20,7 @@ import org.primefaces.event.SelectEvent;
 import pl.edu.pwr.krk.models.entities.Celprzedmiotu;
 import pl.edu.pwr.krk.models.entities.Kartaprzedmiotu;
 import pl.edu.pwr.krk.models.entities.Kurs;
+import pl.edu.pwr.krk.models.entities.ManagePosition;
 import pl.edu.pwr.krk.models.entities.Narzedziedydaktyczne;
 import pl.edu.pwr.krk.models.entities.Ocenaosiagieciapek;
 import pl.edu.pwr.krk.models.entities.Pozycjaliteraturowa;
@@ -58,8 +59,9 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 	private static List<Pozycjaliteraturowa> extendedLiterature = new ArrayList<>();
 	private static List<Ocenaosiagieciapek> formingEvaluations = new ArrayList<>();
 	private static List<Ocenaosiagieciapek> concludingEvaluations = new ArrayList<>();
-	private static String inputPrerequisite;
 
+	private Wymaganiawstepne selectedPrerequisite;
+	
 	public AddNewSubjectCardBean() {
 		log.debug("Initialiaze AddNewSubjectCardBean");
 	}
@@ -75,23 +77,6 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 
 	public void initialiaze() {
 		subject = subjectService.getPrzedmiot(id);
-	}
-
-	public void acceptClick() {
-		Wymaganiawstepne prereq = new Wymaganiawstepne();
-		prereq.setKartaprzedmiotu(subjectCard);
-		prereq.setWymaganie(inputPrerequisite);
-		prereq.setPozycja((short)(prerequisites.size() + 1));
-		inputPrerequisite = "";
-		prerequisites.add(prereq);
-	}
-
-	public String getInputPrerequisite() {
-		return inputPrerequisite;
-	}
-
-	public void setInputPrerequisite(String inputPrerequisite) {
-		this.inputPrerequisite = inputPrerequisite;
 	}
 
 	public List<Ocenaosiagieciapek> getFormingEvaluations() {
@@ -221,4 +206,93 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 	public void setTabIndex(int tabIndex) {
 		this.tabIndex = tabIndex;
 	}
+	
+	/**
+	 * Obsługa okien dialogowych dla Wymagan Wstępnych
+	 */
+	
+	public Wymaganiawstepne getSelectedPrerequisite() {
+		return selectedPrerequisite;
+	}
+	
+	public void setSelectedPrerequisite(Wymaganiawstepne selectedPrerequisite) {
+		this.selectedPrerequisite = selectedPrerequisite;
+	}
+	
+	public void preAddPrerequisite() {
+		this.selectedPrerequisite = new Wymaganiawstepne();
+	}
+	
+	public void preEditPrerequisite(Wymaganiawstepne prerequiste) {
+		this.selectedPrerequisite = prerequiste;
+	}
+	
+	public void preRemovePrerequisite(Wymaganiawstepne prerequiste) {
+		this.selectedPrerequisite = prerequiste;
+	}
+	
+	public void savePrerequisteClick() {
+		
+		if (selectedPrerequisite != null) {
+			
+			prerequisites.remove(selectedPrerequisite);
+			
+			if (selectedPrerequisite.getId() == null 
+					|| selectedPrerequisite.getId() == 0) {
+				//Add
+				selectedPrerequisite.setKartaprzedmiotu(subjectCard);
+				selectedPrerequisite.setPozycja((short)(prerequisites.size() + 1));
+				prerequisites.add(selectedPrerequisite);
+			}
+			else {
+				//Edit
+				prerequisites.add(selectedPrerequisite.getPozycja() - 1, selectedPrerequisite);
+			}
+			
+			showMessageDlg(FacesMessage.SEVERITY_INFO, "Pomyślnie zapisano zmiany");
+			
+			selectedPrerequisite = null;
+		}
+	}
+	
+	public void removePrerequisteClick() {
+		
+		if (selectedPrerequisite != null) {
+			this.prerequisites.remove(selectedPrerequisite);
+			correctPositions(prerequisites);
+
+			showMessageDlg(FacesMessage.SEVERITY_INFO, "Pomyślnie usunięto");
+		
+			selectedPrerequisite = null;
+		}
+	}
+
+	private void correctPositions(List<Wymaganiawstepne> list) {
+		for (int i=0; i < list.size(); i++) {
+			list.get(i).setPozycja((short)(i+1));
+		}
+	}
+	
+	public void upPrerequisitePosition(Wymaganiawstepne prerequiste) {
+		changePostionTo(prerequiste, prerequiste.getPozycja() - 1);
+	}
+	
+	public void downPrerequisitePosition(Wymaganiawstepne prerequiste) {
+		changePostionTo(prerequiste, prerequiste.getPozycja() + 1);
+	}
+	
+	public void changePostionTo(Wymaganiawstepne prerequiste, int newPosition) {
+		if (newPosition > 0 && newPosition < prerequisites.size())
+		{
+			prerequisites.remove(prerequiste);
+			prerequisites.add(newPosition - 1, prerequiste);
+			correctPositions(prerequisites);
+		}
+	}
+	
+	/**
+	 * 
+	 */
+	
+	
 }

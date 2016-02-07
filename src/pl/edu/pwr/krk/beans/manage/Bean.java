@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.context.FacesContext;
 
 import org.apache.commons.logging.Log;
@@ -54,4 +56,9 @@ public abstract class Bean implements Serializable {
 		
 		return bundle.getString(key);
 	}
+	
+	public void showMessageDlg(Severity messageType, String content) {
+		FacesContext.getCurrentInstance().addMessage(null, 
+        		new FacesMessage(messageType, content, null));
+    }
 }

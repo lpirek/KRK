@@ -1,0 +1,65 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	
+		<h:form id="prerequisitiesForm">
+	
+						<p:commandButton
+							value="#{msg['newSubjectCard.prerequisitesTitle.button.add']}" 
+							action="#{addNewSubjectCardBean.preAddPrerequisite()}"
+							update=":modifyPrerquisiteDlgForm"
+							oncomplete="PF('modifyPrerequisiteDlg').show();" />
+
+						<br />
+						<br />
+
+						<p:dataTable var="card"
+							value="#{addNewSubjectCardBean.prerequisites}"
+							emptyMessage="#{msg['newSubjectCard.prerequisitesTitle.table.empty']}">
+
+							<p:column
+								headerText="#{msg['newSubjectCard.prerequisitesTitle.table.number']}"
+								style="width: 40px" sortBy="#{card.pozycja}">
+								<h:outputText value="#{card.pozycja}" />
+							</p:column>
+
+							<p:column style="width:200px">
+								<p:commandButton id="up" style="width: 80px" value="/\"
+									action="#{addNewSubjectCardBean.upPrerequisitePosition(card)}"
+									update=":tabView:prerequisitiesForm" />
+								<p:commandButton id="down" style="width: 80px" value="\/"
+									action="#{addNewSubjectCardBean.downPrerequisitePosition(card)}"
+									update=":tabView:prerequisitiesForm" />
+							</p:column>
+
+							<p:column
+								headerText="#{msg['newSubjectCard.prerequisitesTitle.table.prerequisite']}"
+								sortBy="#{card.wymaganie}">
+								<h:outputText value="#{card.wymaganie}" />
+							</p:column>
+
+							<p:column style="width: 200px">
+								<p:commandButton id="modify" style="width: 80px"
+									value="#{msg['newSubjectCard.prerequisitesTitle.table.button.edit']}"
+									action="#{addNewSubjectCardBean.preEditPrerequisite(card)}"
+									update=":modifyPrerquisiteDlgForm"
+									oncomplete="PF('modifyPrerequisiteDlg').show();" />
+								<p:commandButton id="remove" style="width: 80px"
+									action="#{addNewSubjectCardBean.preRemovePrerequisite(card)}"
+									update=":removePrerquisiteDlgForm"
+									oncomplete="PF('removePrerequisiteDlg').show();"
+									value="#{msg['newSubjectCard.prerequisitesTitle.table.button.remove']}" />
+							</p:column>
+
+						</p:dataTable>
+						<br />
+						<br />
+
+						<p:commandButton
+							value="#{msg['newSubjectCard.prerequisitesTitle.button.import']}" />
+							
+			</h:form>
+</ui:composition>
