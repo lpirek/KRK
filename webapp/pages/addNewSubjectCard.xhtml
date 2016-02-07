@@ -7,7 +7,6 @@
 	<title>EasyKRK</title>
 </h:head>
 <h:body>
-
 	<f:metadata>
 		<f:viewParam name="id" value="#{addNewSubjectCardBean.id}" />
 	</f:metadata>
@@ -188,11 +187,23 @@
 					<p:tab title="#{msg['newSubjectCard.prerequisitesTitle']}">
 						<p:commandButton
 							value="#{msg['newSubjectCard.prerequisitesTitle.button.add']}"
-							actionListener="#{addNewSubjectCardBean.addPrerequisite}">
-							<p:ajax event="dialogReturn"
-								listener="#{addNewSubjectCardBean.onPrerequisiteAdd}"
-								update="message" />
-						</p:commandButton>
+							type="button" onclick="PF('addDialog').show();" />
+
+						<p:dialog header="#{msg['prerequisite.title.add']}" resizable="false" draggable="false" closable="true" widgetVar="addDialog" modal="true">
+							<h:form>
+								<h:panelGrid columns="1">
+									<h:outputText value="#{msg['prerequisite.prerequisite']}" />
+									<h:inputTextarea rows="5"
+										value="#{addNewSubjectCardBean.inputPrerequisite}" />
+									<h:panelGrid columns="2">
+										<p:commandButton value="#{msg['view.button.cancel']}"
+											onclick="PF('addDialog').hide();" />
+										<p:commandButton value="#{msg['view.button.accept']}"
+											onclick="#{addNewSubjectCardBean.acceptClick()}" />
+									</h:panelGrid>
+								</h:panelGrid>
+							</h:form>
+						</p:dialog>
 						<br />
 						<br />
 

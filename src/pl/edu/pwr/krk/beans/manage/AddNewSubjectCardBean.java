@@ -44,20 +44,21 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 	private Przedmiot subject;
 	private PrzedmiotService subjectService = null;
 
-	private int tabIndex = 0;
-	private String subjectCardLanguage;
-	private Kartaprzedmiotu subjectCard;
-	private List<Wymaganiawstepne> prerequisites;
-	private List<Celprzedmiotu> objectives;
-	private List<Przedmiotowyefektksztalcenia> subjectEducationalEffectsKnowledge;
-	private List<Przedmiotowyefektksztalcenia> subjectEducationalEffectsSkills;
-	private List<Przedmiotowyefektksztalcenia> subjectEducationalEffectsReferences;
-	private List<Trescprogramowa> programmeContents;
-	private List<Narzedziedydaktyczne> teachingTools;
-	private List<Pozycjaliteraturowa> basicLiterature;
-	private List<Pozycjaliteraturowa> extendedLiterature;
-	private List<Ocenaosiagieciapek> formingEvaluations;
-	private List<Ocenaosiagieciapek> concludingEvaluations;
+	private static int tabIndex = 0;
+	private static String subjectCardLanguage;
+	private static Kartaprzedmiotu subjectCard = new Kartaprzedmiotu();
+	private static List<Wymaganiawstepne> prerequisites = new ArrayList<>();
+	private static List<Celprzedmiotu> objectives = new ArrayList<>();
+	private static List<Przedmiotowyefektksztalcenia> subjectEducationalEffectsKnowledge = new ArrayList<>();
+	private static List<Przedmiotowyefektksztalcenia> subjectEducationalEffectsSkills = new ArrayList<>();
+	private static List<Przedmiotowyefektksztalcenia> subjectEducationalEffectsReferences = new ArrayList<>();
+	private static List<Trescprogramowa> programmeContents = new ArrayList<>();;
+	private static List<Narzedziedydaktyczne> teachingTools = new ArrayList<>();;
+	private static List<Pozycjaliteraturowa> basicLiterature = new ArrayList<>();
+	private static List<Pozycjaliteraturowa> extendedLiterature = new ArrayList<>();
+	private static List<Ocenaosiagieciapek> formingEvaluations = new ArrayList<>();
+	private static List<Ocenaosiagieciapek> concludingEvaluations = new ArrayList<>();
+	private static String inputPrerequisite;
 
 	public AddNewSubjectCardBean() {
 		log.debug("Initialiaze AddNewSubjectCardBean");
@@ -74,73 +75,24 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 
 	public void initialiaze() {
 		subject = subjectService.getPrzedmiot(id);
-
-/*		String nazwa = subject.getModulksztalcenia().getProgramstudiow().getProgramksztalcenia().getKierunekstudiow()
-				.getWydzial().getNazwa();*/
-
-		subjectCard = new Kartaprzedmiotu();
-		prerequisites = new ArrayList<>();
-		prerequisites.add(new Wymaganiawstepne(new Kartaprzedmiotu(), (short) 1, "wymaganie"));
-
-		objectives = new ArrayList<>();
-		objectives.add(new Celprzedmiotu(1, new Kartaprzedmiotu(), "numer", "opis"));
-
-		subjectEducationalEffectsKnowledge = new ArrayList<>();
-		subjectEducationalEffectsKnowledge
-				.add(new Przedmiotowyefektksztalcenia(subjectCard, "zakres", "numer", "opis"));
-		subjectEducationalEffectsSkills = new ArrayList<>();
-		subjectEducationalEffectsSkills.add(new Przedmiotowyefektksztalcenia(subjectCard, "zakres", "numer", "opis"));
-		subjectEducationalEffectsReferences = new ArrayList<>();
-		subjectEducationalEffectsReferences
-				.add(new Przedmiotowyefektksztalcenia(subjectCard, "zakres", "numer", "opis"));
-
-		programmeContents = new ArrayList<>();
-		programmeContents.add(new Trescprogramowa(subjectCard, (short) 1, (short) 2, "opis", (short) 12));
-
-		teachingTools = new ArrayList<>();
-		teachingTools.add(new Narzedziedydaktyczne(subjectCard, new Kurs(), "numer", "opis"));
-
-		basicLiterature = new ArrayList<>();
-		basicLiterature.add(new Pozycjaliteraturowa(subjectCard, (short) 1, "opis", "rodzaj"));
-		extendedLiterature = new ArrayList<>();
-		extendedLiterature.add(new Pozycjaliteraturowa(subjectCard, (short) 1, "opis", "rodzaj"));
-
-		formingEvaluations = new ArrayList<>();
-		formingEvaluations.add(new Ocenaosiagieciapek(subjectCard, "rodzajOceny", "numer", "opis", "sposobOceny"));
-		concludingEvaluations = new ArrayList<>();
-		concludingEvaluations.add(new Ocenaosiagieciapek(subjectCard, "rodzajOceny", "numer", "opis", "sposobOceny"));
 	}
 
-	public void addPrerequisite() {
-		System.out.println("Dodaje");
-        Map<String,Object> options = new HashMap<>();
-        options.put("resizable", false);
-        options.put("draggable", false);
-        options.put("modal", true);
-       /* Map<String, List<String>> params = new HashMap<>();
-        List<String> list = new ArrayList<>();
-        list.add(getMessage("prerequisite.title.add"));
-        params.put("title", list);*/
-        RequestContext.getCurrentInstance().openDialog("prerequisites", options, /*params*/null);
-    }
-     
-    public void onPrerequisiteAdd(SelectEvent event) {
-    	System.out.println("Otrzymałem");
-    	Wymaganiawstepne prereq = (Wymaganiawstepne) event.getObject();
-    	String msgTitle = getMessage("prerequisite.title.add");
-    	String msg = getMessage("view.response.cancel");
-        
-    	if( prereq != null )
-        {
-    		prereq.setKartaprzedmiotu(subjectCard);
-    		prerequisites.add(prereq);
-    		msg = getMessage("view.response.accept");
-        }
-    	
-    	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msgTitle, msg); 
-        FacesContext.getCurrentInstance().addMessage(null, message);
-    }
+	public void acceptClick() {
+		Wymaganiawstepne prereq = new Wymaganiawstepne();
+		prereq.setKartaprzedmiotu(subjectCard);
+		prereq.setWymaganie(inputPrerequisite);
+		prereq.setPozycja((short)(prerequisites.size() + 1));
+		inputPrerequisite = "";
+		prerequisites.add(prereq);
+	}
 
+	public String getInputPrerequisite() {
+		return inputPrerequisite;
+	}
+
+	public void setInputPrerequisite(String inputPrerequisite) {
+		this.inputPrerequisite = inputPrerequisite;
+	}
 
 	public List<Ocenaosiagieciapek> getFormingEvaluations() {
 		return formingEvaluations;
