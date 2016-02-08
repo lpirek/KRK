@@ -34,6 +34,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.WebAttributes;
 
+import net.sf.jasperreports.engine.JRException;
+import pl.edu.pwr.krk.tools.ReportGenerator;
+
 
 @ManagedBean
 @RequestScoped
@@ -51,6 +54,14 @@ public class AuthBean implements Serializable {
     
     public String doLogin() throws ServletException, IOException {
         
+    	ReportGenerator rg = new ReportGenerator();
+    	try {
+			rg.test();
+		} catch (JRException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+    	
         try {
             Authentication request = new UsernamePasswordAuthenticationToken(username, password);
             Authentication result = authenticationManager.authenticate(request);
