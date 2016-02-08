@@ -129,7 +129,8 @@ CREATE TABLE `TrescProgramowa` (
   `trescDo`           smallint(6) NOT NULL, 
   `opis`              varchar(255) NOT NULL, 
   `liczbaGodzin`      smallint(6) NOT NULL, 
-  `KartaPrzedmiotuid` int(11) NOT NULL, 
+  `KartaPrzedmiotuid` int(11) NOT NULL,
+  `Kursid` 			  int(11) NOT NULL, 	
   PRIMARY KEY (`id`)) ENGINE=InnoDB CHARACTER SET UTF8;
 CREATE TABLE `PozycjaLiteraturowa` (
   `id`                int(11) NOT NULL AUTO_INCREMENT, 
@@ -241,6 +242,7 @@ ALTER TABLE `CelPrzedmiotu` ADD INDEX `FKCelPrzedmi444052` (`KartaPrzedmiotuid`)
 ALTER TABLE `PozycjaLiteraturowa` ADD INDEX `FKPozycjaLit304101` (`KartaPrzedmiotuid`), ADD CONSTRAINT `FKPozycjaLit304101` FOREIGN KEY (`KartaPrzedmiotuid`) REFERENCES `KartaPrzedmiotu` (`id`);
 ALTER TABLE `WymaganiaWstepne` ADD INDEX `FKWymaganiaW61956` (`KartaPrzedmiotuid`), ADD CONSTRAINT `FKWymaganiaW61956` FOREIGN KEY (`KartaPrzedmiotuid`) REFERENCES `KartaPrzedmiotu` (`id`);
 ALTER TABLE `TrescProgramowa` ADD INDEX `FKTrescProgr527318` (`KartaPrzedmiotuid`), ADD CONSTRAINT `FKTrescProgr527318` FOREIGN KEY (`KartaPrzedmiotuid`) REFERENCES `KartaPrzedmiotu` (`id`);
+ALTER TABLE `TrescProgramowa` ADD INDEX `FKTrescProgr527319` (`Kursid`), ADD CONSTRAINT `FKTrescProgr527319` FOREIGN KEY (`Kursid`) REFERENCES `Kurs` (`id`);
 ALTER TABLE `NarzedzieDydaktyczne` ADD INDEX `FKNarzedzieD916437` (`KartaPrzedmiotuid`), ADD CONSTRAINT `FKNarzedzieD916437` FOREIGN KEY (`KartaPrzedmiotuid`) REFERENCES `KartaPrzedmiotu` (`id`);
 ALTER TABLE `NarzedzieDydaktyczne` ADD INDEX `FKNarzedzieD40365` (`Kursid`), ADD CONSTRAINT `FKNarzedzieD40365` FOREIGN KEY (`Kursid`) REFERENCES `Kurs` (`id`);
 ALTER TABLE `Kurs` ADD INDEX `FKKurs480839` (`Przedmiotid`), ADD CONSTRAINT `FKKurs480839` FOREIGN KEY (`Przedmiotid`) REFERENCES `Przedmiot` (`id`);

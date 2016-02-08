@@ -3,10 +3,11 @@ package pl.edu.pwr.krk.models.entities;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Trescprogramowa implements java.io.Serializable {
+public class Trescprogramowa implements java.io.Serializable, Comparable<Trescprogramowa> {
 
 	private Integer id;
 	private Kartaprzedmiotu kartaprzedmiotu;
+	private Kurs kurs;
 	private short trescOd;
 	private short trescDo;
 	private String opis;
@@ -16,18 +17,20 @@ public class Trescprogramowa implements java.io.Serializable {
 	public Trescprogramowa() {
 	}
 
-	public Trescprogramowa(Kartaprzedmiotu kartaprzedmiotu, short trescOd, short trescDo, String opis,
+	public Trescprogramowa(Kartaprzedmiotu kartaprzedmiotu, Kurs kurs, short trescOd, short trescDo, String opis,
 			short liczbaGodzin) {
 		this.kartaprzedmiotu = kartaprzedmiotu;
+		this.kurs = kurs;
 		this.trescOd = trescOd;
 		this.trescDo = trescDo;
 		this.opis = opis;
 		this.liczbaGodzin = liczbaGodzin;
 	}
 
-	public Trescprogramowa(Kartaprzedmiotu kartaprzedmiotu, short trescOd, short trescDo, String opis,
+	public Trescprogramowa(Kartaprzedmiotu kartaprzedmiotu, Kurs kurs, short trescOd, short trescDo, String opis,
 			short liczbaGodzin, Set<Pektrescprogramowa> pektrescprogramowas) {
 		this.kartaprzedmiotu = kartaprzedmiotu;
+		this.kurs = kurs;
 		this.trescOd = trescOd;
 		this.trescDo = trescDo;
 		this.opis = opis;
@@ -89,6 +92,20 @@ public class Trescprogramowa implements java.io.Serializable {
 
 	public void setPektrescprogramowas(Set<Pektrescprogramowa> pektrescprogramowas) {
 		this.pektrescprogramowas = pektrescprogramowas;
+	}
+
+	public Kurs getKurs() {
+		return kurs;
+	}
+
+	public void setKurs(Kurs kurs) {
+		this.kurs = kurs;
+	}
+
+	@Override
+	public int compareTo(Trescprogramowa o) {
+		return this.getTrescOd() < o.getTrescOd() ? -1 : this.getTrescOd() > o.getTrescOd() ? 1 :
+			this.getTrescDo() < o.getTrescDo() ? -1 : this.getTrescDo() > o.getTrescDo() ? 1 : 0;
 	}
 
 }

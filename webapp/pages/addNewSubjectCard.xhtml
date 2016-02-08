@@ -22,7 +22,15 @@
 				activeIndex="#{addNewSubjectCardBean.tabIndex}">
 				
 				<p:ajax event="tabChange" update="
-					:tabView:correlationMatrixForm" />
+					:tabView:basicDataForm,
+					:tabView:correlationMatrixForm,
+					:tabView:literatureForm,
+					:tabView:objectivesForm,
+					:tabView:prerequisitiesForm,
+					:tabView:programmeContentForm,
+					:tabView:teachingToolsForm,
+					:tabView:evaluationOfSEEForm,
+					:tabView:subjectEducationalEffectsForm" />
 
 				<p:tab title="#{msg['newSubjectCard.basicDataTitle']}">
 					<ui:include src="tabs/basicData.xhtml" />
@@ -84,6 +92,8 @@
 			<ui:include src="dialogs/removeLiteratureDlg.xhtml" />
 			<ui:include src="dialogs/modifyEvaluationOfSEEDlg.xhtml" />
 			<ui:include src="dialogs/removeEvaluationOfSEEDlg.xhtml" />
+			<ui:include src="dialogs/modifyProgrammeContentDlg.xhtml" />
+			<ui:include src="dialogs/removeProgrammeContentDlg.xhtml" />
 
 		</ui:define>
 

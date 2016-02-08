@@ -19,12 +19,14 @@
 					value="#{addNewSubjectCardBean.selectedEvaluation.opis}" />
 				
 				<h:outputText value="#{msg['seeEvaluation.numberEE']}" />
-				<p:selectManyCheckbox id="see"  layout="grid" columns="1">
-            		<f:selectItems value="#{addNewSubjectCardBean.subjectEducationalEffects}" var="see" itemLabel="#{see.numer}" itemValue="#{see.id}"/>
-        		</p:selectManyCheckbox>
+				<p:panel>
+					<p:selectManyCheckbox id="see" value="#{addNewSubjectCardBean.selectedSEEs}" layout="grid" columns="1">
+            			<f:selectItems value="#{addNewSubjectCardBean.subjectEducationalEffects}" var="see" itemLabel="#{see.numer} - #{see.opis}" itemValue="#{see.numer}"/>
+        			</p:selectManyCheckbox>
+        		</p:panel>
 					
 				<h:outputText value="#{msg['seeEvaluation.theWay']}" />
-				<h:inputTextarea rows="5" cols="40" required="true"
+				<h:inputTextarea rows="8" cols="60" required="true"
 					value="#{addNewSubjectCardBean.selectedEvaluation.sposobOceny}" />
 
 				<h:panelGrid columns="2">

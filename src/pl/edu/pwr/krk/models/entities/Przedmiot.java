@@ -1,6 +1,8 @@
 package pl.edu.pwr.krk.models.entities;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Przedmiot implements java.io.Serializable {
@@ -154,6 +156,10 @@ public class Przedmiot implements java.io.Serializable {
 
 	public Set<Kurs> getKurses() {
 		return this.kurses;
+	}
+	
+	public List<Kurs> getKursesAsList() {
+		return new ArrayList<Kurs>(this.kurses);
 	}
 
 	public void setKurses(Set<Kurs> kurses) {

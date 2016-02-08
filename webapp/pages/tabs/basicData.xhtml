@@ -11,13 +11,13 @@
 						<h:panelGrid columns="2" style="margin-bottom:10px"
 							cellpadding="5">
 							<p:selectOneRadio id="language"
-								value="#{addNewSubjectCardBean.subjectCardLanguage}">
+								value="#{addNewSubjectCardBean.subjectCard.jezyk}">
 								<f:selectItem
 									itemLabel="#{msg['newSubjectCard.basicDataTitle.subjectCardLanguage.polish']}"
-									itemValue="polish" />
+									itemValue="PL" />
 								<f:selectItem
 									itemLabel="#{msg['newSubjectCard.basicDataTitle.subjectCardLanguage.english']}"
-									itemValue="english" />
+									itemValue="EN" />
 							</p:selectOneRadio>
 						</h:panelGrid>
 
