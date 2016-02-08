@@ -11,7 +11,7 @@
 					
 					<br />
 				
-					<h:outputText value="#{msg['subjectEducationalEffects.emptyList']}"/>
+					<h:outputText value="#{msg['correlationMatrix.table.empty']}"/>
 					
 					<br />
 					<br />
@@ -19,16 +19,59 @@
 				
 				<h:panelGroup rendered="#{!addNewSubjectCardBean.subjectEducationalEffects.isEmpty()}">
 				
-					<p:accordionPanel var="see" value="#{addNewSubjectCardBean.subjectEducationalEffects}">
+					<p:accordionPanel dynamic="true" var="see" value="#{addNewSubjectCardBean.subjectEducationalEffects}">
 							
-							<p:tab title="#{see.numer}">
+						<p:tab title="#{see.numer}">
 							
-								<p:panel>
-									<h:outputText value="#{see.opis}"/>
-								</p:panel>
+							<p:panel>
+								<h:outputText value="#{addNewSubjectCardBean.getDescription(see)}"/>
+							</p:panel>
 							
-							</p:tab>
-		
+							<br />
+								
+							<h:outputText value="#{msg['correlationMatrix.kek.title']}" />
+							<p:panel>
+								<p:selectManyCheckbox layout="grid" columns="1"
+									value="#{addNewSubjectCardBean.selectedFEEs}">
+            						<f:selectItems value="#{addNewSubjectCardBean.facultatyEducationalEffects}" var="fee" itemLabel="#{fee.numer} - #{fee.opis}" itemValue="#{fee.numer}"/>
+        							<f:ajax listener="#{addNewSubjectCardBean.selectFEEListener}" />
+        						</p:selectManyCheckbox>
+        					</p:panel>	
+        					
+        					<br />
+							
+							<h:outputText value="#{msg['correlationMatrix.objective.title']}" />
+							<p:panel>
+								<p:selectManyCheckbox layout="grid" columns="1"
+									value="#{addNewSubjectCardBean.selectedObjectives}">
+            						<f:selectItems value="#{addNewSubjectCardBean.objectives}" var="obj" itemLabel="#{obj.numer} - #{obj.opis}" itemValue="#{obj.numer}"/>
+        							<f:ajax listener="#{addNewSubjectCardBean.selectObjectiveListener}" />
+        						</p:selectManyCheckbox>
+							</p:panel>
+							
+							<br />
+							
+							<h:outputText value="#{msg['correlationMatrix.tools.title']}" />
+							<p:panel>
+								<p:selectManyCheckbox layout="grid" columns="1"
+									value="#{addNewSubjectCardBean.selectedTools}" >
+            						<f:selectItems value="#{addNewSubjectCardBean.teachingTools}" var="tt" itemLabel="#{tt.numer} - #{tt.opis}" itemValue="#{tt.numer}"/>
+        							<f:ajax listener="#{addNewSubjectCardBean.selectToolListener}" />
+        						</p:selectManyCheckbox>
+							</p:panel>
+							
+							<br />
+							
+							<h:outputText value="#{msg['correlationMatrix.programmeContent.title']}" />
+							<p:panel>
+								<p:selectManyCheckbox layout="grid" columns="1"
+									value="#{addNewSubjectCardBean.selectedProgrammeContents}">
+            						<f:selectItems value="#{addNewSubjectCardBean.programmeContents}" var="pc" itemLabel="#{pc.opis}" itemValue="#{pc.numer}"/>
+        							<f:ajax listener="#{addNewSubjectCardBean.selectProgrammeListener}" />	
+        						</p:selectManyCheckbox>
+							</p:panel>	
+							
+						</p:tab>
   				 		
   				 	</p:accordionPanel>
 				

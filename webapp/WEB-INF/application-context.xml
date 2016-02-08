@@ -44,6 +44,9 @@
 	<bean id="kartaprzedmiotuDAO" class="pl.edu.pwr.krk.models.dao.KartaprzedmiotuDAO">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	<bean id="kekDAO" class="pl.edu.pwr.krk.models.dao.KierunkowyefektksztalceniaDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 
 	<!-- Connect Services with DAOs -->
 	<bean id="uzytkownikService" class="pl.edu.pwr.krk.models.services.UzytkownikService">
@@ -55,7 +58,9 @@
 	<bean id="kartaprzedmiotuService" class="pl.edu.pwr.krk.models.services.KartaprzedmiotuService">
 		<property name="kartaprzedmiotuDAO" ref="kartaprzedmiotuDAO" />
 	</bean>
-	
+	<bean id="kekService" class="pl.edu.pwr.krk.models.services.KierunkowyefektksztalceniaService">
+		<property name="kierunkowyefektksztalceniaDAO" ref="kekDAO" />
+	</bean>
 	
 	<!-- Connect Provider with AppContext -->
 	<bean id="provider" class="pl.edu.pwr.krk.tools.ApplicationContextProvider"> </bean>

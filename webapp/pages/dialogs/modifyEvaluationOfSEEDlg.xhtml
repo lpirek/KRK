@@ -35,7 +35,7 @@
 					<p:commandButton value="#{msg['view.button.accept']}"
 						action="#{addNewSubjectCardBean.saveEvaluationClick()}"
 						update=":tabView:evaluationOfSEEForm, :message"
-						oncomplete="PF('modifyEvaluationOfSEEDlg').hide();" />
+						oncomplete="if (args &amp;&amp; !args.validationFailed) PF('modifyEvaluationOfSEEDlg').hide();" />
 				</h:panelGrid>
 
 			</h:panelGrid>

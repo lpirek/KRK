@@ -18,6 +18,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.event.ValueChangeEvent;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -28,16 +30,22 @@ import org.primefaces.model.StreamedContent;
 
 import pl.edu.pwr.krk.models.entities.Celprzedmiotu;
 import pl.edu.pwr.krk.models.entities.Kartaprzedmiotu;
+import pl.edu.pwr.krk.models.entities.Kekpek;
+import pl.edu.pwr.krk.models.entities.Kierunkowyefektksztalcenia;
 import pl.edu.pwr.krk.models.entities.Kurs;
-import pl.edu.pwr.krk.models.entities.ManagePosition;
 import pl.edu.pwr.krk.models.entities.Narzedziedydaktyczne;
 import pl.edu.pwr.krk.models.entities.Ocenaosiagieciapek;
+import pl.edu.pwr.krk.models.entities.Pekcelprzedmiotu;
+import pl.edu.pwr.krk.models.entities.Peknarzedziedydaktyczne;
 import pl.edu.pwr.krk.models.entities.Pekocenaosiagnieciapek;
+import pl.edu.pwr.krk.models.entities.Pektrescprogramowa;
 import pl.edu.pwr.krk.models.entities.Pozycjaliteraturowa;
 import pl.edu.pwr.krk.models.entities.Przedmiot;
 import pl.edu.pwr.krk.models.entities.Przedmiotowyefektksztalcenia;
 import pl.edu.pwr.krk.models.entities.Trescprogramowa;
 import pl.edu.pwr.krk.models.entities.Wymaganiawstepne;
+import pl.edu.pwr.krk.models.services.KartaprzedmiotuService;
+import pl.edu.pwr.krk.models.services.KierunkowyefektksztalceniaService;
 import pl.edu.pwr.krk.models.services.PrzedmiotService;
 import pl.edu.pwr.krk.tools.ApplicationContextProvider;
 
@@ -58,6 +66,8 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 	
 	private Przedmiot subject;
 	private PrzedmiotService subjectService = null;
+	private KartaprzedmiotuService subjectCardService = null;
+	private KierunkowyefektksztalceniaService feeService = null;
 
 	private static int tabIndex = 0;
 	private int elementIndex;
@@ -74,11 +84,7 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 	private static List<Pozycjaliteraturowa> extendedLiterature = new ArrayList<>();
 	private static List<Ocenaosiagieciapek> formingEvaluations = new ArrayList<>();
 	private static List<Ocenaosiagieciapek> concludingEvaluations = new ArrayList<>();
-	
-	private static Map<Integer, List<Trescprogramowa>> programmeContents = new HashMap<Integer, List<Trescprogramowa>>();
-	
-	private List<String> selectedSEEs;
-	
+
 	private Wymaganiawstepne selectedPrerequisite;
 	private Celprzedmiotu selectedObjective;
 	private Przedmiotowyefektksztalcenia selectedSEE;
@@ -87,6 +93,20 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 	private Pozycjaliteraturowa selectedLiterature;
 	private Ocenaosiagieciapek selectedEvaluation;
 	private Kurs selectedKurs;
+	
+	private List<String> selectedSEEs;
+	
+	private static Map<Integer, List<Trescprogramowa>> programmeContents = new HashMap<Integer, List<Trescprogramowa>>();
+	
+	private Przedmiotowyefektksztalcenia expandedSEE;
+	
+	private List<String> selectedFEEs;
+	private List<String> selectedObjectives;
+	private List<String> selectedTools;
+	private List<String> selectedProgrammeContents;
+	
+	private List<Kierunkowyefektksztalcenia> fees;
+	
 
 	public AddNewSubjectCardBean() {
 		log.debug("Initialiaze AddNewSubjectCardBean");
@@ -98,11 +118,17 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 		if (!facesContext.isPostback() && !facesContext.isValidationFailed()) {
 			subjectService = (PrzedmiotService) ApplicationContextProvider.getApplicationContext()
 					.getBean("przedmiotService");
+			subjectCardService = (KartaprzedmiotuService) ApplicationContextProvider.getApplicationContext()
+					.getBean("kartaprzedmiotuService");
+			feeService = (KierunkowyefektksztalceniaService) ApplicationContextProvider.getApplicationContext()
+					.getBean("kekService");
 		}
 	}
 
 	public void initialiaze() {
 		subject = subjectService.getPrzedmiot(id);
+		fees = feeService.getFEEs();
+		
 		subjectCard = new Kartaprzedmiotu();
 		
 		//SelectOneMenu wymaga instancji obiektu już podczas inicjalizacji
@@ -182,6 +208,10 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 		return teachingTools;
 	}
 	
+	public List<Kierunkowyefektksztalcenia> getFacultatyEducationalEffects() {
+		return fees;
+	}
+	
 	public List<Przedmiotowyefektksztalcenia> getSubjectEducationalEffectsKnowledge() {
 		return subjectEducationalEffectsKnowledge;
 	}
@@ -212,20 +242,62 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 		return result;
 	}
 
-	private Przedmiotowyefektksztalcenia getPEK(String numer) {
+	private Przedmiotowyefektksztalcenia getSEE(String number) {
 		
 		List<Przedmiotowyefektksztalcenia> result = getSubjectEducationalEffects();
 		
 		for (Przedmiotowyefektksztalcenia pek : result) {
-			if (pek.getNumer().equals(numer)) {
+			if (pek.getNumer().equals(number)) {
 				return pek;
 			}
 		}
 		
 		return null;
 	}
-
 	
+	private Kierunkowyefektksztalcenia getFEE(String number) {
+		
+		for (Kierunkowyefektksztalcenia kek : this.getFacultatyEducationalEffects()) {
+			if (kek.getNumer().equals(number)) {
+				return kek;
+			}
+		}
+		
+		return null;
+	}
+	
+	private Celprzedmiotu getObjective(String number) {
+		
+		for (Celprzedmiotu cel : this.getObjectives()) {
+			if (cel.getNumer().equals(number)) {
+				return cel;
+			}
+		}
+		
+		return null;
+	}
+	
+	private Narzedziedydaktyczne getTool(String number) {
+		
+		for (Narzedziedydaktyczne tool : this.getTeachingTools()) {
+			if (tool.getNumer().equals(number)) {
+				return tool;
+			}
+		}
+		
+		return null;
+	}
+	
+	private Trescprogramowa getProgrammeContent(String number) {
+		
+		for (Trescprogramowa pc : this.getProgrammeContents()) {
+			if (pc.getNumer().equals(number)) {
+				return pc;
+			}
+		}
+		
+		return null;
+	}
 	public List<Trescprogramowa> getProgrammeContents(Kurs kurs) {
 		
 		if (kurs != null && kurs.getId() != null) {
@@ -241,6 +313,18 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 		}
 		
 		return null;
+	}
+	
+	public List<Trescprogramowa> getProgrammeContents() {
+		
+		List<Trescprogramowa> result = new ArrayList<Trescprogramowa>();
+		
+		for (List<Trescprogramowa> list : programmeContents.values())
+		{
+			result.addAll(list);
+		}
+			
+		return result;
 	}
 
 	public List<Wymaganiawstepne> getPrerequisites() {
@@ -923,10 +1007,11 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 		
 		Set<Pekocenaosiagnieciapek> pekos = new HashSet<Pekocenaosiagnieciapek>();
 		
-		for (String numer : this.selectedSEEs) {
+		for (String number : selectedSEEs) 
+		{
 			Pekocenaosiagnieciapek peko = new Pekocenaosiagnieciapek();
 			peko.setOcenaosiagieciapek(selectedEvaluation);
-			peko.setPrzedmiotowyefektksztalcenia(getPEK(numer));
+			peko.setPrzedmiotowyefektksztalcenia(getSEE(number));
 			pekos.add(peko);
 		}
 		
@@ -970,5 +1055,155 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 	/**
 	 * 
 	 */
+	
+	public String getDescription(Przedmiotowyefektksztalcenia pek) {
+		this.expandedSEE = pek;
+		
+		putValuesToSelectedEFFs();
+		putValuesToSelectedObjectives();
+		putValuesToSelectedTools();
+		putValuesToSelectedProgrammeContents();
+		
+		return pek.getOpis();
+	}
+	
+	public List<String> getSelectedFEEs() {
+		return selectedFEEs;
+	}
+	
+	public void setSelectedFEEs(List<String> selectedFEEs) {
+		this.selectedFEEs = selectedFEEs;
+	}
+	
+	public List<String> getSelectedObjectives() {
+		return selectedObjectives;
+	}
+	
+	public void setSelectedObjectives(List<String> selectedObjectives) {
+		this.selectedObjectives = selectedObjectives;
+	}
+	
+	public List<String> getSelectedProgrammeContents() {
+		return selectedProgrammeContents;
+	}
 
+	public void setSelectedProgrammeContents(List<String> selectedProgrammeContents) {
+		this.selectedProgrammeContents = selectedProgrammeContents;
+	}
+	
+	public List<String> getSelectedTools() {
+		return selectedTools;
+	}
+	
+	public void setSelectedTools(List<String> selectedTools) {
+		this.selectedTools = selectedTools;
+	}
+	
+	public void selectFEEListener(AjaxBehaviorEvent event) {
+	    giveValuesFromSelectedFEEs();
+	}
+	
+	public void selectObjectiveListener(AjaxBehaviorEvent event) {
+		giveValuesFromSelectedObjectives();
+	}
+	
+	public void selectToolListener(AjaxBehaviorEvent event) {
+	    giveValuesFromSelectedTools();
+	}
+	
+	public void selectProgrammeContentListener(AjaxBehaviorEvent event) {
+	    giveValuesFromSelectedProgrammeContents();
+	}
+	
+	private void putValuesToSelectedObjectives() {
+		this.selectedObjectives = new ArrayList<String>();
+		
+		for(Pekcelprzedmiotu item : expandedSEE.getPekcelprzedmiotus()) {
+			selectedObjectives.add(item.getCelprzedmiotu().getNumer());
+		}
+	}
+	
+	private void putValuesToSelectedEFFs() {
+		this.selectedFEEs = new ArrayList<String>();
+		
+		for(Kekpek item : expandedSEE.getKekpeks()) {
+			selectedFEEs.add(item.getKierunkowyefektksztalcenia().getNumer());
+		}
+	}
+	
+	private void putValuesToSelectedTools() {
+		this.selectedTools = new ArrayList<String>();
+		
+		for(Peknarzedziedydaktyczne item : expandedSEE.getPeknarzedziedydaktycznes()) {
+			selectedTools.add(item.getNarzedziedydaktyczne().getNumer());
+		}
+	}
+	
+	private void putValuesToSelectedProgrammeContents() {
+		this.selectedProgrammeContents = new ArrayList<String>();
+		
+		for(Pektrescprogramowa item : expandedSEE.getPektrescprogramowas()) {
+			selectedProgrammeContents.add(item.getTrescprogramowa().getNumer());
+		}
+	}
+
+	private void giveValuesFromSelectedObjectives() {
+		
+		Set<Pekcelprzedmiotu> items = new HashSet<Pekcelprzedmiotu>();
+		
+		for (String number : selectedObjectives) 
+		{
+			Pekcelprzedmiotu item = new Pekcelprzedmiotu();
+			item.setPrzedmiotowyefektksztalcenia(expandedSEE);
+			item.setCelprzedmiotu(this.getObjective(number));
+			items.add(item);
+		}
+		
+		expandedSEE.setPekcelprzedmiotus(items);
+	}
+	
+	private void giveValuesFromSelectedFEEs() {
+		
+		Set<Kekpek> items = new HashSet<Kekpek>();
+		
+		for (String number : selectedFEEs) 
+		{
+			Kekpek item = new Kekpek();
+			item.setPrzedmiotowyefektksztalcenia(expandedSEE);
+			item.setKierunkowyefektksztalcenia(this.getFEE(number));
+			items.add(item);
+		}
+		
+		expandedSEE.setKekpeks(items);
+	}
+
+	private void giveValuesFromSelectedTools() {
+		
+		Set<Peknarzedziedydaktyczne> items = new HashSet<Peknarzedziedydaktyczne>();
+		
+		for (String number : selectedTools) 
+		{
+			Peknarzedziedydaktyczne item = new Peknarzedziedydaktyczne();
+			item.setPrzedmiotowyefektksztalcenia(expandedSEE);
+			item.setNarzedziedydaktyczne(this.getTool(number));
+			items.add(item);
+		}
+		
+		expandedSEE.setPeknarzedziedydaktycznes(items);
+	}
+
+	private void giveValuesFromSelectedProgrammeContents() {
+		
+		Set<Pektrescprogramowa> items = new HashSet<Pektrescprogramowa>();
+		
+		for (String number : selectedProgrammeContents) 
+		{
+			Pektrescprogramowa item = new Pektrescprogramowa();
+			item.setPrzedmiotowyefektksztalcenia(expandedSEE);
+			item.setTrescprogramowa(this.getProgrammeContent(number));
+			items.add(item);
+		}
+		
+		expandedSEE.setPektrescprogramowas(items);
+	}
 }

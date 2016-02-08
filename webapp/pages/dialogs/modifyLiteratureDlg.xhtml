@@ -22,7 +22,7 @@
 						<p:commandButton value="#{msg['view.button.accept']}"
 							action="#{addNewSubjectCardBean.saveLiteratureClick()}"
 							update=":tabView:literatureForm, :message"
-							oncomplete="PF('modifyLiteratureDlg').hide();" />
+							oncomplete="if (args &amp;&amp; !args.validationFailed) PF('modifyLiteratureDlg').hide();" />
 					</h:panelGrid>
 					
 				</h:panelGrid>

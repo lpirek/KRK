@@ -19,7 +19,7 @@
 						<p:commandButton value="#{msg['view.button.accept']}"
 							action="#{addNewSubjectCardBean.removeTeachingToolClick()}"
 							update=":tabView:teachingToolsForm, :message"
-							oncomplete="PF('removeTeachingToolDlg').hide();" />
+							oncomplete="if (args &amp;&amp; !args.validationFailed) PF('removeTeachingToolDlg').hide();" />
 					</h:panelGrid>
 					
 				</h:panelGrid>

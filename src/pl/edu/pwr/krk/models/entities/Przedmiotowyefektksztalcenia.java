@@ -3,7 +3,7 @@ package pl.edu.pwr.krk.models.entities;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Przedmiotowyefektksztalcenia implements java.io.Serializable {
+public class Przedmiotowyefektksztalcenia implements java.io.Serializable  {
 
 	private Integer id;
 	private Kartaprzedmiotu kartaprzedmiotu;

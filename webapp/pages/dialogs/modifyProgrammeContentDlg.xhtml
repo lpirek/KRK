@@ -43,7 +43,7 @@
 					<p:commandButton value="#{msg['view.button.accept']}"
 						action="#{addNewSubjectCardBean.saveProgrammeContentClick()}"
 						update=":tabView:programmeContentForm, :message"
-						oncomplete="PF('modifyProgrammeContentDlg').hide();" />
+						oncomplete="if (args &amp;&amp; !args.validationFailed) PF('modifyProgrammeContentDlg').hide();" />
 				</h:panelGrid>
 				
 				</h:panelGrid>

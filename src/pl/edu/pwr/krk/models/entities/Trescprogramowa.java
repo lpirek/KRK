@@ -1,5 +1,6 @@
 package pl.edu.pwr.krk.models.entities;
 
+import java.text.MessageFormat;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -100,6 +101,14 @@ public class Trescprogramowa implements java.io.Serializable, Comparable<Trescpr
 
 	public void setKurs(Kurs kurs) {
 		this.kurs = kurs;
+	}
+	
+	public String getNumer() {
+		return MessageFormat.format("{0}-{1}-{2}-{3}", 
+				 kurs.getFormaZajec(),
+				 this.trescOd,
+				 this.trescDo,
+				 this.liczbaGodzin);
 	}
 
 	@Override

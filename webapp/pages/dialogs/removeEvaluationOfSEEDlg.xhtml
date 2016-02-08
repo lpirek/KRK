@@ -19,7 +19,7 @@
 						<p:commandButton value="#{msg['view.button.accept']}"
 							action="#{addNewSubjectCardBean.removeEvaluationClick()}"
 							update=":tabView:evaluationOfSEEForm, :message"
-							oncomplete="PF('removeEvaluationOfSEEDlg').hide();" />
+							oncomplete="if (args &amp;&amp; !args.validationFailed) PF('removeEvaluationOfSEEDlg').hide();" />
 					</h:panelGrid>
 					
 				</h:panelGrid>

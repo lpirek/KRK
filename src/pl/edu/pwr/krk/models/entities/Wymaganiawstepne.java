@@ -1,6 +1,6 @@
 package pl.edu.pwr.krk.models.entities;
 
-public class Wymaganiawstepne implements java.io.Serializable, ManagePosition {
+public class Wymaganiawstepne implements java.io.Serializable {
 
 	private Integer id;
 	private Kartaprzedmiotu kartaprzedmiotu;
