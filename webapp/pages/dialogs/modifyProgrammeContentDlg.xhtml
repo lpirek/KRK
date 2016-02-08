@@ -1,11 +1,54 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
-</html>
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui">	
+	
+		<p:dialog
+			resizable="false" draggable="false" closable="true" 
+			widgetVar="modifyProgrammeContentDlg" modal="true">
+			
+			<h:form id="modifyProgrammeContentDlgForm">
+				<h:panelGrid columns="1">
+				
+				<h:panelGrid columns="2">
+					<h:outputText value="#{msg['programmeContent.from']}" />
+					
+					<h:outputText value="#{msg['programmeContent.to']}" />
+					
+					<p:selectOneMenu value="#{addNewSubjectCardBean.selectedProgrammeContent.trescOd}" style="width:125px">
+			            <f:selectItems value="#{addNewSubjectCardBean.getCoursesList()}" var="var" itemValue="#{var}" itemLabel="#{var}" />
+			        </p:selectOneMenu>
+				
+					<p:selectOneMenu value="#{addNewSubjectCardBean.selectedProgrammeContent.trescDo}" style="width:125px">
+			            <f:selectItems value="#{addNewSubjectCardBean.getCoursesList()}" var="var" itemValue="#{var}" itemLabel="#{var}" />
+			        </p:selectOneMenu>
+			        
+				</h:panelGrid>
+				
+				<h:outputText value="#{msg['programmeContent.description']}" />
+				<h:inputTextarea rows="5" cols="40" required="true"
+					value="#{addNewSubjectCardBean.selectedProgrammeContent.opis}" />
+					
+				<h:outputText value="#{msg['programmeContent.hours']}" />
+				<pe:inputNumber required="true" 
+					value="#{addNewSubjectCardBean.selectedProgrammeContent.liczbaGodzin}" decimalPlaces="0">   
+                </pe:inputNumber>
+				
+				<h:panelGrid columns="2">
+					<p:commandButton value="#{msg['view.button.cancel']}"
+						onclick="PF('modifyProgrammeContentDlg').hide();" />
+					<p:commandButton value="#{msg['view.button.accept']}"
+						action="#{addNewSubjectCardBean.saveProgrammeContentClick()}"
+						update=":tabView:programmeContentForm, :message"
+						oncomplete="if (args &amp;&amp; !args.validationFailed) PF('modifyProgrammeContentDlg').hide();" />
+				</h:panelGrid>
+				
+				</h:panelGrid>
+				
+			</h:form>
+		</p:dialog>
+		
+</ui:composition>

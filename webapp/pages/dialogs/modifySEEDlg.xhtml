@@ -22,7 +22,7 @@
 					<p:commandButton value="#{msg['view.button.accept']}"
 						action="#{addNewSubjectCardBean.saveSEEClick()}"
 						update=":tabView:subjectEducationalEffectsForm, :message"
-						oncomplete="PF('modifySEEDlg').hide();" />
+						oncomplete="if (args &amp;&amp; !args.validationFailed) PF('modifySEEDlg').hide();" />
 				</h:panelGrid>
 
 			</h:panelGrid>

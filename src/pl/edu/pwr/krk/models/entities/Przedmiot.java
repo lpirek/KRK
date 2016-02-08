@@ -1,6 +1,8 @@
 package pl.edu.pwr.krk.models.entities;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Przedmiot implements java.io.Serializable {
@@ -155,14 +157,56 @@ public class Przedmiot implements java.io.Serializable {
 	public Set<Kurs> getKurses() {
 		return this.kurses;
 	}
+	
+	public List<Kurs> getKursesAsList() {
+		return new ArrayList<Kurs>(this.kurses);
+	}
 
 	public void setKurses(Set<Kurs> kurses) {
 		this.kurses = kurses;
 	}
 	
 	public boolean isGroup() {
-		return grupakursows != null && !grupakursows.isEmpty();
-		
+		return grupakursows != null && !grupakursows.isEmpty();	
 	}
 
+	public Kurs getKurs(String formaPrzedmiotu) {
+		for (Kurs kurs : kurses) {
+			if (kurs.getFormaZajec().equals(formaPrzedmiotu)) {
+				return kurs;
+			}
+		}
+		
+		return null;
+	}
+	
+	public String getZZU(String formaPrzedmiotu) {
+		Kurs kurs = getKurs(formaPrzedmiotu);
+		return kurs != null ? String.valueOf(kurs.getZzu()) : "-";
+	}
+	
+	public String getCNPS(String formaPrzedmiotu) {
+		Kurs kurs = getKurs(formaPrzedmiotu);
+		return kurs != null ? String.valueOf(kurs.getCnps()) : "-";
+	}
+	
+	public String getECTS(String formaPrzedmiotu) {
+		Kurs kurs = getKurs(formaPrzedmiotu);
+		return kurs != null ? String.valueOf(kurs.getEcts()) : "-";
+	}
+	
+	public String getCrediting(String formaPrzedmiotu) {
+		Kurs kurs = getKurs(formaPrzedmiotu);
+		return kurs != null ? kurs.getFormaZaliczenia() : "-";
+	}
+	
+	public String getPointsP(String formaPrzedmiotu) {
+		Kurs kurs = getKurs(formaPrzedmiotu);
+		return kurs != null ? String.valueOf(kurs.getPunktyP()) : "-";
+	}
+	
+	public String getPointsBK(String formaPrzedmiotu) {
+		Kurs kurs = getKurs(formaPrzedmiotu);
+		return kurs != null ? String.valueOf(kurs.getPunktyBk()) : "-";
+	}
 }

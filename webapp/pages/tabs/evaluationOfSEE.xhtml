@@ -12,6 +12,7 @@
 		<p:commandButton
 			value="#{msg['newSubjectCard.prerequisitesTitle.button.add']}"
 			action="#{addNewSubjectCardBean.preAddEvaluation('forming')}"
+			disabled="#{addNewSubjectCardBean.subjectEducationalEffects.isEmpty()}"
 			update=":modifyEvaluationOfSEEDlgForm"
 			oncomplete="PF('modifyEvaluationOfSEEDlg').show();" />
 
@@ -37,7 +38,7 @@
 			<p:column
 				headerText="#{msg['newSubjectCard.evaluationOfSEETitle.table.numberEE']}"
 				sortBy="#{cardEvaluationForming.numer}">
-				<h:outputText value="TODO: Pobrać i wypisać" />
+				<h:outputText value="#{cardEvaluationForming.PEKs}" />
 			</p:column>
 
 			<p:column
@@ -77,6 +78,7 @@
 		<p:commandButton
 			value="#{msg['newSubjectCard.prerequisitesTitle.button.add']}"
 			action="#{addNewSubjectCardBean.preAddEvaluation('concluding')}"
+			disabled="#{addNewSubjectCardBean.subjectEducationalEffects.isEmpty()}"
 			update=":modifyEvaluationOfSEEDlgForm"
 			oncomplete="PF('modifyEvaluationOfSEEDlg').show();"  />
 
@@ -102,7 +104,7 @@
 			<p:column
 				headerText="#{msg['newSubjectCard.evaluationOfSEETitle.table.numberEE']}"
 				sortBy="#{cardEvaluationConcluding.numer}">
-				<h:outputText value="TODO: Pobrać i wypisać" />
+				<h:outputText value="#{cardEvaluationConcluding.PEKs}" />
 			</p:column>
 
 			<p:column

@@ -11,6 +11,9 @@
         <many-to-one name="kartaprzedmiotu" class="pl.edu.pwr.krk.models.entities.Kartaprzedmiotu" fetch="select">
             <column name="KartaPrzedmiotuid" not-null="true" />
         </many-to-one>
+        <many-to-one name="kurs" class="pl.edu.pwr.krk.models.entities.Kurs" fetch="select">
+            <column name="Kursid" not-null="true" />
+        </many-to-one>
         <property name="trescOd" type="short">
             <column name="trescOd" not-null="true" />
         </property>

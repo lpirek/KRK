@@ -23,7 +23,7 @@
 					<p:commandButton value="#{msg['view.button.accept']}"
 						action="#{addNewSubjectCardBean.saveObjectiveClick()}"
 						update=":tabView:objectivesForm, :message"
-						oncomplete="PF('modifyObjectiveDlg').hide();" />
+						oncomplete="if (args &amp;&amp; !args.validationFailed) PF('modifyObjectiveDlg').hide();" />
 				</h:panelGrid>
 
 			</h:panelGrid>

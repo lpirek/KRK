@@ -22,7 +22,7 @@
 						<p:commandButton value="#{msg['view.button.accept']}"
 							action="#{addNewSubjectCardBean.savePrerequisteClick()}"
 							update=":tabView:prerequisitiesForm, :message"
-							oncomplete="PF('modifyPrerequisiteDlg').hide();" />
+							oncomplete="if (args &amp;&amp; !args.validationFailed) PF('modifyPrerequisiteDlg').hide();" />
 					</h:panelGrid>
 					
 				</h:panelGrid>

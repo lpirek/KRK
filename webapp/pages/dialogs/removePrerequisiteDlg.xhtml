@@ -19,7 +19,7 @@
 						<p:commandButton value="#{msg['view.button.accept']}"
 							action="#{addNewSubjectCardBean.removePrerequisteClick()}"
 							update=":tabView:prerequisitiesForm, :message"
-							oncomplete="PF('removePrerequisiteDlg').hide();" />
+							oncomplete="if (args &amp;&amp; !args.validationFailed) PF('removePrerequisiteDlg').hide();" />
 					</h:panelGrid>
 					
 				</h:panelGrid>

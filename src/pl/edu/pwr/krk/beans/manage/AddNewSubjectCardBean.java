@@ -1,37 +1,56 @@
 package pl.edu.pwr.krk.beans.manage;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.text.MessageFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.event.ValueChangeEvent;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 import pl.edu.pwr.krk.models.entities.Celprzedmiotu;
 import pl.edu.pwr.krk.models.entities.Kartaprzedmiotu;
+import pl.edu.pwr.krk.models.entities.Kekpek;
+import pl.edu.pwr.krk.models.entities.Kierunkowyefektksztalcenia;
 import pl.edu.pwr.krk.models.entities.Kurs;
-import pl.edu.pwr.krk.models.entities.ManagePosition;
 import pl.edu.pwr.krk.models.entities.Narzedziedydaktyczne;
 import pl.edu.pwr.krk.models.entities.Ocenaosiagieciapek;
+import pl.edu.pwr.krk.models.entities.Pekcelprzedmiotu;
+import pl.edu.pwr.krk.models.entities.Peknarzedziedydaktyczne;
+import pl.edu.pwr.krk.models.entities.Pekocenaosiagnieciapek;
+import pl.edu.pwr.krk.models.entities.Pektrescprogramowa;
 import pl.edu.pwr.krk.models.entities.Pozycjaliteraturowa;
 import pl.edu.pwr.krk.models.entities.Przedmiot;
 import pl.edu.pwr.krk.models.entities.Przedmiotowyefektksztalcenia;
 import pl.edu.pwr.krk.models.entities.Trescprogramowa;
 import pl.edu.pwr.krk.models.entities.Wymaganiawstepne;
+import pl.edu.pwr.krk.models.services.KartaprzedmiotuService;
+import pl.edu.pwr.krk.models.services.KierunkowyefektksztalceniaService;
 import pl.edu.pwr.krk.models.services.PrzedmiotService;
 import pl.edu.pwr.krk.tools.ApplicationContextProvider;
+
+import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
 
 @ManagedBean
 @ViewScoped()
@@ -47,33 +66,47 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 	
 	private Przedmiot subject;
 	private PrzedmiotService subjectService = null;
+	private KartaprzedmiotuService subjectCardService = null;
+	private KierunkowyefektksztalceniaService feeService = null;
 
 	private static int tabIndex = 0;
 	private int elementIndex;
 	
-	private static String subjectCardLanguage;
-	
-	private static Kartaprzedmiotu subjectCard = new Kartaprzedmiotu();
+	private static Kartaprzedmiotu subjectCard;
 	
 	private static List<Wymaganiawstepne> prerequisites = new ArrayList<>();
 	private static List<Celprzedmiotu> objectives = new ArrayList<>();
 	private static List<Przedmiotowyefektksztalcenia> subjectEducationalEffectsKnowledge = new ArrayList<>();
 	private static List<Przedmiotowyefektksztalcenia> subjectEducationalEffectsSkills = new ArrayList<>();
 	private static List<Przedmiotowyefektksztalcenia> subjectEducationalEffectsReferences = new ArrayList<>();
-	private static List<Trescprogramowa> programmeContents = new ArrayList<>();;
-	private static List<Narzedziedydaktyczne> teachingTools = new ArrayList<>();;
+	private static List<Narzedziedydaktyczne> teachingTools = new ArrayList<>();
 	private static List<Pozycjaliteraturowa> basicLiterature = new ArrayList<>();
 	private static List<Pozycjaliteraturowa> extendedLiterature = new ArrayList<>();
 	private static List<Ocenaosiagieciapek> formingEvaluations = new ArrayList<>();
 	private static List<Ocenaosiagieciapek> concludingEvaluations = new ArrayList<>();
-	
+
 	private Wymaganiawstepne selectedPrerequisite;
 	private Celprzedmiotu selectedObjective;
 	private Przedmiotowyefektksztalcenia selectedSEE;
-	private Trescprogramowa selectedProgrammeCotent;
+	private Trescprogramowa selectedProgrammeContent;
 	private Narzedziedydaktyczne selectedTeachingTool;
 	private Pozycjaliteraturowa selectedLiterature;
 	private Ocenaosiagieciapek selectedEvaluation;
+	private Kurs selectedKurs;
+	
+	private List<String> selectedSEEs;
+	
+	private static Map<Integer, List<Trescprogramowa>> programmeContents = new HashMap<Integer, List<Trescprogramowa>>();
+	
+	private Przedmiotowyefektksztalcenia expandedSEE;
+	
+	private List<String> selectedFEEs;
+	private List<String> selectedObjectives;
+	private List<String> selectedTools;
+	private List<String> selectedProgrammeContents;
+	
+	private List<Kierunkowyefektksztalcenia> fees;
+	
 
 	public AddNewSubjectCardBean() {
 		log.debug("Initialiaze AddNewSubjectCardBean");
@@ -85,12 +118,33 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 		if (!facesContext.isPostback() && !facesContext.isValidationFailed()) {
 			subjectService = (PrzedmiotService) ApplicationContextProvider.getApplicationContext()
 					.getBean("przedmiotService");
+			subjectCardService = (KartaprzedmiotuService) ApplicationContextProvider.getApplicationContext()
+					.getBean("kartaprzedmiotuService");
+			feeService = (KierunkowyefektksztalceniaService) ApplicationContextProvider.getApplicationContext()
+					.getBean("kekService");
 		}
 	}
 
 	public void initialiaze() {
 		subject = subjectService.getPrzedmiot(id);
+		fees = feeService.getFEEs();
+		
+		subjectCard = new Kartaprzedmiotu();
+		
+		//SelectOneMenu wymaga instancji obiektu już podczas inicjalizacji
+		selectedProgrammeContent = new Trescprogramowa();
+		
+		setDefaultLang();
 	}
+
+	public void setDefaultLang() {
+		if (isPolish()) {
+			subjectCard.setJezyk(Kartaprzedmiotu.JEZYK_PL);
+		} 
+		else {
+			subjectCard.setJezyk(Kartaprzedmiotu.JEZYK_EN);
+		}
+	} 
 	
 	public String getSubjectName() {
 		return isPolish() ? subject.getNazwaPl() : subject.getNazwaEn();
@@ -104,6 +158,13 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 		this.id = id;
 
 		initialiaze();
+	}
+	
+	public String getProgrammeContentTabTitle(Kurs kurs) {
+		return MessageFormat.format("{0} - {1} (ZZU - {2})", 
+				 this.getMessage("newSubjectCard.programmeContentTitle.formOfClasses"),
+				 kurs.getFormaZajec(),
+				 kurs.getZzu());
 	}
 	
 	/**
@@ -147,6 +208,10 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 		return teachingTools;
 	}
 	
+	public List<Kierunkowyefektksztalcenia> getFacultatyEducationalEffects() {
+		return fees;
+	}
+	
 	public List<Przedmiotowyefektksztalcenia> getSubjectEducationalEffectsKnowledge() {
 		return subjectEducationalEffectsKnowledge;
 	}
@@ -177,8 +242,89 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 		return result;
 	}
 
+	private Przedmiotowyefektksztalcenia getSEE(String number) {
+		
+		List<Przedmiotowyefektksztalcenia> result = getSubjectEducationalEffects();
+		
+		for (Przedmiotowyefektksztalcenia pek : result) {
+			if (pek.getNumer().equals(number)) {
+				return pek;
+			}
+		}
+		
+		return null;
+	}
+	
+	private Kierunkowyefektksztalcenia getFEE(String number) {
+		
+		for (Kierunkowyefektksztalcenia kek : this.getFacultatyEducationalEffects()) {
+			if (kek.getNumer().equals(number)) {
+				return kek;
+			}
+		}
+		
+		return null;
+	}
+	
+	private Celprzedmiotu getObjective(String number) {
+		
+		for (Celprzedmiotu cel : this.getObjectives()) {
+			if (cel.getNumer().equals(number)) {
+				return cel;
+			}
+		}
+		
+		return null;
+	}
+	
+	private Narzedziedydaktyczne getTool(String number) {
+		
+		for (Narzedziedydaktyczne tool : this.getTeachingTools()) {
+			if (tool.getNumer().equals(number)) {
+				return tool;
+			}
+		}
+		
+		return null;
+	}
+	
+	private Trescprogramowa getProgrammeContent(String number) {
+		
+		for (Trescprogramowa pc : this.getProgrammeContents()) {
+			if (pc.getNumer().equals(number)) {
+				return pc;
+			}
+		}
+		
+		return null;
+	}
+	public List<Trescprogramowa> getProgrammeContents(Kurs kurs) {
+		
+		if (kurs != null && kurs.getId() != null) {
+			
+			List<Trescprogramowa> list = programmeContents.get(kurs.getId());
+			
+			if (list == null) {
+				list = new ArrayList<Trescprogramowa>();
+				programmeContents.put(kurs.getId(), list);
+			}
+			
+			return list;
+		}
+		
+		return null;
+	}
+	
 	public List<Trescprogramowa> getProgrammeContents() {
-		return programmeContents;
+		
+		List<Trescprogramowa> result = new ArrayList<Trescprogramowa>();
+		
+		for (List<Trescprogramowa> list : programmeContents.values())
+		{
+			result.addAll(list);
+		}
+			
+		return result;
 	}
 
 	public List<Wymaganiawstepne> getPrerequisites() {
@@ -197,14 +343,14 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 		this.subject = subject;
 	}
 
-	public String getSubjectCardLanguage() {
-		return subjectCardLanguage;
+	public Kartaprzedmiotu getSubjectCard() {
+		return subjectCard;
 	}
-
-	public void setSubjectCardLanguage(String subjectCardLanguage) {
-		this.subjectCardLanguage = subjectCardLanguage;
+	
+	public void setSubjectCard(Kartaprzedmiotu subjectCard) {
+		this.subjectCard = subjectCard;
 	}
-
+	
 	public int getTabIndex() {
 		return tabIndex;
 	}
@@ -251,7 +397,6 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 				// Add
 				selectedPrerequisite.setKartaprzedmiotu(subjectCard);
 				selectedPrerequisite.setPozycja((short) (prerequisites.size() + 1));
-				selectedPrerequisite.setId(prerequisites.size() + 1);
 				prerequisites.add(selectedPrerequisite);
 			} else {
 				// Edit
@@ -312,6 +457,7 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 
 	public void preAddObjective() {
 		this.selectedObjective = new Celprzedmiotu();
+		this.selectedObjective.setKartaprzedmiotu(subjectCard);
 		StringBuffer sb = new StringBuffer();
 		sb.append("C");
 		sb.append(objectives.size() + 1);
@@ -330,19 +476,18 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 	public void saveObjectiveClick() {
 
 		if (selectedObjective != null) {
-
 			objectives.remove(selectedObjective);
 
 			if (selectedObjective.getId() == 0) {
 				// Add
-				selectedObjective.setKartaprzedmiotu(subjectCard);
-				selectedObjective.setId(objectives.size() + 1);
 				objectives.add(selectedObjective);
 			} else {
 				// Edit
 				objectives.add(elementIndex, selectedObjective);
 			}
 
+			correctObjectiveNumbers(objectives);
+			
 			showMessageDlg(FacesMessage.SEVERITY_INFO, "Pomyślnie zapisano zmiany");
 
 			elementIndex = -1;
@@ -353,7 +498,8 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 	public void removeObjectiveClick() {
 
 		if (selectedObjective != null) {
-			this.objectives.remove(selectedObjective);
+			objectives.remove(selectedObjective);
+			
 			correctObjectiveNumbers(objectives);
 
 			showMessageDlg(FacesMessage.SEVERITY_INFO, "Pomyślnie usunięto");
@@ -383,6 +529,12 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 	public void setSelectedSEE(Przedmiotowyefektksztalcenia selectedSEE) {
 		this.selectedSEE = selectedSEE;
 	}
+	
+	public StreamedContent downloadVerbs() {
+		InputStream stream = ((ServletContext)FacesContext.getCurrentInstance().getExternalContext().getContext()).
+				getResourceAsStream("/resources/files/spis_czasownikow.pdf");
+		return new DefaultStreamedContent(stream, "application/pdf", "spis_czasownikow.pdf");
+	}
 
 	public void preAddSEE(String type) {
 		this.selectedSEE = new Przedmiotowyefektksztalcenia();
@@ -392,14 +544,15 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 			sb.append("PEK_W");
 			sb.append(String.format("%02d", number));
 			this.selectedSEE.setNumer(sb.toString());
-
-		} else if (type.equals("skill")) {
+		} 
+		else if (type.equals("skill")) {
 			StringBuffer sb = new StringBuffer();
 			int number = (subjectEducationalEffectsSkills.size() + 1);
 			sb.append("PEK_U");
 			sb.append(String.format("%02d", number));
 			this.selectedSEE.setNumer(sb.toString());
-		} else {
+		} 
+		else {
 			StringBuffer sb = new StringBuffer();
 			int number = (subjectEducationalEffectsReferences.size() + 1);
 			sb.append("PEK_K");
@@ -410,6 +563,7 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 
 	public void preEditSEE(Przedmiotowyefektksztalcenia see) {
 		this.selectedSEE = see;
+		
 		if (see.getNumer().startsWith("PEK_W")) {
 			elementIndex = subjectEducationalEffectsKnowledge.lastIndexOf(see);
 		} else if (see.getNumer().startsWith("PEK_U")) {
@@ -439,15 +593,12 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 				// Add
 				if (selectedSEE.getNumer().startsWith("PEK_W")) {
 					selectedSEE.setKartaprzedmiotu(subjectCard);
-					selectedSEE.setId(subjectEducationalEffectsKnowledge.size() + 1);
 					subjectEducationalEffectsKnowledge.add(selectedSEE);
 				} else if (selectedSEE.getNumer().startsWith("PEK_U")) {
 					selectedSEE.setKartaprzedmiotu(subjectCard);
-					selectedSEE.setId(subjectEducationalEffectsSkills.size() + 1);
 					subjectEducationalEffectsSkills.add(selectedSEE);
 				} else {
 					selectedSEE.setKartaprzedmiotu(subjectCard);
-					selectedSEE.setId(subjectEducationalEffectsReferences.size() + 1);
 					subjectEducationalEffectsReferences.add(selectedSEE);
 				}
 
@@ -460,7 +611,6 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 				} else {
 					subjectEducationalEffectsReferences.add(elementIndex, selectedSEE);
 				}
-				;
 			}
 
 			showMessageDlg(FacesMessage.SEVERITY_INFO, "Pomyślnie zapisano zmiany");
@@ -483,7 +633,6 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 				subjectEducationalEffectsReferences.remove(selectedSEE);
 				correctSEENumbers(subjectEducationalEffectsReferences);
 			}
-			;
 
 			showMessageDlg(FacesMessage.SEVERITY_INFO, "Pomyślnie usunięto");
 
@@ -505,24 +654,81 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 	 * Obsługa okien dialogowych dla Treści programowych
 	 */
 	
-	public Trescprogramowa getSelectedProgrammeCotent() {
-		return selectedProgrammeCotent;
+	public Trescprogramowa getSelectedProgrammeContent() {
+		return selectedProgrammeContent;
 	}
 
-	public void setSelectedProgrammeCotent(Trescprogramowa selectedProgrammeCotent) {
-		this.selectedProgrammeCotent = selectedProgrammeCotent;
+	public void setSelectedProgrammeContent(Trescprogramowa selectedProgrammeContent) {
+		this.selectedProgrammeContent = selectedProgrammeContent;
+	}
+	
+	public Kurs getSelectedKurs() {
+		return selectedKurs;
 	}
 
-	public void preAddProgrammeCotent() {
-		this.selectedProgrammeCotent = new Trescprogramowa();
+	public void setSelectedKurs(Kurs selectedKurs) {
+		this.selectedKurs = selectedKurs;
+	}
+	
+	public void preAddProgrammeContent(Kurs kurs) {
+		this.selectedKurs = kurs;
+		this.selectedProgrammeContent = new Trescprogramowa();
+		this.selectedProgrammeContent.setKartaprzedmiotu(subjectCard);
+		this.selectedProgrammeContent.setKurs(selectedKurs);
 	}
 
-	public void preEditProgrammeCotent(Trescprogramowa programmeContent) {
-		this.selectedProgrammeCotent = programmeContent;
+	public void preEditProgrammeContent(Kurs kurs, Trescprogramowa programmeContent) {
+		this.selectedKurs = kurs;
+		this.selectedProgrammeContent = programmeContent;
 	}
 
-	public void preRemoveProgrammeCotent(Trescprogramowa programmeContent) {
-		this.selectedProgrammeCotent = programmeContent;
+	public void preRemoveProgrammeContent(Kurs kurs, Trescprogramowa programmeContent) {
+		this.selectedKurs = kurs;
+		this.selectedProgrammeContent = programmeContent;
+	}
+	
+	public List<Integer> getCoursesList() {
+		List<Integer> courses = new ArrayList<Integer>();
+		
+		if (selectedKurs != null) {
+			for (int i = 0; i < selectedKurs.getLiczbaZajec(); i++) {
+				courses.add(i+1);
+			}
+		}
+		
+		return courses;
+	}
+	
+	public void saveProgrammeContentClick() {
+		
+		if (selectedProgrammeContent != null && selectedKurs != null) {
+			
+			List<Trescprogramowa> list = this.getProgrammeContents(selectedKurs);
+			list.remove(selectedProgrammeContent);
+			list.add(selectedProgrammeContent);
+			
+			Collections.sort(list);
+			
+			showMessageDlg(FacesMessage.SEVERITY_INFO, "Pomyślnie zapisano zmiany");
+
+			selectedProgrammeContent = null;
+			selectedKurs = null;
+		}
+		
+	}
+	
+	public void removeProgrammeContentClick() {
+		
+		if (selectedProgrammeContent != null && selectedKurs != null) {
+			
+			List<Trescprogramowa> list = this.getProgrammeContents(selectedKurs);
+			list.remove(selectedProgrammeContent);
+
+			showMessageDlg(FacesMessage.SEVERITY_INFO, "Pomyślnie usunięto");
+
+			selectedProgrammeContent = null;
+			selectedKurs = null;
+		}
 	}
 	
 	/**
@@ -539,6 +745,7 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 
 	public void preAddTeachingTool() {
 		this.selectedTeachingTool = new Narzedziedydaktyczne();
+		this.selectedTeachingTool.setKartaprzedmiotu(subjectCard);	
 		StringBuffer sb = new StringBuffer();
 		sb.append("N");
 		sb.append(teachingTools.size() + 1);
@@ -557,19 +764,18 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 	public void saveTeachingToolClick() {
 
 		if (selectedTeachingTool != null) {
-
 			teachingTools.remove(selectedTeachingTool);
 
 			if (selectedTeachingTool.getId() == null || selectedTeachingTool.getId() == 0) {
 				// Add
-				selectedTeachingTool.setKartaprzedmiotu(subjectCard);
-				selectedTeachingTool.setId(teachingTools.size() + 1);
 				teachingTools.add(selectedTeachingTool);
 			} else {
 				// Edit
 				teachingTools.add(elementIndex, selectedTeachingTool);
 			}
 
+			correctTeachingToolNumbers(teachingTools);
+			
 			showMessageDlg(FacesMessage.SEVERITY_INFO, "Pomyślnie zapisano zmiany");
 
 			elementIndex = -1;
@@ -581,6 +787,7 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 
 		if (selectedTeachingTool != null) {
 			teachingTools.remove(selectedTeachingTool);
+			
 			correctTeachingToolNumbers(teachingTools);
 
 			showMessageDlg(FacesMessage.SEVERITY_INFO, "Pomyślnie usunięto");
@@ -643,11 +850,9 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 				selectedLiterature.setKartaprzedmiotu(subjectCard);
 				if (selectedLiterature.getRodzaj().equals("podstawowa")) {
 					selectedLiterature.setPozycja((short) (basicLiterature.size() + 1));
-					selectedLiterature.setId(basicLiterature.size() + 1);
 					basicLiterature.add(selectedLiterature);
 				} else {
 					selectedLiterature.setPozycja((short) (extendedLiterature.size() + 1));
-					selectedLiterature.setId(extendedLiterature.size() + 1);
 					extendedLiterature.add(selectedLiterature);
 				}
 			} else {
@@ -661,7 +866,6 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 
 			showMessageDlg(FacesMessage.SEVERITY_INFO, "Pomyślnie zapisano zmiany");
 
-			elementIndex = -1;
 			selectedLiterature = null;
 		}
 	}
@@ -729,6 +933,8 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 
 	public void preAddEvaluation(String type) {
 		this.selectedEvaluation = new Ocenaosiagieciapek();
+		this.selectedEvaluation.setKartaprzedmiotu(subjectCard);
+		
 		if (type.equals("forming")) {
 			StringBuffer sb = new StringBuffer();
 			sb.append("F");
@@ -740,6 +946,8 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 			sb.append(concludingEvaluations.size() + 1);
 			this.selectedEvaluation.setNumer(sb.toString());
 		}
+		
+		putValuesToSelectedSEEs();
 	}
 
 	public void preEditEvaluation(Ocenaosiagieciapek evaluation) {
@@ -748,6 +956,16 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 			elementIndex = formingEvaluations.lastIndexOf(evaluation);
 		} else {
 			elementIndex = concludingEvaluations.lastIndexOf(evaluation);
+		}
+		
+		putValuesToSelectedSEEs();
+	}
+	
+	private void putValuesToSelectedSEEs() {
+		this.selectedSEEs = new ArrayList<String>();
+		
+		for(Pekocenaosiagnieciapek peko : selectedEvaluation.getPekocenaosiagnieciapeks()) {
+			selectedSEEs.add(peko.getPrzedmiotowyefektksztalcenia().getNumer());
 		}
 	}
 
@@ -759,6 +977,8 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 
 		if (selectedEvaluation != null) {
 
+			giveValuesFromSelectedSEEs();
+			
 			if (this.selectedEvaluation.getNumer().startsWith("F")) {
 				formingEvaluations.remove(selectedEvaluation);
 			} else {
@@ -766,31 +986,36 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 			}
 
 			if (selectedEvaluation.getId() == null || selectedEvaluation.getId() == 0) {
-				// Add
+				
 				if (this.selectedEvaluation.getNumer().startsWith("F")) {
-					selectedEvaluation.setKartaprzedmiotu(subjectCard);
-					selectedEvaluation.setId(formingEvaluations.size() + 1);
 					formingEvaluations.add(selectedEvaluation);
+					correctEvaluationNumbers(formingEvaluations);
 				} else {
-					selectedEvaluation.setKartaprzedmiotu(subjectCard);
-					selectedEvaluation.setId(concludingEvaluations.size() + 1);
 					concludingEvaluations.add(selectedEvaluation);
-				}
-			} else {
-				// Edit
-				if (this.selectedEvaluation.getNumer().startsWith("F")) {
-					formingEvaluations.add(elementIndex, selectedEvaluation);
-				} else {
-					concludingEvaluations.add(elementIndex, selectedEvaluation);
+					correctEvaluationNumbers(concludingEvaluations);
 				}
 
 			}
-
+			
 			showMessageDlg(FacesMessage.SEVERITY_INFO, "Pomyślnie zapisano zmiany");
 
-			elementIndex = -1;
 			selectedEvaluation = null;
 		}
+	}
+
+	private void giveValuesFromSelectedSEEs() {
+		
+		Set<Pekocenaosiagnieciapek> pekos = new HashSet<Pekocenaosiagnieciapek>();
+		
+		for (String number : selectedSEEs) 
+		{
+			Pekocenaosiagnieciapek peko = new Pekocenaosiagnieciapek();
+			peko.setOcenaosiagieciapek(selectedEvaluation);
+			peko.setPrzedmiotowyefektksztalcenia(getSEE(number));
+			pekos.add(peko);
+		}
+		
+		selectedEvaluation.setPekocenaosiagnieciapeks(pekos);
 	}
 
 	public void removeEvaluationClick() {
@@ -806,7 +1031,6 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 
 			showMessageDlg(FacesMessage.SEVERITY_INFO, "Pomyślnie usunięto");
 
-			elementIndex = -1;
 			selectedEvaluation = null;
 		}
 	}
@@ -819,9 +1043,167 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 			list.get(i).setNumer(sb.toString());
 		}
 	}
+
+	public List<String> getSelectedSEEs() {
+		return selectedSEEs;
+	}
+
+	public void setSelectedSEEs(List<String> selectedSEEs) {
+		this.selectedSEEs = selectedSEEs;
+	}
 	
 	/**
 	 * 
 	 */
+	
+	public String getDescription(Przedmiotowyefektksztalcenia pek) {
+		this.expandedSEE = pek;
+		
+		putValuesToSelectedEFFs();
+		putValuesToSelectedObjectives();
+		putValuesToSelectedTools();
+		putValuesToSelectedProgrammeContents();
+		
+		return pek.getOpis();
+	}
+	
+	public List<String> getSelectedFEEs() {
+		return selectedFEEs;
+	}
+	
+	public void setSelectedFEEs(List<String> selectedFEEs) {
+		this.selectedFEEs = selectedFEEs;
+	}
+	
+	public List<String> getSelectedObjectives() {
+		return selectedObjectives;
+	}
+	
+	public void setSelectedObjectives(List<String> selectedObjectives) {
+		this.selectedObjectives = selectedObjectives;
+	}
+	
+	public List<String> getSelectedProgrammeContents() {
+		return selectedProgrammeContents;
+	}
 
+	public void setSelectedProgrammeContents(List<String> selectedProgrammeContents) {
+		this.selectedProgrammeContents = selectedProgrammeContents;
+	}
+	
+	public List<String> getSelectedTools() {
+		return selectedTools;
+	}
+	
+	public void setSelectedTools(List<String> selectedTools) {
+		this.selectedTools = selectedTools;
+	}
+	
+	public void selectFEEListener(AjaxBehaviorEvent event) {
+	    giveValuesFromSelectedFEEs();
+	}
+	
+	public void selectObjectiveListener(AjaxBehaviorEvent event) {
+		giveValuesFromSelectedObjectives();
+	}
+	
+	public void selectToolListener(AjaxBehaviorEvent event) {
+	    giveValuesFromSelectedTools();
+	}
+	
+	public void selectProgrammeContentListener(AjaxBehaviorEvent event) {
+	    giveValuesFromSelectedProgrammeContents();
+	}
+	
+	private void putValuesToSelectedObjectives() {
+		this.selectedObjectives = new ArrayList<String>();
+		
+		for(Pekcelprzedmiotu item : expandedSEE.getPekcelprzedmiotus()) {
+			selectedObjectives.add(item.getCelprzedmiotu().getNumer());
+		}
+	}
+	
+	private void putValuesToSelectedEFFs() {
+		this.selectedFEEs = new ArrayList<String>();
+		
+		for(Kekpek item : expandedSEE.getKekpeks()) {
+			selectedFEEs.add(item.getKierunkowyefektksztalcenia().getNumer());
+		}
+	}
+	
+	private void putValuesToSelectedTools() {
+		this.selectedTools = new ArrayList<String>();
+		
+		for(Peknarzedziedydaktyczne item : expandedSEE.getPeknarzedziedydaktycznes()) {
+			selectedTools.add(item.getNarzedziedydaktyczne().getNumer());
+		}
+	}
+	
+	private void putValuesToSelectedProgrammeContents() {
+		this.selectedProgrammeContents = new ArrayList<String>();
+		
+		for(Pektrescprogramowa item : expandedSEE.getPektrescprogramowas()) {
+			selectedProgrammeContents.add(item.getTrescprogramowa().getNumer());
+		}
+	}
+
+	private void giveValuesFromSelectedObjectives() {
+		
+		Set<Pekcelprzedmiotu> items = new HashSet<Pekcelprzedmiotu>();
+		
+		for (String number : selectedObjectives) 
+		{
+			Pekcelprzedmiotu item = new Pekcelprzedmiotu();
+			item.setPrzedmiotowyefektksztalcenia(expandedSEE);
+			item.setCelprzedmiotu(this.getObjective(number));
+			items.add(item);
+		}
+		
+		expandedSEE.setPekcelprzedmiotus(items);
+	}
+	
+	private void giveValuesFromSelectedFEEs() {
+		
+		Set<Kekpek> items = new HashSet<Kekpek>();
+		
+		for (String number : selectedFEEs) 
+		{
+			Kekpek item = new Kekpek();
+			item.setPrzedmiotowyefektksztalcenia(expandedSEE);
+			item.setKierunkowyefektksztalcenia(this.getFEE(number));
+			items.add(item);
+		}
+		
+		expandedSEE.setKekpeks(items);
+	}
+
+	private void giveValuesFromSelectedTools() {
+		
+		Set<Peknarzedziedydaktyczne> items = new HashSet<Peknarzedziedydaktyczne>();
+		
+		for (String number : selectedTools) 
+		{
+			Peknarzedziedydaktyczne item = new Peknarzedziedydaktyczne();
+			item.setPrzedmiotowyefektksztalcenia(expandedSEE);
+			item.setNarzedziedydaktyczne(this.getTool(number));
+			items.add(item);
+		}
+		
+		expandedSEE.setPeknarzedziedydaktycznes(items);
+	}
+
+	private void giveValuesFromSelectedProgrammeContents() {
+		
+		Set<Pektrescprogramowa> items = new HashSet<Pektrescprogramowa>();
+		
+		for (String number : selectedProgrammeContents) 
+		{
+			Pektrescprogramowa item = new Pektrescprogramowa();
+			item.setPrzedmiotowyefektksztalcenia(expandedSEE);
+			item.setTrescprogramowa(this.getProgrammeContent(number));
+			items.add(item);
+		}
+		
+		expandedSEE.setPektrescprogramowas(items);
+	}
 }

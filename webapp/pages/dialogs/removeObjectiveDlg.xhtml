@@ -19,7 +19,7 @@
 						<p:commandButton value="#{msg['view.button.accept']}"
 							action="#{addNewSubjectCardBean.removeObjectiveClick()}"
 							update=":tabView:objectivesForm, :message"
-							oncomplete="PF('removeObjectiveDlg').hide();" />
+							oncomplete="if (args &amp;&amp; !args.validationFailed) PF('removeObjectiveDlg').hide();" />
 					</h:panelGrid>
 					
 				</h:panelGrid>

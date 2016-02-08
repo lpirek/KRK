@@ -90,5 +90,16 @@ public class Ocenaosiagieciapek implements java.io.Serializable {
 	public void setPekocenaosiagnieciapeks(Set<Pekocenaosiagnieciapek> pekocenaosiagnieciapeks) {
 		this.pekocenaosiagnieciapeks = pekocenaosiagnieciapeks;
 	}
+	
+	public String getPEKs() {
+		StringBuilder sb = new StringBuilder();
+		
+		for (Pekocenaosiagnieciapek peko : pekocenaosiagnieciapeks) {
+			sb.append(peko.getPrzedmiotowyefektksztalcenia().getNumer());
+			sb.append("; ");
+		}
+		
+		return sb.toString();
+	}
 
 }

@@ -5,60 +5,76 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<h:form id="programmeContentForm">
-		<h:outputText
-			value="#{msg['newSubjectCard.programmeContentTitle.formOfClasses']}" />
-		<p:separator />
+	
+	
+		<p:accordionPanel var="kurs" value="#{addNewSubjectCardBean.subject.kursesAsList}">
+							
+			<p:tab title="#{addNewSubjectCardBean.getProgrammeContentTabTitle(kurs)}">
+							
+				<p:commandButton
+					value="#{msg['newSubjectCard.prerequisitesTitle.button.add']}"
+					action="#{addNewSubjectCardBean.preAddProgrammeContent(kurs)}"
+					update=":modifyProgrammeContentDlgForm"
+					oncomplete="PF('modifyProgrammeContentDlg').show();" />
+		
+				<br />
+				<br />
+		
+				<p:dataTable var="cardProgrammeContent"
+					value="#{addNewSubjectCardBean.getProgrammeContents(kurs)}"
+					emptyMessage="#{msg['newSubjectCard.programmeContentTitle.table.empty']}">
+		
+					<p:column
+						headerText="#{msg['newSubjectCard.programmeContentTitle.table.from']}"
+						style="width: 40px" sortBy="#{cardProgrammeContent.trescOd}">
+						<h:outputText value="#{cardProgrammeContent.trescOd}" />
+					</p:column>
+		
+					<p:column
+						headerText="#{msg['newSubjectCard.programmeContentTitle.table.to']}"
+						style="width: 40px" sortBy="#{cardProgrammeContent.trescDo}">
+						<h:outputText value="#{cardProgrammeContent.trescDo}" />
+					</p:column>
+		
+					<p:column
+						headerText="#{msg['newSubjectCard.programmeContentTitle.table.topic']}"
+					    sortBy="#{cardProgrammeContent.opis}">
+						<h:outputText value="#{cardProgrammeContent.opis}" />
+					</p:column>
+		
+					<p:column
+						headerText="#{msg['newSubjectCard.programmeContentTitle.table.hours']}"
+						style="width: 120px" sortBy="#{cardProgrammeContent.liczbaGodzin}">
+						<h:outputText value="#{cardProgrammeContent.liczbaGodzin}" />
+					</p:column>
+		
+					<p:column style="width: 200px">
+						<p:commandButton id="modify" style="width: 80px"
+							value="#{msg['newSubjectCard.prerequisitesTitle.table.button.edit']}"
+							action="#{addNewSubjectCardBean.preEditProgrammeContent(kurs, cardProgrammeContent)}"
+							update=":modifyProgrammeContentDlgForm"
+							oncomplete="PF('modifyProgrammeContentDlg').show();" />
+						<p:commandButton id="remove" style="width: 80px"
+							action="#{addNewSubjectCardBean.preRemoveProgrammeContent(kurs, cardProgrammeContent)}"
+							update=":removeProgrammeContentDlgForm"
+							oncomplete="PF('removeProgrammeContentDlg').show();"
+							value="#{msg['newSubjectCard.prerequisitesTitle.table.button.remove']}" />
+					</p:column>
+		
+				</p:dataTable>
+				<br />
+				<br />
+		
+				<p:commandButton
+					disabled="true"
+					value="#{msg['newSubjectCard.prerequisitesTitle.button.import']}" />
+									
+			</p:tab>
+		
+  				 		
+  		</p:accordionPanel>
 
-		<p:commandButton
-			value="#{msg['newSubjectCard.prerequisitesTitle.button.add']}" />
-
-		<br />
-		<br />
-
-		<p:dataTable var="cardProgrammeContent"
-			value="#{addNewSubjectCardBean.programmeContents}"
-			emptyMessage="#{msg['newSubjectCard.programmeContentTitle.table.empty']}">
-
-			<p:column
-				headerText="#{msg['newSubjectCard.programmeContentTitle.table.from']}"
-				style="width: 40px" sortBy="#{cardProgrammeContent.trescOd}">
-				<h:outputText value="#{cardProgrammeContent.trescOd}" />
-			</p:column>
-
-			<p:column
-				headerText="#{msg['newSubjectCard.programmeContentTitle.table.to']}"
-				style="width: 40px" sortBy="#{cardProgrammeContent.trescDo}">
-				<h:outputText value="#{cardProgrammeContent.trescDo}" />
-			</p:column>
-
-			<p:column
-				headerText="#{msg['newSubjectCard.programmeContentTitle.table.topic']}"
-				style="width: 100px" sortBy="#{cardProgrammeContent.opis}">
-				<h:outputText value="#{cardProgrammeContent.opis}" />
-			</p:column>
-
-			<p:column
-				headerText="#{msg['newSubjectCard.programmeContentTitle.table.hours']}"
-				sortBy="#{cardProgrammeContent.liczbaGodzin}">
-				<h:outputText value="#{cardProgrammeContent.liczbaGodzin}" />
-			</p:column>
-
-			<p:column style="width: 200px">
-				<p:commandButton id="modify" style="width: 80px"
-					value="#{msg['newSubjectCard.prerequisitesTitle.table.button.edit']}"
-					disabled="false" />
-				<p:commandButton id="remove" style="width: 80px"
-					value="#{msg['newSubjectCard.prerequisitesTitle.table.button.remove']}"
-					disabled="false" />
-			</p:column>
-
-		</p:dataTable>
-		<br />
-		<br />
-
-		<p:commandButton
-			disabled="true"
-			value="#{msg['newSubjectCard.prerequisitesTitle.button.import']}" />
+		
 
 	</h:form>
 </ui:composition>
