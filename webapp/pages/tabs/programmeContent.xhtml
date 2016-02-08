@@ -1,0 +1,63 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form id="programmeContentForm">
+		<h:outputText
+			value="#{msg['newSubjectCard.programmeContentTitle.formOfClasses']}" />
+		<p:separator />
+
+		<p:commandButton
+			value="#{msg['newSubjectCard.prerequisitesTitle.button.add']}" />
+
+		<br />
+		<br />
+
+		<p:dataTable var="cardProgrammeContent"
+			value="#{addNewSubjectCardBean.programmeContents}"
+			emptyMessage="#{msg['newSubjectCard.programmeContentTitle.table.empty']}">
+
+			<p:column
+				headerText="#{msg['newSubjectCard.programmeContentTitle.table.from']}"
+				style="width: 40px" sortBy="#{cardProgrammeContent.trescOd}">
+				<h:outputText value="#{cardProgrammeContent.trescOd}" />
+			</p:column>
+
+			<p:column
+				headerText="#{msg['newSubjectCard.programmeContentTitle.table.to']}"
+				style="width: 40px" sortBy="#{cardProgrammeContent.trescDo}">
+				<h:outputText value="#{cardProgrammeContent.trescDo}" />
+			</p:column>
+
+			<p:column
+				headerText="#{msg['newSubjectCard.programmeContentTitle.table.topic']}"
+				style="width: 40px" sortBy="#{cardProgrammeContent.opis}">
+				<h:outputText value="#{cardProgrammeContent.opis}" />
+			</p:column>
+
+			<p:column
+				headerText="#{msg['newSubjectCard.programmeContentTitle.table.hours']}"
+				sortBy="#{cardProgrammeContent.liczbaGodzin}">
+				<h:outputText value="#{cardProgrammeContent.liczbaGodzin}" />
+			</p:column>
+
+			<p:column style="width: 200px">
+				<p:commandButton id="modify" style="width: 80px"
+					value="#{msg['newSubjectCard.prerequisitesTitle.table.button.edit']}"
+					disabled="false" />
+				<p:commandButton id="remove" style="width: 80px"
+					value="#{msg['newSubjectCard.prerequisitesTitle.table.button.remove']}"
+					disabled="false" />
+			</p:column>
+
+		</p:dataTable>
+		<br />
+		<br />
+
+		<p:commandButton
+			value="#{msg['newSubjectCard.prerequisitesTitle.button.import']}" />
+
+	</h:form>
+</ui:composition>

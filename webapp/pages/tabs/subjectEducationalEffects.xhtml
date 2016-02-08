@@ -1,0 +1,167 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form id="subjectEducationalEffectsForm">
+		<p:commandButton
+			value="#{msg['newSubjectCard.subjectEducationalEffectsTitle.getVerbs']}"/>
+
+		<br />
+		<br />
+
+		<h:outputText
+			value="#{msg['newSubjectCard.subjectEducationalEffectsTitle.knowledge']}" />
+		<p:separator />
+
+		<p:commandButton
+			value="#{msg['newSubjectCard.prerequisitesTitle.button.add']}"
+			action="#{addNewSubjectCardBean.preAddSEE('knowledge')}"
+			update=":modifySEEDlgForm"
+			oncomplete="PF('modifySEEDlg').show();"  />
+
+		<br />
+		<br />
+
+		<p:dataTable var="cardSEEKnowledge"
+			value="#{addNewSubjectCardBean.subjectEducationalEffectsKnowledge}"
+			emptyMessage="#{msg['newSubjectCard.subjectEducationalEffectsTitle.table.empty']}">
+
+			<p:column
+				headerText="#{msg['newSubjectCard.subjectEducationalEffectsTitle.table.number']}"
+				style="width: 40px" sortBy="#{cardSEEKnowledge.numer}">
+				<h:outputText value="#{cardSEEKnowledge.numer}" />
+			</p:column>
+
+			<p:column
+				headerText="#{msg['newSubjectCard.subjectEducationalEffectsTitle.table.description']}"
+				sortBy="#{cardSEEKnowledge.opis}">
+				<h:outputText value="#{cardSEEKnowledge.opis}" />
+			</p:column>
+
+			<p:column style="width: 200px">
+				<p:commandButton id="modify" style="width: 80px"
+					value="#{msg['newSubjectCard.prerequisitesTitle.table.button.edit']}"
+					action="#{addNewSubjectCardBean.preEditSEE(cardSEEKnowledge)}"
+					update=":modifySEEDlgForm"
+					oncomplete="PF('modifySEEDlg').show();"  />
+				<p:commandButton id="remove" style="width: 80px"
+					value="#{msg['newSubjectCard.prerequisitesTitle.table.button.remove']}"
+					action="#{addNewSubjectCardBean.preRemoveSEE(cardSEEKnowledge)}"
+					update=":removeSEEDlgForm"
+					oncomplete="PF('removeSEEDlg').show();" />
+			</p:column>
+
+		</p:dataTable>
+		<br />
+		<br />
+
+		<p:commandButton
+			value="#{msg['newSubjectCard.prerequisitesTitle.button.import']}" />
+
+		<br />
+		<br />
+
+		<h:outputText
+			value="#{msg['newSubjectCard.subjectEducationalEffectsTitle.skills']}" />
+		<p:separator />
+
+		<p:commandButton
+			value="#{msg['newSubjectCard.prerequisitesTitle.button.add']}"
+			action="#{addNewSubjectCardBean.preAddSEE('skill')}"
+			update=":modifySEEDlgForm"
+			oncomplete="PF('modifySEEDlg').show();"  />
+
+		<br />
+		<br />
+
+		<p:dataTable var="cardSEESkills"
+			value="#{addNewSubjectCardBean.subjectEducationalEffectsSkills}"
+			emptyMessage="#{msg['newSubjectCard.subjectEducationalEffectsTitle.table.empty']}">
+
+			<p:column
+				headerText="#{msg['newSubjectCard.subjectEducationalEffectsTitle.table.number']}"
+				style="width: 40px" sortBy="#{cardSEESkills.numer}">
+				<h:outputText value="#{cardSEESkills.numer}" />
+			</p:column>
+
+			<p:column
+				headerText="#{msg['newSubjectCard.subjectEducationalEffectsTitle.table.description']}"
+				sortBy="#{cardSEESkills.opis}">
+				<h:outputText value="#{cardSEESkills.opis}" />
+			</p:column>
+
+			<p:column style="width: 200px">
+				<p:commandButton id="modify" style="width: 80px"
+					value="#{msg['newSubjectCard.prerequisitesTitle.table.button.edit']}"
+					action="#{addNewSubjectCardBean.preEditSEE(cardSEESkills)}"
+					update=":modifySEEDlgForm"
+					oncomplete="PF('modifySEEDlg').show();"  />
+				<p:commandButton id="remove" style="width: 80px"
+					value="#{msg['newSubjectCard.prerequisitesTitle.table.button.remove']}"
+					action="#{addNewSubjectCardBean.preRemoveSEE(cardSEESkills)}"
+					update=":removeSEEDlgForm"
+					oncomplete="PF('removeSEEDlg').show();" />
+			</p:column>
+
+		</p:dataTable>
+		<br />
+		<br />
+
+		<p:commandButton
+			value="#{msg['newSubjectCard.prerequisitesTitle.button.import']}" />
+		<br />
+		<br />
+
+		<h:outputText
+			value="#{msg['newSubjectCard.subjectEducationalEffectsTitle.references']}" />
+		<p:separator />
+
+		<p:commandButton
+			value="#{msg['newSubjectCard.prerequisitesTitle.button.add']}"
+			action="#{addNewSubjectCardBean.preAddSEE('reference')}"
+			update=":modifySEEDlgForm"
+			oncomplete="PF('modifySEEDlg').show();"  />
+
+		<br />
+		<br />
+
+		<p:dataTable var="cardSEEReferences"
+			value="#{addNewSubjectCardBean.subjectEducationalEffectsReferences}"
+			emptyMessage="#{msg['newSubjectCard.subjectEducationalEffectsTitle.table.empty']}">
+
+			<p:column
+				headerText="#{msg['newSubjectCard.subjectEducationalEffectsTitle.table.number']}"
+				style="width: 40px" sortBy="#{cardSEEReferences.numer}">
+				<h:outputText value="#{cardSEEReferences.numer}" />
+			</p:column>
+
+			<p:column
+				headerText="#{msg['newSubjectCard.subjectEducationalEffectsTitle.table.description']}"
+				sortBy="#{cardSEEReferences.opis}">
+				<h:outputText value="#{cardSEEReferences.opis}" />
+			</p:column>
+
+			<p:column style="width: 200px">
+				<p:commandButton id="modify" style="width: 80px"
+					value="#{msg['newSubjectCard.prerequisitesTitle.table.button.edit']}"
+					action="#{addNewSubjectCardBean.preEditSEE(cardSEEReferences)}"
+					update=":modifySEEDlgForm"
+					oncomplete="PF('modifySEEDlg').show();"  />
+				<p:commandButton id="remove" style="width: 80px"
+					value="#{msg['newSubjectCard.prerequisitesTitle.table.button.remove']}"
+					action="#{addNewSubjectCardBean.preRemoveSEE(cardSEEReferences)}"
+					update=":removeSEEDlgForm"
+					oncomplete="PF('removeSEEDlg').show();" />
+			</p:column>
+
+		</p:dataTable>
+		<br />
+		<br />
+
+		<p:commandButton
+			value="#{msg['newSubjectCard.prerequisitesTitle.button.import']}" />
+
+	</h:form>
+</ui:composition>

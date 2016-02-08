@@ -1,0 +1,33 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog resizable="false" draggable="false" closable="true"
+		widgetVar="modifySEEDlg" modal="true">
+
+		<h:form id="modifySEEDlgForm">
+			<h:panelGrid columns="1">
+				<h:outputText value="#{msg['see.number']}" />
+				<h:inputText required="true"
+					value="#{addNewSubjectCardBean.selectedSEE.numer}" />
+				<h:outputText value="#{msg['see.description']}" />
+				<h:inputTextarea rows="5" cols="40" required="true"
+					value="#{addNewSubjectCardBean.selectedSEE.opis}" />
+
+				<h:panelGrid columns="2">
+					<p:commandButton value="#{msg['view.button.cancel']}"
+						onclick="PF('modifySEEDlg').hide();" />
+					<p:commandButton value="#{msg['view.button.accept']}"
+						action="#{addNewSubjectCardBean.saveSEEClick()}"
+						update=":tabView:subjectEducationalEffectsForm, :message"
+						oncomplete="PF('modifySEEDlg').hide();" />
+				</h:panelGrid>
+
+			</h:panelGrid>
+		</h:form>
+
+	</p:dialog>
+
+</ui:composition>

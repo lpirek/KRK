@@ -1,0 +1,134 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form id="evaluationOfSEEForm">
+		<h:outputText
+			value="#{msg['newSubjectCard.evaluationOfSEETitle.forming']}" />
+		<p:separator />
+
+		<p:commandButton
+			value="#{msg['newSubjectCard.prerequisitesTitle.button.add']}"
+			action="#{addNewSubjectCardBean.preAddEvaluation('forming')}"
+			update=":modifyEvaluationOfSEEDlgForm"
+			oncomplete="PF('modifyEvaluationOfSEEDlg').show();" />
+
+		<br />
+		<br />
+
+		<p:dataTable var="cardEvaluationForming"
+			value="#{addNewSubjectCardBean.formingEvaluations}"
+			emptyMessage="#{msg['newSubjectCard.evaluationOfSEETitle.table.empty']}">
+
+			<p:column
+				headerText="#{msg['newSubjectCard.evaluationOfSEETitle.table.number']}"
+				style="width: 40px" sortBy="#{cardEvaluationForming.numer}">
+				<h:outputText value="#{cardEvaluationForming.numer}" />
+			</p:column>
+
+			<p:column
+				headerText="#{msg['newSubjectCard.evaluationOfSEETitle.table.name']}"
+				sortBy="#{cardEvaluationForming.opis}">
+				<h:outputText value="#{cardEvaluationForming.opis}" />
+			</p:column>
+
+			<p:column
+				headerText="#{msg['newSubjectCard.evaluationOfSEETitle.table.numberEE']}"
+				sortBy="#{cardEvaluationForming.numer}">
+				<h:outputText value="TODO: Pobrać i wypisać" />
+			</p:column>
+
+			<p:column
+				headerText="#{msg['newSubjectCard.evaluationOfSEETitle.table.theWay']}"
+				sortBy="#{cardEvaluationForming.sposobOceny}">
+				<h:outputText value="#{cardEvaluationForming.sposobOceny}" />
+			</p:column>
+
+			<p:column style="width: 200px">
+				<p:commandButton id="modify" style="width: 80px"
+					value="#{msg['newSubjectCard.prerequisitesTitle.table.button.edit']}"
+					action="#{addNewSubjectCardBean.preEditEvaluation(cardEvaluationForming)}"
+					update=":modifyEvaluationOfSEEDlgForm"
+					oncomplete="PF('modifyEvaluationOfSEEDlg').show();" />
+				<p:commandButton id="remove" style="width: 80px"
+					value="#{msg['newSubjectCard.prerequisitesTitle.table.button.remove']}"
+					action="#{addNewSubjectCardBean.preRemoveEvaluation(cardEvaluationForming)}"
+					update=":removeEvaluationOfSEEDlgForm"
+					oncomplete="PF('removeEvaluationOfSEEDlg').show();" />
+			</p:column>
+		</p:dataTable>
+
+		<br />
+		<br />
+
+		<p:commandButton
+			value="#{msg['newSubjectCard.prerequisitesTitle.button.import']}" />
+
+		<br />
+		<br />
+
+		<h:outputText
+			value="#{msg['newSubjectCard.evaluationOfSEETitle.concluding']}" />
+		<p:separator />
+
+		<p:commandButton
+			value="#{msg['newSubjectCard.prerequisitesTitle.button.add']}"
+			action="#{addNewSubjectCardBean.preAddEvaluation('concluding')}"
+			update=":modifyEvaluationOfSEEDlgForm"
+			oncomplete="PF('modifyEvaluationOfSEEDlg').show();"  />
+
+		<br />
+		<br />
+
+		<p:dataTable var="cardEvaluationConcluding"
+			value="#{addNewSubjectCardBean.concludingEvaluations}"
+			emptyMessage="#{msg['newSubjectCard.evaluationOfSEETitle.table.empty']}">
+
+			<p:column
+				headerText="#{msg['newSubjectCard.evaluationOfSEETitle.table.number']}"
+				style="width: 40px" sortBy="#{cardEvaluationConcluding.numer}">
+				<h:outputText value="#{cardEvaluationConcluding.numer}" />
+			</p:column>
+
+			<p:column
+				headerText="#{msg['newSubjectCard.evaluationOfSEETitle.table.name']}"
+				sortBy="#{cardEvaluationConcluding.opis}">
+				<h:outputText value="#{cardEvaluationConcluding.opis}" />
+			</p:column>
+
+			<p:column
+				headerText="#{msg['newSubjectCard.evaluationOfSEETitle.table.numberEE']}"
+				sortBy="#{cardEvaluationConcluding.numer}">
+				<h:outputText value="TODO: Pobrać i wypisać" />
+			</p:column>
+
+			<p:column
+				headerText="#{msg['newSubjectCard.evaluationOfSEETitle.table.theWay']}"
+				sortBy="#{cardEvaluationConcluding.sposobOceny}">
+				<h:outputText value="#{cardEvaluationConcluding.sposobOceny}" />
+			</p:column>
+
+			<p:column style="width: 200px">
+				<p:commandButton id="modify" style="width: 80px"
+					value="#{msg['newSubjectCard.prerequisitesTitle.table.button.edit']}"
+					action="#{addNewSubjectCardBean.preEditEvaluation(cardEvaluationConcluding)}"
+					update=":modifyEvaluationOfSEEDlgForm"
+					oncomplete="PF('modifyEvaluationOfSEEDlg').show();" />
+				<p:commandButton id="remove" style="width: 80px"
+					value="#{msg['newSubjectCard.prerequisitesTitle.table.button.remove']}"
+					action="#{addNewSubjectCardBean.preRemoveEvaluation(cardEvaluationConcluding)}"
+					update=":removeEvaluationOfSEEDlgForm"
+					oncomplete="PF('removeEvaluationOfSEEDlg').show();" />
+			</p:column>
+
+		</p:dataTable>
+		<br />
+		<br />
+
+		<p:commandButton
+			value="#{msg['newSubjectCard.prerequisitesTitle.button.import']}" />
+
+	</h:form>
+</ui:composition>

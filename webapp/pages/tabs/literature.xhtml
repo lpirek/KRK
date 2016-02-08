@@ -1,0 +1,126 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form id="literatureForm">
+		<h:outputText value="#{msg['newSubjectCard.literatureTitle.basic']}" />
+		<p:separator />
+
+		<p:commandButton
+			value="#{msg['newSubjectCard.prerequisitesTitle.button.add']}"
+			action="#{addNewSubjectCardBean.preAddLiterature('basic')}"
+			update=":modifyLiteratureDlgForm"
+			oncomplete="PF('modifyLiteratureDlg').show();" />
+
+		<br />
+		<br />
+
+		<p:dataTable var="cardLiterature"
+			value="#{addNewSubjectCardBean.basicLiterature}"
+			emptyMessage="#{msg['newSubjectCard.literatureTitle.table.empty']}">
+
+			<p:column
+				headerText="#{msg['newSubjectCard.literatureTitle.table.number']}"
+				style="width: 40px" sortBy="#{cardLiterature.pozycja}">
+				<h:outputText value="#{cardLiterature.pozycja}" />
+			</p:column>
+
+			<p:column style="width: 200px">
+				<p:commandButton id="up" style="width: 80px" value="/\"
+					action="#{addNewSubjectCardBean.upLiteraturePosition(cardLiterature)}"
+					update=":tabView:literatureForm" />
+				<p:commandButton id="down" style="width: 80px" value="\/"
+					action="#{addNewSubjectCardBean.downLiteraturePosition(cardLiterature)}"
+					update=":tabView:literatureForm" />
+			</p:column>
+
+			<p:column
+				headerText="#{msg['newSubjectCard.literatureTitle.table.descripton']}"
+				sortBy="#{cardLiterature.opis}">
+				<h:outputText value="#{cardLiterature.opis}" />
+			</p:column>
+
+			<p:column style="width: 200px">
+				<p:commandButton id="modify" style="width: 80px"
+					value="#{msg['newSubjectCard.prerequisitesTitle.table.button.edit']}"
+					action="#{addNewSubjectCardBean.preEditLiterature(cardLiterature)}"
+					update=":modifyLiteratureDlgForm"
+					oncomplete="PF('modifyLiteratureDlg').show();"  />
+				<p:commandButton id="remove" style="width: 80px"
+					value="#{msg['newSubjectCard.prerequisitesTitle.table.button.remove']}"
+					action="#{addNewSubjectCardBean.preRemoveLiterature(cardLiterature)}"
+					update=":removeLiteratureDlgForm"
+					oncomplete="PF('removeLiteratureDlg').show();" />
+			</p:column>
+		</p:dataTable>
+
+		<br />
+		<br />
+
+		<p:commandButton
+			value="#{msg['newSubjectCard.prerequisitesTitle.button.import']}" />
+
+		<br />
+		<br />
+
+		<h:outputText
+			value="#{msg['newSubjectCard.literatureTitle.extended']}" />
+		<p:separator />
+
+		<p:commandButton
+			value="#{msg['newSubjectCard.prerequisitesTitle.button.add']}"
+			action="#{addNewSubjectCardBean.preAddLiterature('extended')}"
+			update=":modifyLiteratureDlgForm"
+			oncomplete="PF('modifyLiteratureDlg').show();"   />
+
+		<br />
+		<br />
+
+		<p:dataTable var="cardLiteratureExtended"
+			value="#{addNewSubjectCardBean.extendedLiterature}"
+			emptyMessage="#{msg['newSubjectCard.literatureTitle.table.empty']}">
+
+			<p:column
+				headerText="#{msg['newSubjectCard.literatureTitle.table.number']}"
+				style="width: 40px" sortBy="#{cardLiteratureExtended.pozycja}">
+				<h:outputText value="#{cardLiteratureExtended.pozycja}" />
+			</p:column>
+
+			<p:column style="width: 200px">
+				<p:commandButton id="up" style="width: 80px" value="/\"
+					action="#{addNewSubjectCardBean.upLiteraturePosition(cardLiteratureExtended)}"
+					update=":tabView:literatureForm" />
+				<p:commandButton id="down" style="width: 80px" value="\/"
+					action="#{addNewSubjectCardBean.downLiteraturePosition(cardLiteratureExtended)}"
+					update=":tabView:literatureForm" />
+			</p:column>
+
+			<p:column
+				headerText="#{msg['newSubjectCard.literatureTitle.table.descripton']}"
+				sortBy="#{cardLiteratureExtended.opis}">
+				<h:outputText value="#{cardLiteratureExtended.opis}" />
+			</p:column>
+
+			<p:column style="width: 200px">
+				<p:commandButton id="modify" style="width: 80px"
+					value="#{msg['newSubjectCard.prerequisitesTitle.table.button.edit']}"
+					action="#{addNewSubjectCardBean.preEditLiterature(cardLiteratureExtended)}"
+					update=":modifyLiteratureDlgForm"
+					oncomplete="PF('modifyLiteratureDlg').show();"  />
+				<p:commandButton id="remove" style="width: 80px"
+					value="#{msg['newSubjectCard.prerequisitesTitle.table.button.remove']}"
+					action="#{addNewSubjectCardBean.preRemoveLiterature(cardLiteratureExtended)}"
+					update=":removeLiteratureDlgForm"
+					oncomplete="PF('removeLiteratureDlg').show();" />
+			</p:column>
+
+		</p:dataTable>
+		<br />
+		<br />
+
+		<p:commandButton
+			value="#{msg['newSubjectCard.prerequisitesTitle.button.import']}" />
+	</h:form>
+</ui:composition>

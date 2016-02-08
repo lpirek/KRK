@@ -1,0 +1,55 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form id="teachingToolsForm">
+		<p:commandButton
+			value="#{msg['newSubjectCard.prerequisitesTitle.button.add']}"
+			action="#{addNewSubjectCardBean.preAddTeachingTool()}"
+			update=":modifyTeachingToolDlgForm"
+			oncomplete="PF('modifyTeachingToolDlg').show();"  />
+
+		<br />
+		<br />
+
+		<p:dataTable var="cardTeachingTools"
+			value="#{addNewSubjectCardBean.teachingTools}"
+			emptyMessage="#{msg['newSubjectCard.teachingToolsTitle.table.empty']}">
+
+			<p:column
+				headerText="#{msg['newSubjectCard.teachingToolsTitle.table.number']}"
+				style="width: 40px" sortBy="#{cardTeachingTools.numer}">
+				<h:outputText value="#{cardTeachingTools.numer}" />
+			</p:column>
+
+			<p:column
+				headerText="#{msg['newSubjectCard.teachingToolsTitle.table.tool']}"
+				sortBy="#{cardTeachingTools.opis}">
+				<h:outputText value="#{cardTeachingTools.opis}" />
+			</p:column>
+
+			<p:column style="width: 200px">
+				<p:commandButton id="modify" style="width: 80px"
+					value="#{msg['newSubjectCard.prerequisitesTitle.table.button.edit']}"
+					action="#{addNewSubjectCardBean.preEditTeachingTool(cardTeachingTools)}"
+					update=":modifyTeachingToolDlgForm"
+					oncomplete="PF('modifyTeachingToolDlg').show();"/>
+				<p:commandButton id="remove" style="width: 80px"
+					value="#{msg['newSubjectCard.prerequisitesTitle.table.button.remove']}"
+					action="#{addNewSubjectCardBean.preRemoveTeachingTool(cardTeachingTools)}"
+					update=":removeTeachingToolDlgForm"
+					oncomplete="PF('removeTeachingToolDlg').show();"/>
+			</p:column>
+
+		</p:dataTable>
+		<br />
+		<br />
+
+		<p:commandButton
+			value="#{msg['newSubjectCard.prerequisitesTitle.button.import']}" />
+
+	</h:form>
+
+</ui:composition>

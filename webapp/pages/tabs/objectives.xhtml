@@ -1,0 +1,53 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form id="objectivesForm">
+		<p:commandButton
+			value="#{msg['newSubjectCard.prerequisitesTitle.button.add']}"
+			action="#{addNewSubjectCardBean.preAddObjective()}"
+			update=":modifyObjectiveDlgForm"
+			oncomplete="PF('modifyObjectiveDlg').show();" />
+
+		<br />
+		<br />
+
+		<p:dataTable var="cardObjectives"
+			value="#{addNewSubjectCardBean.objectives}"
+			emptyMessage="#{msg['newSubjectCard.subjectObjectivesTitle.table.empty']}">
+
+			<p:column
+				headerText="#{msg['newSubjectCard.subjectObjectivesTitle.table.number']}"
+				style="width: 40px" sortBy="#{cardObjectives.numer}">
+				<h:outputText value="#{cardObjectives.numer}" />
+			</p:column>
+
+			<p:column
+				headerText="#{msg['newSubjectCard.subjectObjectivesTitle.table.objective']}"
+				sortBy="#{cardObjectives.opis}">
+				<h:outputText value="#{cardObjectives.opis}" />
+			</p:column>
+
+			<p:column style="width: 200px">
+				<p:commandButton id="modify" style="width: 80px"
+					value="#{msg['newSubjectCard.prerequisitesTitle.table.button.edit']}"
+					action="#{addNewSubjectCardBean.preEditObjective(cardObjectives)}"
+					update=":modifyObjectiveDlgForm"
+					oncomplete="PF('modifyObjectiveDlg').show();" />
+				<p:commandButton id="remove" style="width: 80px"
+					value="#{msg['newSubjectCard.prerequisitesTitle.table.button.remove']}"
+					action="#{addNewSubjectCardBean.preRemoveObjective(cardObjectives)}"
+					update=":removeObjectiveDlgForm"
+					oncomplete="PF('removeObjectiveDlg').show();" />
+			</p:column>
+
+		</p:dataTable>
+		<br />
+		<br />
+
+		<p:commandButton
+			value="#{msg['newSubjectCard.prerequisitesTitle.button.import']}" />
+	</h:form>
+</ui:composition>
