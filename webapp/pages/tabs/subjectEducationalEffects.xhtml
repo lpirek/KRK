@@ -6,7 +6,10 @@
 
 	<h:form id="subjectEducationalEffectsForm">
 		<p:commandButton
-			value="#{msg['newSubjectCard.subjectEducationalEffectsTitle.getVerbs']}"/>
+			value="#{msg['newSubjectCard.subjectEducationalEffectsTitle.getVerbs']}"
+			ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
+		    <p:fileDownload value="#{addNewSubjectCardBean.downloadVerbs()}" />
+		</p:commandButton>
 
 		<br />
 		<br />
@@ -167,4 +170,17 @@
 			value="#{msg['newSubjectCard.prerequisitesTitle.button.import']}" />
 
 	</h:form>
+	
+	<script type="text/javascript">
+		function start() {
+		    PF('statusDialog').show();
+		}
+		 
+		function stop() {
+		    PF('statusDialog').hide();
+		}
+	</script>
+	
 </ui:composition>
+
+ 	

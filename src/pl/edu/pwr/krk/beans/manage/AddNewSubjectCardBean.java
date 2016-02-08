@@ -1,6 +1,7 @@
 package pl.edu.pwr.krk.beans.manage;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -18,6 +19,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 import pl.edu.pwr.krk.models.entities.Celprzedmiotu;
 import pl.edu.pwr.krk.models.entities.Kartaprzedmiotu;
@@ -32,6 +35,9 @@ import pl.edu.pwr.krk.models.entities.Trescprogramowa;
 import pl.edu.pwr.krk.models.entities.Wymaganiawstepne;
 import pl.edu.pwr.krk.models.services.PrzedmiotService;
 import pl.edu.pwr.krk.tools.ApplicationContextProvider;
+
+import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
 
 @ManagedBean
 @ViewScoped()
@@ -382,6 +388,12 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 
 	public void setSelectedSEE(Przedmiotowyefektksztalcenia selectedSEE) {
 		this.selectedSEE = selectedSEE;
+	}
+	
+	public StreamedContent downloadVerbs() {
+		InputStream stream = ((ServletContext)FacesContext.getCurrentInstance().getExternalContext().getContext()).
+				getResourceAsStream("/resources/files/spis_czasownikow.pdf");
+		return new DefaultStreamedContent(stream, "application/pdf", "spis_czasownikow.pdf");
 	}
 
 	public void preAddSEE(String type) {

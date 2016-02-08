@@ -19,9 +19,9 @@
 					value="#{addNewSubjectCardBean.selectedEvaluation.opis}" />
 				
 				<h:outputText value="#{msg['seeEvaluation.numberEE']}" />
-				<p:selectOneRadio id="see"  layout="grid" columns="1">
+				<p:selectManyCheckbox id="see"  layout="grid" columns="1">
             		<f:selectItems value="#{addNewSubjectCardBean.subjectEducationalEffects}" var="see" itemLabel="#{see.numer}" itemValue="#{see.id}"/>
-        		</p:selectOneRadio>
+        		</p:selectManyCheckbox>
 					
 				<h:outputText value="#{msg['seeEvaluation.theWay']}" />
 				<h:inputTextarea rows="5" cols="40" required="true"

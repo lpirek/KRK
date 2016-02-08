@@ -5,6 +5,15 @@ import java.util.Set;
 
 public class Kurs implements java.io.Serializable {
 
+	public static final String FORMA_WYKLAD = "wykład";
+	public static final String FORMA_LABORATORIUM = "laboratorium";
+	public static final String FORMA_PROJEKT = "projekt";
+	public static final String FORMA_SEMINARIUM = "seminarium";
+	public static final String FORMA_CWICZENIA = "ćwiczenia";
+	
+	public static final String ZALICZENIE_EGZAMIN = "egzamin";
+	public static final String ZALICZENIE_NA_OCENE = "zaliczenie na ocenę";
+	
 	private Integer id;
 	private Grupakursow grupakursow;
 	private Semestr semestr;
