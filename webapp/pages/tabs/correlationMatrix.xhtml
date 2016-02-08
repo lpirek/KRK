@@ -1,0 +1,38 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	
+		<h:form id="correlationMatrixForm">
+				
+				<h:panelGroup rendered="#{addNewSubjectCardBean.subjectEducationalEffects.isEmpty()}">
+					
+					<br />
+				
+					<h:outputText value="#{msg['subjectEducationalEffects.emptyList']}"/>
+					
+					<br />
+					<br />
+				</h:panelGroup>
+				
+				<h:panelGroup rendered="#{!addNewSubjectCardBean.subjectEducationalEffects.isEmpty()}">
+				
+					<p:accordionPanel var="se" value="#{addNewSubjectCardBean.subjectEducationalEffects}">
+							
+							<p:tab title="#{se.numer}">
+							
+								<p:panel>
+									<h:outputText value="#{se.opis}"/>
+								</p:panel>
+							
+							</p:tab>
+		
+  				 		
+  				 	</p:accordionPanel>
+				
+				</h:panelGroup>
+				
+		</h:form>
+</ui:composition>

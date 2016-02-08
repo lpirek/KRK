@@ -20,6 +20,9 @@
 
 			<p:tabView id="tabView"
 				activeIndex="#{addNewSubjectCardBean.tabIndex}">
+				
+				<p:ajax event="tabChange" update="
+					:tabView:correlationMatrixForm" />
 
 				<p:tab title="#{msg['newSubjectCard.basicDataTitle']}">
 					<ui:include src="tabs/basicData.xhtml" />
@@ -55,6 +58,7 @@
 				</p:tab>
 
 				<p:tab title="#{msg['newSubjectCard.correlationMatrixTitle']}">
+					<ui:include src="tabs/correlationMatrix.xhtml" />
 				</p:tab>
 			</p:tabView>
 

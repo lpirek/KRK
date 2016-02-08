@@ -147,6 +147,24 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 	public List<Przedmiotowyefektksztalcenia> getSubjectEducationalEffectsReferences() {
 		return subjectEducationalEffectsReferences;
 	}
+	
+	public List<Przedmiotowyefektksztalcenia> getSubjectEducationalEffects() {
+		List<Przedmiotowyefektksztalcenia> result = new ArrayList<Przedmiotowyefektksztalcenia>();
+		
+		if (subjectEducationalEffectsKnowledge != null) {
+			result.addAll(subjectEducationalEffectsKnowledge);
+		}
+		
+		if (subjectEducationalEffectsSkills != null) {
+			result.addAll(subjectEducationalEffectsSkills);
+		}
+		
+		if (subjectEducationalEffectsReferences != null) {
+			result.addAll(subjectEducationalEffectsReferences);
+		}
+		
+		return result;
+	}
 
 	public void setSubjectEducationalEffectsReferences(
 			List<Przedmiotowyefektksztalcenia> subjectEducationalEffectsReferences) {
