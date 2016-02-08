@@ -20,7 +20,7 @@
 
 			<p:column
 				headerText="#{msg['newSubjectCard.subjectObjectivesTitle.table.number']}"
-				style="width: 40px" sortBy="#{cardObjectives.numer}">
+				style="width: 60px" sortBy="#{cardObjectives.numer}">
 				<h:outputText value="#{cardObjectives.numer}" />
 			</p:column>
 
@@ -48,6 +48,8 @@
 		<br />
 
 		<p:commandButton
+		 	disabled="true"
 			value="#{msg['newSubjectCard.prerequisitesTitle.button.import']}" />
+			
 	</h:form>
 </ui:composition>

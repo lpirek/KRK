@@ -33,7 +33,7 @@
 
 			<p:column
 				headerText="#{msg['newSubjectCard.programmeContentTitle.table.topic']}"
-				style="width: 40px" sortBy="#{cardProgrammeContent.opis}">
+				style="width: 100px" sortBy="#{cardProgrammeContent.opis}">
 				<h:outputText value="#{cardProgrammeContent.opis}" />
 			</p:column>
 
@@ -57,6 +57,7 @@
 		<br />
 
 		<p:commandButton
+			disabled="true"
 			value="#{msg['newSubjectCard.prerequisitesTitle.button.import']}" />
 
 	</h:form>

@@ -23,7 +23,7 @@
 
 			<p:column
 				headerText="#{msg['newSubjectCard.literatureTitle.table.number']}"
-				style="width: 40px" sortBy="#{cardLiterature.pozycja}">
+				style="width: 60px" sortBy="#{cardLiterature.pozycja}">
 				<h:outputText value="#{cardLiterature.pozycja}" />
 			</p:column>
 
@@ -60,6 +60,7 @@
 		<br />
 
 		<p:commandButton
+			disabled="true"
 			value="#{msg['newSubjectCard.prerequisitesTitle.button.import']}" />
 
 		<br />
@@ -84,7 +85,7 @@
 
 			<p:column
 				headerText="#{msg['newSubjectCard.literatureTitle.table.number']}"
-				style="width: 40px" sortBy="#{cardLiteratureExtended.pozycja}">
+				style="width: 60px" sortBy="#{cardLiteratureExtended.pozycja}">
 				<h:outputText value="#{cardLiteratureExtended.pozycja}" />
 			</p:column>
 
@@ -121,6 +122,8 @@
 		<br />
 
 		<p:commandButton
+			disabled="true"
 			value="#{msg['newSubjectCard.prerequisitesTitle.button.import']}" />
+			
 	</h:form>
 </ui:composition>

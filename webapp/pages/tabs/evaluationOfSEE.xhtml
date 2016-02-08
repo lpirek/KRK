@@ -24,7 +24,7 @@
 
 			<p:column
 				headerText="#{msg['newSubjectCard.evaluationOfSEETitle.table.number']}"
-				style="width: 40px" sortBy="#{cardEvaluationForming.numer}">
+				style="width: 60px" sortBy="#{cardEvaluationForming.numer}">
 				<h:outputText value="#{cardEvaluationForming.numer}" />
 			</p:column>
 
@@ -64,6 +64,7 @@
 		<br />
 
 		<p:commandButton
+			disabled="true"
 			value="#{msg['newSubjectCard.prerequisitesTitle.button.import']}" />
 
 		<br />
@@ -88,7 +89,7 @@
 
 			<p:column
 				headerText="#{msg['newSubjectCard.evaluationOfSEETitle.table.number']}"
-				style="width: 40px" sortBy="#{cardEvaluationConcluding.numer}">
+				style="width: 60px" sortBy="#{cardEvaluationConcluding.numer}">
 				<h:outputText value="#{cardEvaluationConcluding.numer}" />
 			</p:column>
 
@@ -128,6 +129,7 @@
 		<br />
 
 		<p:commandButton
+			disabled="true"
 			value="#{msg['newSubjectCard.prerequisitesTitle.button.import']}" />
 
 	</h:form>

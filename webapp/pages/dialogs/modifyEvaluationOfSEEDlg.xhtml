@@ -11,14 +11,18 @@
 			<h:panelGrid columns="1">
 				<h:outputText value="#{msg['seeEvaluation.number']}" />
 				<h:inputText
+					required="true"
 					value="#{addNewSubjectCardBean.selectedEvaluation.numer}" />
 				<h:outputText value="#{msg['seeEvaluation.name']}" />
-				<h:inputTextarea rows="5" cols="40" required="true"
+				<h:inputText
+					required="true"
 					value="#{addNewSubjectCardBean.selectedEvaluation.opis}" />
-				<h:outputText value="#{msg['seeEvaluation.name']}" />
+				
 				<h:outputText value="#{msg['seeEvaluation.numberEE']}" />
-				<h:inputTextarea rows="5" cols="40" required="true"
-					value="TODO: zrobić" />
+				<p:selectOneRadio id="see"  layout="grid" columns="1">
+            		<f:selectItems value="#{addNewSubjectCardBean.subjectEducationalEffects}" var="see" itemLabel="#{see.numer}" itemValue="#{see.id}"/>
+        		</p:selectOneRadio>
+					
 				<h:outputText value="#{msg['seeEvaluation.theWay']}" />
 				<h:inputTextarea rows="5" cols="40" required="true"
 					value="#{addNewSubjectCardBean.selectedEvaluation.sposobOceny}" />

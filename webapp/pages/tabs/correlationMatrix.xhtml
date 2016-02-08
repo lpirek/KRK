@@ -19,12 +19,12 @@
 				
 				<h:panelGroup rendered="#{!addNewSubjectCardBean.subjectEducationalEffects.isEmpty()}">
 				
-					<p:accordionPanel var="se" value="#{addNewSubjectCardBean.subjectEducationalEffects}">
+					<p:accordionPanel var="see" value="#{addNewSubjectCardBean.subjectEducationalEffects}">
 							
-							<p:tab title="#{se.numer}">
+							<p:tab title="#{see.numer}">
 							
 								<p:panel>
-									<h:outputText value="#{se.opis}"/>
+									<h:outputText value="#{see.opis}"/>
 								</p:panel>
 							
 							</p:tab>

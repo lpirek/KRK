@@ -65,9 +65,12 @@
 			<br />
 			<br />
 
-			<p:commandButton value="#{msg['newSubjectCard.button.cancel']}" />
-			<p:commandButton value="#{msg['newSubjectCard.button.storeDraft']}" />
-			<p:commandButton value="#{msg['newSubjectCard.button.store']}" />
+			<p:commandButton value="#{msg['newSubjectCard.button.cancel']}" 
+				action="#{addNewSubjectCardBean.cancelNewCard}" />
+			<p:commandButton value="#{msg['newSubjectCard.button.storeDraft']}" 
+				action="#{addNewSubjectCardBean.saveNewCard}" />
+			<p:commandButton value="#{msg['newSubjectCard.button.store']}"
+				action="#{addNewSubjectCardBean.confirmNewCard}" />
 
 			<ui:include src="dialogs/modifyPrerequisiteDlg.xhtml" />
 			<ui:include src="dialogs/removePrerequisiteDlg.xhtml" />
