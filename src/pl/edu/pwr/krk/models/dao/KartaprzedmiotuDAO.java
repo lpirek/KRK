@@ -24,54 +24,70 @@ public class KartaprzedmiotuDAO extends DAO {
 	private static final Log log = LogFactory.getLog(KartaprzedmiotuDAO.class);
 
 	public Kartaprzedmiotu findById(int id) {
-		
+
 		Session session = null;
-		
+
 		try {
 			session = sessionFactory.openSession();
 			Transaction tx = session.beginTransaction();
-			
+
 			Criteria criteria = session.createCriteria(Kartaprzedmiotu.class);
 			criteria.add(Restrictions.eq("id", id));
-			
-			Kartaprzedmiotu instance = (Kartaprzedmiotu)criteria.uniqueResult();
-			
+
+			Kartaprzedmiotu instance = (Kartaprzedmiotu) criteria.uniqueResult();
+
 			tx.commit();
-		
+
 			return instance;
-			
+
 		} catch (RuntimeException exception) {
 			log.error("get failed", exception);
 			throw exception;
 		} finally {
-	        session.close(); 
-	    }
+			session.close();
+		}
 	}
-	
+
 	public List<Kartaprzedmiotu> findKartyPrzedmiotu(int przedmiotId) {
-		
+
 		Session session = null;
 		List<Kartaprzedmiotu> result = null;
-		
+
 		try {
 			session = sessionFactory.openSession();
 			Transaction tx = session.beginTransaction();
-			
+
 			Criteria criteria = session.createCriteria(Kartaprzedmiotu.class);
 			criteria.add(Restrictions.eq("przedmiot.id", przedmiotId));
-			
+
 			result = new ArrayList<Kartaprzedmiotu>(criteria.list());
-			
+
 			tx.commit();
 
 			return result;
+
+		} catch (RuntimeException exception) {
+			log.error("get failed", exception);
+			throw exception;
+		} finally {
+			session.close();
+		}
+	}
+
+	public void saveOrUpdate(Kartaprzedmiotu subjectCard) {
+		Session session = null;
+		try {
+			session = sessionFactory.openSession();
+			Transaction tx = session.beginTransaction();
+
+			session.saveOrUpdate(subjectCard);
+			tx.commit();
 			
 		} catch (RuntimeException exception) {
 			log.error("get failed", exception);
 			throw exception;
 		} finally {
-	        session.close(); 
-	    }
+			session.close();
+		}
 	}
-	
 }

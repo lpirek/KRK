@@ -2,7 +2,10 @@ package pl.edu.pwr.krk.tools;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
 
+import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -33,6 +36,8 @@ public class ReportGenerator extends AbstractSampleApp {
 	 */
 	public void fill() throws JRException {
 		long start = System.currentTimeMillis();
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("subjectDetails", new JREmptyDataSource(50));
 		JasperFillManager.fillReportToFile("D:/Studia/Semestr II/PSI/KRK/webapp/resources/reports/StylesReport.jasper", null);
 		System.err.println("Filling time : " + (System.currentTimeMillis() - start));
 	}

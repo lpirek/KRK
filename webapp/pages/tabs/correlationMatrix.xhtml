@@ -67,7 +67,7 @@
 								<p:selectManyCheckbox layout="grid" columns="1"
 									value="#{addNewSubjectCardBean.selectedProgrammeContents}">
             						<f:selectItems value="#{addNewSubjectCardBean.programmeContents}" var="pc" itemLabel="#{pc.opis}" itemValue="#{pc.numer}"/>
-        							<f:ajax listener="#{addNewSubjectCardBean.selectProgrammeListener}" />	
+        							<f:ajax listener="#{addNewSubjectCardBean.selectProgrammeContentListener}" />	
         						</p:selectManyCheckbox>
 							</p:panel>	
 							

@@ -54,14 +54,6 @@ public class AuthBean implements Serializable {
     
     public String doLogin() throws ServletException, IOException {
         
-    	ReportGenerator rg = new ReportGenerator();
-    	try {
-			rg.test();
-		} catch (JRException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-    	
         try {
             Authentication request = new UsernamePasswordAuthenticationToken(username, password);
             Authentication result = authenticationManager.authenticate(request);
