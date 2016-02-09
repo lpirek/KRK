@@ -691,13 +691,13 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 		if (selectedSEE != null) {
 			if (selectedSEE.getNumer().startsWith("PEK_W")) {
 				subjectEducationalEffectsKnowledge.remove(selectedSEE);
-				correctSEENumbers(subjectEducationalEffectsKnowledge);
+				//correctSEENumbers(subjectEducationalEffectsKnowledge);
 			} else if (selectedSEE.getNumer().startsWith("PEK_U")) {
 				subjectEducationalEffectsSkills.remove(selectedSEE);
-				correctSEENumbers(subjectEducationalEffectsSkills);
+				//correctSEENumbers(subjectEducationalEffectsSkills);
 			} else {
 				subjectEducationalEffectsReferences.remove(selectedSEE);
-				correctSEENumbers(subjectEducationalEffectsReferences);
+				//correctSEENumbers(subjectEducationalEffectsReferences);
 			}
 
 			showMessageDlg(FacesMessage.SEVERITY_INFO, "Pomyślnie usunięto");
@@ -710,7 +710,7 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 	private void correctSEENumbers(List<Przedmiotowyefektksztalcenia> list) {
 		for (int i = 0; i < list.size(); i++) {
 			StringBuffer sb = new StringBuffer();
-			sb.append(list.get(i).getNumer().substring(0, 5));
+			sb.append(list.get(i).getNumer().substring(0, 4));
 			sb.append(String.format("%d02", i + 1));
 			list.get(i).setNumer(sb.toString());
 		}

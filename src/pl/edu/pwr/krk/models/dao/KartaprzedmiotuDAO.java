@@ -37,7 +37,21 @@ public class KartaprzedmiotuDAO extends DAO {
 			Kartaprzedmiotu instance = (Kartaprzedmiotu) criteria.uniqueResult();
 
 			tx.commit();
+			
+			Hibernate.initialize(instance.getCelprzedmiotus());
+			Hibernate.initialize(instance.getNarzedziedydaktycznes());
+			Hibernate.initialize(instance.getPrzedmiotowyefektksztalcenias());
+			Hibernate.initialize(instance.getTrescprogramowas());
+			Hibernate.initialize(instance.getWymaganiawstepnes());
+			Hibernate.initialize(instance.getOcenaosiagieciapeks());
+			Hibernate.initialize(instance.getPozycjaliteraturowas());
 
+			Hibernate.initialize(instance.getPrzedmiot());
+			Hibernate.initialize(instance.getPrzedmiot().getModulksztalcenia());
+			Hibernate.initialize(instance.getPrzedmiot().getModulksztalcenia().getProgramstudiow());
+			Hibernate.initialize(instance.getPrzedmiot().getModulksztalcenia().getProgramstudiow().getProgramksztalcenia());
+			Hibernate.initialize(instance.getPrzedmiot().getModulksztalcenia().getProgramstudiow().getProgramksztalcenia().getKierunekstudiow());
+			
 			return instance;
 
 		} catch (RuntimeException exception) {

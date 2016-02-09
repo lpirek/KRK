@@ -64,8 +64,8 @@ public class VerifySubjectCardBean extends Bean implements Serializable {
 	}
 
 	public void initialiaze() {
-		//subjectCard = kartaPrzedmiotuService.findById(id);
-		//verify();
+		subjectCard = kartaPrzedmiotuService.findById(id);
+		verify();
 	}
 
 	List<String> errorList = new ArrayList<>();
@@ -307,6 +307,14 @@ public class VerifySubjectCardBean extends Bean implements Serializable {
 		this.id = id;
 
 		initialiaze();
+	}
+	
+	public List<String> getErrorList() {
+		return errorList;
+	}
+		
+	public Kartaprzedmiotu getSubjectCard() {
+		return subjectCard;
 	}
 
 }

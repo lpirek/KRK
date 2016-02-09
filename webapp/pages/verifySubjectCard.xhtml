@@ -16,8 +16,15 @@
 
 		<ui:define name="content">
 		
-		<h2>#{msg['verifySubjectCard.title']}</h2>
+		<h2>#{msg['verifySubjectCard.title']} - #{verifySubjectCardBean.subjectCard.nazwa}</h2>
 		
+		<p:dataList value="#{verifySubjectCardBean.errorList}" var="error" type="ordered">
+	        #{error}
+	    </p:dataList>
+		
+		
+		<br />
+		<br />
 		
 		</ui:define>
 		
