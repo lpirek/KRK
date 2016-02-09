@@ -127,6 +127,20 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 		}
 	}
 
+	private void cleanUp() {
+		prerequisites = new ArrayList<>();
+		objectives = new ArrayList<>();
+		subjectEducationalEffectsKnowledge = new ArrayList<>();
+		subjectEducationalEffectsSkills = new ArrayList<>();
+		subjectEducationalEffectsReferences = new ArrayList<>();
+		teachingTools = new ArrayList<>();
+		basicLiterature = new ArrayList<>();
+		extendedLiterature = new ArrayList<>();
+		formingEvaluations = new ArrayList<>();
+		concludingEvaluations = new ArrayList<>();
+		programmeContents = new HashMap<Integer, List<Trescprogramowa>>();
+	}
+
 	public void initialiaze() {
 		subject = subjectService.getPrzedmiot(id);
 		fees = feeService.getFEEs();
@@ -172,11 +186,12 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 	 */
 
 	public void cancelNewCard() throws IOException {
+		cleanUp();
 		FacesContext.getCurrentInstance().getExternalContext().redirect("subjectCards.xhtml?id=" + id);
 	}
 
 	public void saveNewCard() throws IOException {
-		subjectCard.setStatus("wersja robocza"); 
+		subjectCard.setStatus("wersja robocza");
 		storeSubjectCard();
 
 		FacesContext.getCurrentInstance().getExternalContext().redirect("subjectCards.xhtml?id=" + id);
@@ -185,23 +200,37 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 	public void confirmNewCard() throws IOException {
 		subjectCard.setStatus("wersja zatwierdzona");
 		storeSubjectCard();
-		
+
 		FacesContext.getCurrentInstance().getExternalContext().redirect("subjectCards.xhtml?id=" + id);
 	}
 
 	private void storeSubjectCard() {
-		//addNewSubjectCardBean.subject.modulksztalcenia.programstudiow.programksztalcenia.kierunekstudiow.wydzial.nazwa
+		// addNewSubjectCardBean.subject.modulksztalcenia.programstudiow.programksztalcenia.kierunekstudiow.wydzial.nazwa
 		subjectCard.setCelprzedmiotus(new HashSet<>(objectives));
 		subjectCard.setDataUtworzenia(new Date());
-		subjectCard.setFormaStudiow(subject.getModulksztalcenia().getProgramstudiow().getProgramksztalcenia().getFormaStudiow());
-		subjectCard.setKierunekStudiow(subject.getModulksztalcenia().getProgramstudiow().getProgramksztalcenia().getKierunekstudiow().getNazwa());
+		subjectCard.setFormaStudiow(
+				subject.getModulksztalcenia().getProgramstudiow().getProgramksztalcenia().getFormaStudiow());
+		subjectCard.setKierunekStudiow(subject.getModulksztalcenia().getProgramstudiow().getProgramksztalcenia()
+				.getKierunekstudiow().getNazwa());
 		subjectCard.setNarzedziedydaktycznes(new HashSet<>(teachingTools));
-		subjectCard.setNazwa(getSubjectName());
+		subjectCard.setWersja((short)(subjectCardService.getKartyPrzedmiotu(id).size()+1));
+
+		String[] name = getSubjectName().split("\\s+");
+		StringBuffer sb = new StringBuffer();
+		for (String n : name) {
+			sb.append(n.substring(0, 5));
+			sb.append("_");
+		}
+		sb.append(subjectCard.getFormaStudiow().substring(0, 2));
+		sb.append("_");
+		sb.append(subjectCard.getWersja());
+		subjectCard.setNazwa(sb.toString());
+
 		subjectCard.setWymaganiawstepnes(new HashSet<>(prerequisites));
 		subjectCard.setPrzedmiot(subject);
-		subjectCard.setStopienStudiow(subject.getModulksztalcenia().getProgramstudiow().getProgramksztalcenia().getStopienStudiow());
-		subjectCard.setWersja((short)0);
-		
+		subjectCard.setStopienStudiow(
+				subject.getModulksztalcenia().getProgramstudiow().getProgramksztalcenia().getStopienStudiow());
+
 		Set<Ocenaosiagieciapek> evalTemp = new HashSet<>(formingEvaluations);
 		evalTemp.addAll(concludingEvaluations);
 		subjectCard.setOcenaosiagieciapeks(evalTemp);
@@ -210,17 +239,17 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 		seeTemp.addAll(subjectEducationalEffectsReferences);
 		subjectCard.setPrzedmiotowyefektksztalcenias(seeTemp);
 		Set<Pozycjaliteraturowa> litTemp = new HashSet<>(basicLiterature);
-		litTemp.addAll(extendedLiterature);		
+		litTemp.addAll(extendedLiterature);
 		subjectCard.setPozycjaliteraturowas(litTemp);
 
 		Set<Trescprogramowa> progTemp = new HashSet<>();
-		for( Integer pcKey : programmeContents.keySet() )
-		{
-			progTemp.addAll( programmeContents.get(pcKey));
+		for (Integer pcKey : programmeContents.keySet()) {
+			progTemp.addAll(programmeContents.get(pcKey));
 		}
 		subjectCard.setTrescprogramowas(progTemp);
 
 		subjectCardService.saveOrUpdate(subjectCard);
+		cleanUp();
 	}
 
 	/**
