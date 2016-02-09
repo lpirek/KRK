@@ -7,7 +7,6 @@ public class Narzedziedydaktyczne implements java.io.Serializable {
 
 	private Integer id;
 	private Kartaprzedmiotu kartaprzedmiotu;
-	private Kurs kurs;
 	private String numer;
 	private String opis;
 	private Set<Peknarzedziedydaktyczne> peknarzedziedydaktycznes = new HashSet<Peknarzedziedydaktyczne>(0);
@@ -15,17 +14,15 @@ public class Narzedziedydaktyczne implements java.io.Serializable {
 	public Narzedziedydaktyczne() {
 	}
 
-	public Narzedziedydaktyczne(Kartaprzedmiotu kartaprzedmiotu, Kurs kurs, String numer, String opis) {
+	public Narzedziedydaktyczne(Kartaprzedmiotu kartaprzedmiotu, String numer, String opis) {
 		this.kartaprzedmiotu = kartaprzedmiotu;
-		this.kurs = kurs;
 		this.numer = numer;
 		this.opis = opis;
 	}
 
-	public Narzedziedydaktyczne(Kartaprzedmiotu kartaprzedmiotu, Kurs kurs, String numer, String opis,
+	public Narzedziedydaktyczne(Kartaprzedmiotu kartaprzedmiotu, String numer, String opis,
 			Set<Peknarzedziedydaktyczne> peknarzedziedydaktycznes) {
 		this.kartaprzedmiotu = kartaprzedmiotu;
-		this.kurs = kurs;
 		this.numer = numer;
 		this.opis = opis;
 		this.peknarzedziedydaktycznes = peknarzedziedydaktycznes;
@@ -45,14 +42,6 @@ public class Narzedziedydaktyczne implements java.io.Serializable {
 
 	public void setKartaprzedmiotu(Kartaprzedmiotu kartaprzedmiotu) {
 		this.kartaprzedmiotu = kartaprzedmiotu;
-	}
-
-	public Kurs getKurs() {
-		return this.kurs;
-	}
-
-	public void setKurs(Kurs kurs) {
-		this.kurs = kurs;
 	}
 
 	public String getNumer() {

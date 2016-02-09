@@ -263,20 +263,6 @@ public class VerifySubjectCardBean extends Bean implements Serializable {
 			errorList.add("Karta przedmiotu musi mieć wybrany język, w którym jest napisana (polski lub angielski)");
 		}
 
-		List<Przedmiotowyefektksztalcenia> copyList = new ArrayList<>();
-		// REG017 Oceny podsumowujące dla danej karty przedmiotu muszą pokrywać
-		// wszystkie Przedmiotowe Efekty Kształcenia dla tej karty.
-		for (Ocenaosiagieciapek obj : subjectCard.getOcenaosiagieciapeks()) {
-			if (obj.getNumer().startsWith("P"))
-				for (Pekocenaosiagnieciapek pek : obj.getPekocenaosiagnieciapeks()) {
-					copyList.add(pek.getPrzedmiotowyefektksztalcenia());
-				}
-		}
-		if (copyList.size() != subjectCard.getPrzedmiotowyefektksztalcenias().size()) {
-			errorList.add(
-					"Oceny podsumowujące dla danej karty przedmiotu muszą pokrywać wszystkie Przedmiotowe Efekty Kształcenia dla tej karty");
-		}
-
 		// REG023 Numer kolejnego Przedmiotowego Efektu Kształcenia musi
 		// spełniać następujące wyrażenie regularne: /PEK_[A-Z][0-9]* /
 		// (objaśnienie: zaczyna się od ciągu znaków "PEK_", po nim następuje
