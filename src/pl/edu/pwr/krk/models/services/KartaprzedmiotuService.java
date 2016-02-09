@@ -20,6 +20,10 @@ public class KartaprzedmiotuService {
 		this.kartaprzedmiotuDAO = kartaprzedmiotuDAO;
 	}
 
+	public Kartaprzedmiotu findById(int id) {
+		return kartaprzedmiotuDAO.findById(id);
+	}
+	
 	public List<Kartaprzedmiotu> getKartyPrzedmiotu(int id) {
 		return kartaprzedmiotuDAO.findKartyPrzedmiotu(id);
 	}
