@@ -28,7 +28,7 @@ public class KartaprzedmiotuService {
 		return kartaprzedmiotuDAO.findKartyPrzedmiotu(id);
 	}
 
-	public void saveOrUpdate(Kartaprzedmiotu subjectCard) {
-		kartaprzedmiotuDAO.saveOrUpdate(subjectCard);
+	public int saveOrUpdate(Kartaprzedmiotu subjectCard) {
+		return kartaprzedmiotuDAO.saveOrUpdate(subjectCard);
 	}
 }

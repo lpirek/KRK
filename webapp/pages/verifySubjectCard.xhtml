@@ -18,6 +18,13 @@
 		
 		<h2>#{msg['verifySubjectCard.title']} - #{verifySubjectCardBean.subjectCard.nazwa}</h2>
 		
+		<br />
+		<br />
+
+		<h:outputText
+			value="#{msg['verifySubjectCard.errors']}" />
+		<p:separator />
+		
 		<p:dataList value="#{verifySubjectCardBean.errorList}" var="error" type="ordered">
 	        #{error}
 	    </p:dataList>
@@ -25,6 +32,9 @@
 		
 		<br />
 		<br />
+		
+		<p:commandButton value="#{msg['verifySubjectCard.button.cancel']}" 
+				action="#{verifySubjectCardBean.cancelVerify}" />
 		
 		</ui:define>
 		

@@ -6,6 +6,11 @@ import java.util.Set;
 
 public class Kartaprzedmiotu implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	public static final String JEZYK_PL = "PL";
 	public static final String JEZYK_EN = "EN";
 	

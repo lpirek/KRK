@@ -6,7 +6,7 @@
     <class name="pl.edu.pwr.krk.models.entities.Celprzedmiotu" table="celprzedmiotu" catalog="easykrkdb">
         <id name="id" type="int">
             <column name="id" />
-            <generator class="assigned" />
+            <generator class="native" />
         </id>
         <many-to-one name="kartaprzedmiotu" class="pl.edu.pwr.krk.models.entities.Kartaprzedmiotu" fetch="select">
             <column name="KartaPrzedmiotuid" not-null="true" />

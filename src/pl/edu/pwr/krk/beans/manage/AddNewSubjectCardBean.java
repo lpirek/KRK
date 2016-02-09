@@ -66,7 +66,8 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 	private static final Log log = LogFactory.getLog(AddNewSubjectCardBean.class);
 
 	private int id;
-
+	private int savedId;
+	
 	private Przedmiot subject;
 	private PrzedmiotService subjectService = null;
 	private KartaprzedmiotuService subjectCardService = null;
@@ -109,6 +110,8 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 	private List<String> selectedProgrammeContents;
 
 	private List<Kierunkowyefektksztalcenia> fees;
+
+	private String selectedType;
 
 	public AddNewSubjectCardBean() {
 		log.debug("Initialiaze AddNewSubjectCardBean");
@@ -191,17 +194,17 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 	}
 
 	public void saveNewCard() throws IOException {
-		subjectCard.setStatus("wersja robocza");
+		subjectCard.setStatus(Kartaprzedmiotu.STATUS_ROBOCZY);
 		storeSubjectCard();
-
+		
 		FacesContext.getCurrentInstance().getExternalContext().redirect("subjectCards.xhtml?id=" + id);
 	}
 
 	public void confirmNewCard() throws IOException {
-		subjectCard.setStatus("wersja zatwierdzona");
+		subjectCard.setStatus(Kartaprzedmiotu.STATUS_ROBOCZY);
 		storeSubjectCard();
 
-		FacesContext.getCurrentInstance().getExternalContext().redirect("subjectCards.xhtml?id=" + id);
+		FacesContext.getCurrentInstance().getExternalContext().redirect("verifySubjectCard.xhtml?id=" + savedId);
 	}
 
 	private void storeSubjectCard() {
@@ -248,7 +251,7 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 		}
 		subjectCard.setTrescprogramowas(progTemp);
 
-		subjectCardService.saveOrUpdate(subjectCard);
+		savedId = subjectCardService.saveOrUpdate(subjectCard);
 		cleanUp();
 	}
 
@@ -606,40 +609,47 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 
 	public void preAddSEE(String type) {
 		this.selectedSEE = new Przedmiotowyefektksztalcenia();
+		this.selectedType = type;
+		
 		if (type.equals("knowledge")) {
 			StringBuffer sb = new StringBuffer();
 			int number = (subjectEducationalEffectsKnowledge.size() + 1);
 			sb.append("PEK_W");
 			sb.append(String.format("%02d", number));
 			this.selectedSEE.setNumer(sb.toString());
+			this.selectedSEE.setZakres("wiedza");
 		} else if (type.equals("skill")) {
 			StringBuffer sb = new StringBuffer();
 			int number = (subjectEducationalEffectsSkills.size() + 1);
 			sb.append("PEK_U");
 			sb.append(String.format("%02d", number));
 			this.selectedSEE.setNumer(sb.toString());
+			this.selectedSEE.setZakres("umiejętności");
 		} else {
 			StringBuffer sb = new StringBuffer();
 			int number = (subjectEducationalEffectsReferences.size() + 1);
 			sb.append("PEK_K");
 			sb.append(String.format("%02d", number));
 			this.selectedSEE.setNumer(sb.toString());
+			this.selectedSEE.setZakres("kompetenecje");
 		}
 	}
 
-	public void preEditSEE(Przedmiotowyefektksztalcenia see) {
+	public void preEditSEE(String type, Przedmiotowyefektksztalcenia see) {
 		this.selectedSEE = see;
+		this.selectedType = type;
 
-		if (see.getNumer().startsWith("PEK_W")) {
+		if (type.equals("knowledge")) {
 			elementIndex = subjectEducationalEffectsKnowledge.lastIndexOf(see);
-		} else if (see.getNumer().startsWith("PEK_U")) {
+		} else if (type.equals("skill")) {
 			elementIndex = subjectEducationalEffectsSkills.lastIndexOf(see);
 		} else {
 			elementIndex = subjectEducationalEffectsReferences.lastIndexOf(see);
 		}
 	}
 
-	public void preRemoveSEE(Przedmiotowyefektksztalcenia see) {
+	public void preRemoveSEE(String type, Przedmiotowyefektksztalcenia see) {
+		this.selectedType = type;
 		this.selectedSEE = see;
 	}
 
@@ -647,9 +657,9 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 
 		if (selectedSEE != null) {
 
-			if (selectedSEE.getNumer().startsWith("PEK_W")) {
+			if (selectedType.equals("knowledge")) {
 				subjectEducationalEffectsKnowledge.remove(selectedSEE);
-			} else if (selectedSEE.getNumer().startsWith("PEK_U")) {
+			} else if (selectedType.equals("skill")) {
 				subjectEducationalEffectsSkills.remove(selectedSEE);
 			} else {
 				subjectEducationalEffectsReferences.remove(selectedSEE);
@@ -657,10 +667,10 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 
 			if (selectedSEE.getId() == null || selectedSEE.getId() == 0) {
 				// Add
-				if (selectedSEE.getNumer().startsWith("PEK_W")) {
+				if (selectedType.equals("knowledge")) {
 					selectedSEE.setKartaprzedmiotu(subjectCard);
 					subjectEducationalEffectsKnowledge.add(selectedSEE);
-				} else if (selectedSEE.getNumer().startsWith("PEK_U")) {
+				} else if (selectedType.equals("skill")) {
 					selectedSEE.setKartaprzedmiotu(subjectCard);
 					subjectEducationalEffectsSkills.add(selectedSEE);
 				} else {
@@ -670,9 +680,9 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 
 			} else {
 				// Edit
-				if (selectedSEE.getNumer().startsWith("PEK_W")) {
+				if (selectedType.equals("knowledge")) {
 					subjectEducationalEffectsKnowledge.add(elementIndex, selectedSEE);
-				} else if (selectedSEE.getNumer().startsWith("PEK_U")) {
+				} else if (selectedType.equals("skill")) {
 					subjectEducationalEffectsSkills.add(elementIndex, selectedSEE);
 				} else {
 					subjectEducationalEffectsReferences.add(elementIndex, selectedSEE);
@@ -689,10 +699,10 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 	public void removeSEEClick() {
 
 		if (selectedSEE != null) {
-			if (selectedSEE.getNumer().startsWith("PEK_W")) {
+			if (selectedType.equals("knowledge")) {
 				subjectEducationalEffectsKnowledge.remove(selectedSEE);
 				//correctSEENumbers(subjectEducationalEffectsKnowledge);
-			} else if (selectedSEE.getNumer().startsWith("PEK_U")) {
+			} else if (selectedType.equals("skill")) {
 				subjectEducationalEffectsSkills.remove(selectedSEE);
 				//correctSEENumbers(subjectEducationalEffectsSkills);
 			} else {
@@ -1006,11 +1016,13 @@ public class AddNewSubjectCardBean extends Bean implements Serializable {
 			sb.append("F");
 			sb.append(formingEvaluations.size() + 1);
 			this.selectedEvaluation.setNumer(sb.toString());
+			this.selectedEvaluation.setRodzajOceny("formująca");
 		} else {
 			StringBuffer sb = new StringBuffer();
 			sb.append("P");
 			sb.append(concludingEvaluations.size() + 1);
 			this.selectedEvaluation.setNumer(sb.toString());
+			this.selectedEvaluation.setRodzajOceny("podsumowująca");
 		}
 
 		putValuesToSelectedSEEs();

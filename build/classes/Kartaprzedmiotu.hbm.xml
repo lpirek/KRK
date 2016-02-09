@@ -6,7 +6,7 @@
     <class name="pl.edu.pwr.krk.models.entities.Kartaprzedmiotu" table="kartaprzedmiotu" catalog="easykrkdb">
         <id name="id" type="int">
             <column name="id" />
-            <generator class="assigned" />
+            <generator class="native" />
         </id>
         <many-to-one name="przedmiot" class="pl.edu.pwr.krk.models.entities.Przedmiot" fetch="select">
             <column name="Przedmiotid" not-null="true" />
@@ -35,7 +35,7 @@
         <property name="formaStudiow" type="string">
             <column name="formaStudiow" length="15" not-null="true" />
         </property>
-        <set name="celprzedmiotus" table="celprzedmiotu" inverse="true" lazy="true" fetch="select">
+        <set name="celprzedmiotus" table="celprzedmiotu" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="KartaPrzedmiotuid" not-null="true" />
             </key>

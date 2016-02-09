@@ -1,5 +1,6 @@
 package pl.edu.pwr.krk.beans.manage;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -61,6 +62,10 @@ public class VerifySubjectCardBean extends Bean implements Serializable {
 			kartaPrzedmiotuService = (KartaprzedmiotuService) ApplicationContextProvider.getApplicationContext()
 					.getBean("kartaprzedmiotuService");
 		}
+	}
+	
+	public void cancelVerify() throws IOException {
+		FacesContext.getCurrentInstance().getExternalContext().redirect("subjectCards.xhtml?id=" + subjectCard.getPrzedmiot().getId());
 	}
 
 	public void initialiaze() {

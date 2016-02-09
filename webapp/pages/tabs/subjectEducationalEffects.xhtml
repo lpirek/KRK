@@ -46,12 +46,12 @@
 			<p:column style="width: 200px">
 				<p:commandButton id="modify" style="width: 80px"
 					value="#{msg['newSubjectCard.prerequisitesTitle.table.button.edit']}"
-					action="#{addNewSubjectCardBean.preEditSEE(cardSEEKnowledge)}"
+					action="#{addNewSubjectCardBean.preEditSEE('knowledge', cardSEEKnowledge)}"
 					update=":modifySEEDlgForm"
 					oncomplete="PF('modifySEEDlg').show();"  />
 				<p:commandButton id="remove" style="width: 80px"
 					value="#{msg['newSubjectCard.prerequisitesTitle.table.button.remove']}"
-					action="#{addNewSubjectCardBean.preRemoveSEE(cardSEEKnowledge)}"
+					action="#{addNewSubjectCardBean.preRemoveSEE('knowledge', cardSEEKnowledge)}"
 					update=":removeSEEDlgForm"
 					oncomplete="PF('removeSEEDlg').show();" />
 			</p:column>
@@ -99,12 +99,12 @@
 			<p:column style="width: 200px">
 				<p:commandButton id="modify" style="width: 80px"
 					value="#{msg['newSubjectCard.prerequisitesTitle.table.button.edit']}"
-					action="#{addNewSubjectCardBean.preEditSEE(cardSEESkills)}"
+					action="#{addNewSubjectCardBean.preEditSEE('skill', cardSEESkills)}"
 					update=":modifySEEDlgForm"
 					oncomplete="PF('modifySEEDlg').show();"  />
 				<p:commandButton id="remove" style="width: 80px"
 					value="#{msg['newSubjectCard.prerequisitesTitle.table.button.remove']}"
-					action="#{addNewSubjectCardBean.preRemoveSEE(cardSEESkills)}"
+					action="#{addNewSubjectCardBean.preRemoveSEE('skill', cardSEESkills)}"
 					update=":removeSEEDlgForm"
 					oncomplete="PF('removeSEEDlg').show();" />
 			</p:column>
@@ -151,12 +151,12 @@
 			<p:column style="width: 200px">
 				<p:commandButton id="modify" style="width: 80px"
 					value="#{msg['newSubjectCard.prerequisitesTitle.table.button.edit']}"
-					action="#{addNewSubjectCardBean.preEditSEE(cardSEEReferences)}"
+					action="#{addNewSubjectCardBean.preEditSEE('reference', cardSEEReferences)}"
 					update=":modifySEEDlgForm"
 					oncomplete="PF('modifySEEDlg').show();"  />
 				<p:commandButton id="remove" style="width: 80px"
 					value="#{msg['newSubjectCard.prerequisitesTitle.table.button.remove']}"
-					action="#{addNewSubjectCardBean.preRemoveSEE(cardSEEReferences)}"
+					action="#{addNewSubjectCardBean.preRemoveSEE('reference', cardSEEReferences)}"
 					update=":removeSEEDlgForm"
 					oncomplete="PF('removeSEEDlg').show();" />
 			</p:column>
