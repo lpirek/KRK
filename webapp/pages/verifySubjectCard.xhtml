@@ -25,8 +25,8 @@
 			value="#{msg['verifySubjectCard.errors']}" />
 		<p:separator />
 		
-		<p:dataList value="#{verifySubjectCardBean.errorList}" var="error" type="ordered">
-	        #{error}
+		<p:dataList value="#{verifySubjectCardBean.errorList}" var="error" type="ordered" emptyMessage="#{msg['verifyList.empty']}">
+		#{error}
 	    </p:dataList>
 		
 		
