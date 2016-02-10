@@ -34,10 +34,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.WebAttributes;
 
-import net.sf.jasperreports.engine.JRException;
-import pl.edu.pwr.krk.tools.ReportGenerator;
-
-
 @ManagedBean
 @RequestScoped
 public class AuthBean implements Serializable {
